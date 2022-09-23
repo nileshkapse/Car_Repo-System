@@ -17,7 +17,7 @@ function Sidebar() {
             {/* <!-- End Dashboard Nav --> */}
 
 
-            <li className="nav-item">
+            <li className="nav-item ">
                 <a className="nav-link" onClick={()=>nevigate(FINACE_DETAILS_URLS)}>
                     <i className="bi bi-grid"></i><span data-feather="file"></span>
                     Finance
@@ -50,7 +50,7 @@ function Sidebar() {
             </li>
             <li className="nav-item">
                 <a className="nav-link" onClick={()=>{nevigate(PROFILE_PAGES_URLS)}}>
-                    <i className="bi bi-grid"></i><span data-feather="file-text"></span>
+                    <i className="bi bi-people"></i><span data-feather="file-text"></span>
                     Profile
                 </a>
             </li>
