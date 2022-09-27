@@ -1,5 +1,5 @@
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import { LANDING_PAGE_URL,APP_USER_URL, FINACE_DETAILS_URLS, FIND_VEHICLE_URLS, DETAILS_VIEW_URLS, UPLOAD_DETAILS_URLS,PROFILE_PAGES_URLS} from "./constants/URLS"
+import { LANDING_PAGE_URL,APP_USER_URL, FINACE_DETAILS_URLS, FIND_VEHICLE_URLS, DETAILS_VIEW_URLS, UPLOAD_DETAILS_URLS,PROFILE_PAGES_URLS, LOGIN_PAGES_URLS} from "./constants/URLS"
 import './App.css';
 import LandingPage from "./pages/LandingPage";
 import Appuser from "./pages/dashboardpages/Appuser";
@@ -8,6 +8,8 @@ import FindVehicle from "./pages/dashboardpages/FindVehicle";
 import DetailsView from "./pages/dashboardpages/DetailsView";
 import UploadDetails from "./pages/dashboardpages/UploadDetails";
 import ProfilePage from "./pages/dashboardpages/ProfilePage";
+import LoginPage from "./pages/dashboardpages/LoginPage";
+import { logRoles } from "@testing-library/react";
 
 function App() {
   return (
@@ -39,7 +41,13 @@ function App() {
               path={PROFILE_PAGES_URLS}
               element={<ProfilePage/>}
             />
+            <Route
+              path={LOGIN_PAGES_URLS}
+              element={<LoginPage/>}
+            />
+
             <Route path="*" element={<Navigate to={LANDING_PAGE_URL} />} />
+
           </Routes>
         </BrowserRouter>  
   );

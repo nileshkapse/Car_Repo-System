@@ -9,8 +9,8 @@ function Sidebar() {
         <ul className="sidebar-nav" id="sidebar-nav">
 
             <li className="nav-item">
-                <a className="nav-link " onClick={()=>{nevigate(LANDING_PAGE_URL)}}>
-                    <i className="bi bi-grid"></i>
+                <a className="nav-link nkcolor" onClick={()=>{nevigate(LANDING_PAGE_URL)}}>
+                    <i className="bi nkcolor bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -19,32 +19,32 @@ function Sidebar() {
 
             <li className="nav-item ">
                 <a className="nav-link" onClick={()=>nevigate(FINACE_DETAILS_URLS)}>
-                    <i className="bi bi-grid"></i><span data-feather="file"></span>
+                    <i className="bi bi-currency-rupee"></i><span data-feather="file"></span>
                     Finance
                 </a>
             </li>
             <li className="nav-item">
                 <a className="nav-link" onClick={()=>{nevigate(APP_USER_URL)}}>
-                    <i className="bi bi-grid"></i><span data-feather="shopping-cart"></span>
+                    <i className="bi bi-person-lines-fill"></i><span data-feather="shopping-cart"></span>
                     User
                 </a>
             </li>
             <li className="nav-item">
                 <a className="nav-link" onClick={()=>{nevigate(FIND_VEHICLE_URLS)}}>
-                    <i className="bi bi-grid"></i><span data-feather="users"></span>
+                    <i className="bi bi-search"></i><span data-feather="users"></span>
                     Find Vehicle
                 </a>
             </li>
             <li className="nav-item">
                 <a className="nav-link" onClick={()=>{nevigate(UPLOAD_DETAILS_URLS)}}>
-                    <i className="bi bi-grid"></i><span data-feather="file-text"></span>
+                    <i className="bi bi-cloud-upload"></i><span data-feather="file-text"></span>
                     Upload Data
                 </a>
             </li>
             <li className="nav-item">
                 <a className="nav-link" onClick={()=>{nevigate(DETAILS_VIEW_URLS)}}>
                     
-                    <i className="bi bi-grid"></i><span data-feather="file-text"></span>
+                    <i className="bi bi-view-list"></i><span data-feather="file-text"></span>
                     Detail View
                 </a>
             </li>
