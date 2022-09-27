@@ -11,17 +11,47 @@ function Appuser() {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
    <Navbar/> 
     {/* <!-- End Header --> */}
-
+ <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+        ></link>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
     {/* <!-- ======= Sidebar ======= --> */}
     <Sidebar/>
 
     
-    <main id="main" class="main">
-    <h1>App Users</h1>
-    <input type="search" placeholder="Name,Mobile no" /> <br/>
+    <main id="main" className="main">
+      <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body ">
+             <h1 class="card-title">App Users</h1>
+ 
+              {/* <!-- Table with stripped rows --> */}
+          <form
+          
+            className=" search-form d-flex align-items-center"
+            method="post"
+            action="#"
+          >
+            <input
+              type="text"
+              name="query"
+              placeholder="Search"
+              title="Enter search keyword"
+            />
+         
+            <a className="nav-link nav-icon search-bar-toggle " href="" onClick={()=>{}}>
+                <i className="bi bi-search"></i>
+              </a>
+          </form>
+    <br/>
+
     <table>
+         
+              
+        
         <thead>
 
             <th><small/>ID&emsp;&emsp;&emsp;</th>
@@ -102,7 +132,11 @@ function Appuser() {
                 </td>
             </tr>
     </tbody>
-    </table></main>
+    </table>
+    </div>
+    </div>
+    </div>
+    </main>
     </div>
   )
 }

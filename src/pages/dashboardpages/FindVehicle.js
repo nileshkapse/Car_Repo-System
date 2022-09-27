@@ -7,27 +7,37 @@ function FindVehicle() {
   const nevigate = useNavigate();
   return (
     <div>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
       <Navbar />
       <Sidebar />
       <main id="main" className="main">
-        <div class="search-bar center">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body ">
+             <h1 class="card-title">Find Vehicle</h1>
+ 
+              {/* <!-- Table with stripped rows --> */}
           <form
-            class="search-form d-flex align-items-center"
+          
+            className=" search-form d-flex align-items-center"
             method="post"
             action="#"
           >
             <input
               type="text"
               name="query"
-              placeholder="Search Vehicle No"
+              placeholder="Search"
               title="Enter search keyword"
             />
-            <button type="submit" title="Search">
-              <i class="bi bi-search"></i>
-            </button>
+         
+            <a className="nav-link nav-icon search-bar-toggle " href="" onClick={()=>{}}>
+                <i className="bi bi-search"></i>
+              </a>
           </form>
-        </div>
-        <br />
+    <br/>
         <section class="section">
           <div class="row">
             <div class="col-lg-8">
@@ -66,6 +76,8 @@ function FindVehicle() {
             </div>
           </div>
         </section>
+        </div>
+        </div></div>
       </main>
     </div>
   );

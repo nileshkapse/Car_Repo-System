@@ -40,7 +40,7 @@ function LandingPage() {
                                     <div className="d-flex align-items-center">
                                         <div
                                             className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i className="bg-info"></i>
+                                            <i className="bi bi-files"></i>
                                         </div>
                                         <div className="ps-3">
                                             <h6>1000000</h6>
@@ -73,7 +73,7 @@ function LandingPage() {
                                     <div className="d-flex align-items-center">
                                         <div
                                             className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                            <i className="bg-info"></i>
+                                            <i className="bi bi-people"></i>
                                         </div>
                                         <div className="ps-3">
                                             <h6>1000000</h6>

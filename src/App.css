@@ -1,15 +1,9 @@
-/**
-* Template Name: NiceAdmin - v2.4.0
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 :root {
   scroll-behavior: smooth;
+}
+/* My colors */
+.nkcolor{
+  color: #d63a3a;
 }
 
 body {
@@ -103,7 +97,7 @@ h6 {
 # Override some default Bootstrap stylings
 --------------------------------------------------------------*/
 /* Dropdown menus */
-.dropdown-menu {
+dropdown-menu {
   border-radius: 4px;
   padding: 10px 0;
   -webkit-animation-name: dropdown-animate;
@@ -224,7 +218,7 @@ h6 {
 
 .bg-info-light {
   background-color: #cff4fc;
-  border-color: #cff4fc;
+  border-color: #fbfbfb;
 }
 
 .bg-dark-light {
@@ -237,7 +231,7 @@ h6 {
   margin-bottom: 30px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+  box-shadow: 0px 0 30px rgba(213, 210, 210, 0.1);
 }
 
 .card-header,
@@ -252,7 +246,7 @@ h6 {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #012970;
+  color: #154599;
   font-family: "Poppins", sans-serif;
 }
 
@@ -263,7 +257,7 @@ h6 {
 }
 
 .card-body {
-  padding: 0 20px 20px 20px;
+  padding: 0 30px 20px 30px;
 }
 
 .card-img-overlay {
@@ -354,12 +348,12 @@ h6 {
   margin-bottom: -2px;
   
   border: none;
-  color: #2c384e;
+  color: #5990f6;
 }
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #f14141;
+  color: #fad12c;
 }
 
 .nav-tabs-bordered .nav-link.active {
@@ -382,7 +376,7 @@ h6 {
 }
 
 .logo img {
-  max-height: 26px;
+  max-height: 50px;
   margin-right: 6px;
 }
 
@@ -408,7 +402,7 @@ h6 {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #55fb08;
+  color: #494949;
 }
 
 .header .search-bar {
@@ -701,7 +695,7 @@ h6 {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #4154f1;
+  color: #3258aa;
   transition: 0.3;
   cursor: pointer;background: #f6f9ff;
   padding: 10px 15px;
@@ -711,7 +705,7 @@ h6 {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #4154f1;
+  color: #324a8c;
 }
 
 .sidebar-nav .nav-link.collapsed {
