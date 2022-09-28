@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom'
 import React from "react";
-import {LOGIN_PAGES_URLS, PROFILE_PAGES_URLS} from "../../constants/URLS"
+import {LOGIN_PAGES_URLS, PROFILE_PAGES_URLS,LANDING_PAGE_URL} from "../../constants/URLS"
 
 function Navbar() {
     const nevigate=useNavigate()
@@ -19,7 +19,7 @@ function Navbar() {
       select(el, all).addEventListener(type, listener);
     }
   };
-
+  
   return (
     <div>
       <header id="header" className="header fixed-top d-flex align-items-center">
@@ -28,11 +28,11 @@ function Navbar() {
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
         ></link>
         <div className="d-flex align-items-center justify-content-between">
-          <a href="index.html" className="logo d-flex align-items-center">
-            <img src={process.env.PUBLIC_URL + "/static/5techg.png"} alt="" />
-            <span className="d-none d-lg-block">5TechG</span>
+          <a href='javascript:void(0)' onClick={()=> {nevigate(LANDING_PAGE_URL)}} className="logo d-flex align-items-center">
+            <img src={process.env.PUBLIC_URL + "/static/5techg.png"} alt=""/>
+            {/* <span className="d-none d-lg-block">5TechG</span> */}
           </a>
-
+</div>
           <i
             className="bi bi-list toggle-sidebar-btn"
             onClick={() => {
@@ -43,7 +43,7 @@ function Navbar() {
               }
             }}
           ></i>
-        </div>
+  
 
         <div className="search-bar">
           <form

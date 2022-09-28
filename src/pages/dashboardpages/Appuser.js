@@ -1,144 +1,127 @@
-import React from 'react'
-import {LANDING_PAGE_URL} from "../../constants/URLS"
-import {useNavigate} from "react-router-dom"
-import Navbar from '../../components/navbar/Navbar'
-import Sidebar from '../../components/sidebar/Sidebar'
+import React from "react";
+import { LANDING_PAGE_URL } from "../../constants/URLS";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/navbar/Navbar";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 function Appuser() {
-    const nevigate=useNavigate()
+  const nevigate = useNavigate();
   return (
     <div>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
-   <Navbar/> 
-    {/* <!-- End Header --> */}
- <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
-        ></link>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      ></link>
+      <Navbar />
+      {/* <!-- End Header --> */}
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      ></link>
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+      />
 
-    {/* <!-- ======= Sidebar ======= --> */}
-    <Sidebar/>
+      {/* <!-- ======= Sidebar ======= --> */}
+      <Sidebar />
 
-    
-    <main id="main" className="main">
-      <div class="col-lg-12">
+      <main id="main" className="main">
+        <div className="col-lg-12">
+          <div className="card">
+            <div className="card-body ">
+              <h1 className="card-title text-info">App Users</h1>
 
-          <div class="card">
-            <div class="card-body ">
-             <h1 class="card-title">App Users</h1>
- 
               {/* <!-- Table with stripped rows --> */}
-          <form
-          
-            className=" search-form d-flex align-items-center"
-            method="post"
-            action="#"
-          >
-            <input
-              type="text"
-              name="query"
-              placeholder="Search"
-              title="Enter search keyword"
-            />
-         
-            <a className="nav-link nav-icon search-bar-toggle " href="" onClick={()=>{}}>
-                <i className="bi bi-search"></i>
-              </a>
-          </form>
-    <br/>
+              <form
+                className=" search-form d-flex align-items-center"
+                method="post"
+                action="#"
+              >
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="Search"
+                  title="Enter search keyword"
+                />
 
-    <table>
-         
-              
-        
-        <thead>
-
-            <th><small/>ID&emsp;&emsp;&emsp;</th>
-            <th>Name&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-            <th>Active&emsp;&emsp;&emsp;</th>
-            <th>Admin&emsp;&emsp;&emsp;</th>
-            <th>Bal Amount&emsp;&emsp;&emsp;</th>
-            {/* </small> */}
-            <tr>
-                <td colspan="5">
-                    <hr />
-                </td>
-            </tr>
-
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td><b>Om Balsane</b><br/><small>9898525645,Loni</small></td>
-                <td><input type="checkbox" ></input></td> <td><input type="checkbox" ></input></td> <td>50000</td>
-
-            </tr>
-            <tr>
-                <td colspan="5">
-                    <hr />
-                </td>
-            </tr>
-
-
-
-            <tr>
-                <td>2</td>
-                <td><b>Nilesh Kapse</b><br/><small>9145455425,Sambhajinagar</small></td>
-                <td><input type="checkbox"></input> </td> <td><input type="checkbox"></input> </td> <td>60000</td>
-            </tr>
-
-            <tr>
-                <td colspan="5">
-                    <hr />
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>3</td>
-                <td><b>Pratik Mahajan</b><br/><small>9191914556,Dhule</small></td>
-                <td><input type="checkbox"></input> </td> <td><input type="checkbox"></input> </td> <td>40000</td>
-            </tr>
-
-            <tr>
-                <td colspan="5">
-                    <hr />
-                </td>
-            </tr>
-
-
-            <tr>
-                <td>4</td>
-                <td><b>Akash Waje</b><br/><small>9898985050,Sambhajinagar</small></td>
-                <td><input type="checkbox" ></input></td> <td><input type="checkbox" ></input></td> <td>60000</td>
-            </tr>
-
-            <tr>
-                <td colspan="5">
-                    <hr />
-                </td>
-            </tr>
-
-            <tr>
-                <td>5</td>
-                <td><b>Mandar Wale</b><br/><small>9145456552,Sangali</small></td>
-                <td><input type="checkbox"></input> </td> <td><input type="checkbox" ></input></td> <td>50000</td>
-            </tr>
-
-            <tr>
-                <td colspan="5">
-                    <hr />
-                </td>
-            </tr>
-    </tbody>
-    </table>
+                <a
+                  className="nav-link nav-icon search-bar-toggle "
+                  href=""
+                  onClick={() => {}}
+                >
+                  <i className="bi bi-search"></i>
+                </a>
+              </form>
+              <br/>
+               
+              {/* <!-- Primary Color Bordered Table --> */}
+              <table className="table ">
+                <thead>
+                  <tr>
+                    <th scope="col" className="text-primary">Sr.No</th>
+                    <th scope="col" className="text-primary">Name</th>
+                    <th scope="col" className="text-primary">IsActive</th>
+                    <th scope="col" className="text-primary">IsAdmin</th>
+                    <th scope="col" className="text-primary">Balance Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td><input type="checkbox" id="scales" 
+             /></td>
+                   <td><input type="checkbox" id="scales" 
+             /></td>
+                    <td>$899</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td><input type="checkbox" id="scales" 
+             /></td>
+                   <td><input type="checkbox" id="scales" 
+             /></td>
+                    <td>$899</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                     <td><input type="checkbox" id="scales" 
+             /></td>
+                   <td><input type="checkbox" id="scales" 
+             /></td>
+                    <td>$899</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                     <td><input type="checkbox" id="scales" 
+             /></td>
+                   <td><input type="checkbox" id="scales" 
+             /></td>
+                    <td>$899</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                     <td><input type="checkbox" id="scales" 
+             /></td>
+                   <td><input type="checkbox" id="scales" 
+             /></td>
+                    <td>$899</td>
+                  </tr>
+                </tbody>
+              </table>
+              {/* <!-- End Primary Color Bordered Table --> */}
+             
+          </div>
+        </div>
+        </div>
+      </main>
     </div>
-    </div>
-    </div>
-    </main>
-    </div>
-  )
+  );
 }
 
 export default Appuser;
