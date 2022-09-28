@@ -43,7 +43,7 @@ function FindVehicle() {
             <div class="col-lg-8">
               <div class="card">
                 <div class="card-body">
-                 
+                <div class="row"> 
                   {/* Vechical Deatils */}
                   <h5 class="card-title fw-bolder ">Vehicle Detail</h5>
                   <div className="d-flex align-items-center">
@@ -52,25 +52,49 @@ function FindVehicle() {
                     </div>
                     <div className="d-flex align-items-center">
                       <div className="ps-3">
-                        <h6 className="fw-bold">Vehicle No</h6>
-                        <span className="text-success center pt-4 fw-bold"></span>
+                        <h6 className="fw-bold text-primary">Vehicle No</h6>
+                        <span className="text-secondary center pt-4 fw-bold">1234</span>
                       </div>
                       <div className="ps-4">
                         <h6 className="fw-bold">Chessie No</h6>
-                        <span className="text-success center pt-4 fw-bold"></span>
+                        <span className="text-secondary center pt-4 fw-bold">1234</span>
                       </div>
                       <div className="ps-4">
                         <h6 className="fw-bold">Model Name</h6>
-                        <span className="text-success center pt-4 fw-bold"></span>
+                        <span className="text-secondary center pt-4 fw-bold">Maruti</span>
                       </div>
                       <div className="ps-4">
                         <h6 className="fw-bold">Engine No</h6>
-                        <span className="text-success center pt-4 fw-bold"></span>
+                        <span className="text-secondary center pt-4 fw-bold">1234</span>
+                      </div>
+                      {/* vehicle details end */}
+                   </div>
+                   <br/>
+                  </div>
+                  
+                 <div class="row">
+                  <div className="d-flex align-items-center ">
+                      <div className="ps-3">
+                        <h6 className="fw-bold text-primary">Vehicle No</h6>
+                        <span className="text-secondary center pt-4 fw-bold">1234</span>
+                      </div>
+                      <div className="ps-4">
+                        <h6 className="fw-bold">Chessie No</h6>
+                        <span className="text-secondary center pt-4 fw-bold">1234</span>
+                      </div>
+                      <div className="ps-4">
+                        <h6 className="fw-bold">Model Name</h6>
+                        <span className="text-secondary center pt-4 fw-bold">Maruti</span>
+                      </div>
+                      <div className="ps-4">
+                        <h6 className="fw-bold">Engine No</h6>
+                        <span className="text-secondary center pt-4 fw-bold">1234</span>
                       </div>
                       {/* vehicle details end */}
                     {/* </div> *
                   {/* </div> */}
-                  </div></div>
+                  </div> </div>
+                  </div>
                 </div>
               </div>
             </div>

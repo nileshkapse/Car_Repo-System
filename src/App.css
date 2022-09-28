@@ -236,9 +236,9 @@ dropdown-menu {
 
 .card-header,
 .card-footer {
-  border-color: #ebeef4;
-  background-color: #fff;
-  color: #798eb3;
+  border-color: #004adf;
+  background-color: rgb(89, 216, 220);
+  color: #84a7e5;
   padding: 15px;
 }
 
@@ -371,17 +371,17 @@ dropdown-menu {
 
 @media (min-width: 1200px) {
   .logo {
-    width: 280px;
+    width: 270px;
   }
 }
 
 .logo img {
   max-height: 50px;
-  margin-right: 6px;
+  margin-right: 3px;
 }
 
 .logo span {
-  font-size: 26px;
+  font-size: 46px;
   font-weight: 700;
   color: #012970;
   font-family: "Nunito", sans-serif;
@@ -392,7 +392,7 @@ dropdown-menu {
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: rgba(98, 108, 255, 0.872);
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
@@ -402,7 +402,7 @@ dropdown-menu {
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #494949;
+  color: #3700b3;
 }
 
 .header .search-bar {
@@ -621,7 +621,7 @@ dropdown-menu {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.79);
 }
 
 @media (max-width: 1199px) {
