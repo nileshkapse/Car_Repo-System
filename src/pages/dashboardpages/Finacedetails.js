@@ -1,5 +1,6 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom"
+import FinanceAdd from '../../components/FinaceDetails/FinanceAdd'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 
@@ -116,7 +117,7 @@ function Finacedetails() {
                   </tr></tbody>
               </table>
               {/* <!-- End Table with stripped rows --> */}
-
+      <FinanceAdd/>
             </div>
           </div></div></main><Sidebar/>
     <Navbar/></div>
