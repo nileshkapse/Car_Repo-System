@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
+import { Col, Row } from "react-bootstrap";
 import Sidebar from "../../components/sidebar/Sidebar";
 function ProfilePage() {
   const nevigate = useNavigate();
@@ -166,6 +167,7 @@ function ProfilePage() {
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
+                    
                   </form>
                   
 
@@ -214,8 +216,17 @@ function ProfilePage() {
                       <div class="col-md-8 col-lg-9">
                         <img src={process.env.PUBLIC_URL + "/static/profile-img.jpg"} alt="Profile"/>
                         <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                          <Row>
+                            <Col>
+                            <div>
+                            <a href="#" class="btn btn-primary btn-sm " title="Upload new profile image"><input classnName="" type="file" /></a>
+                            </div>
+                            </Col>
+                            
+                        <Col> <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a></Col>
+                                          
+                          </Row>
+                           
                         </div>
                       </div>
                     </div>
@@ -274,6 +285,8 @@ function ProfilePage() {
                       <div class="col-md-8 col-lg-9">
                         <input name="email" type="email" class="form-control" id="Email" value="cotact5tech@gmail.com"/>
                       </div>
+                    </div><div class="text-center">
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                     </form></div>
 </div></div></div>

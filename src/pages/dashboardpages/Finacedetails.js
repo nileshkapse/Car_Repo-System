@@ -1,10 +1,14 @@
 import React from 'react'
 import {useNavigate} from "react-router-dom"
+import FinanceAdd from '../../components/FinaceDetails/FinanceAdd'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
+import FinaceDetailsTable from '../../components/DataTable/FinaceDetailsTable'
 
 function Finacedetails() {
     const nevigate=useNavigate()
+
+    
   return (
     <div><main id="main" className="main"><div class="col-lg-12">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
@@ -12,8 +16,10 @@ function Finacedetails() {
             <div class="card-body ">
               <h1 class="card-title">Finace Details</h1>
 
+              <FinaceDetailsTable />
+
               {/* <!-- Table with stripped rows --> */}
-              <table class="table table-striped">
+              {/* <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">Sr.No</th>
@@ -21,6 +27,7 @@ function Finacedetails() {
                     <th scope="col">Location</th>
                     <th scope="col">Branches No</th>
                     <th scope="col">Upload Date</th>
+                    <th scope="col">Options</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -30,6 +37,7 @@ function Finacedetails() {
                     <td>Designer</td>
                     <td>28</td>
                     <td>2016-05-25</td>
+                    <td>View Details</td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
@@ -114,9 +122,9 @@ function Finacedetails() {
                     <td>47</td>
                     <td>2011-04-19</td>
                   </tr></tbody>
-              </table>
+              </table> */}
               {/* <!-- End Table with stripped rows --> */}
-
+      <FinanceAdd/>
             </div>
           </div></div></main><Sidebar/>
     <Navbar/></div>
