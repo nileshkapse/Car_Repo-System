@@ -1,9 +1,15 @@
+/**
+* Template Name: NiceAdmin - v2.4.0
+* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
 :root {
   scroll-behavior: smooth;
-}
-/* My colors */
-.nkcolor{
-  color: #d63a3a;
 }
 
 body {
@@ -97,7 +103,7 @@ h6 {
 # Override some default Bootstrap stylings
 --------------------------------------------------------------*/
 /* Dropdown menus */
-dropdown-menu {
+.dropdown-menu {
   border-radius: 4px;
   padding: 10px 0;
   -webkit-animation-name: dropdown-animate;
@@ -218,7 +224,7 @@ dropdown-menu {
 
 .bg-info-light {
   background-color: #cff4fc;
-  border-color: #fbfbfb;
+  border-color: #cff4fc;
 }
 
 .bg-dark-light {
@@ -231,14 +237,14 @@ dropdown-menu {
   margin-bottom: 30px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0px 0 30px rgba(213, 210, 210, 0.1);
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
 }
 
 .card-header,
 .card-footer {
-  border-color: #004adf;
-  background-color: rgb(89, 216, 220);
-  color: #84a7e5;
+  border-color: #ebeef4;
+  background-color: #fff;
+  color: #798eb3;
   padding: 15px;
 }
 
@@ -246,7 +252,7 @@ dropdown-menu {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #154599;
+  color: #012970;
   font-family: "Poppins", sans-serif;
 }
 
@@ -257,7 +263,7 @@ dropdown-menu {
 }
 
 .card-body {
-  padding: 0 30px 20px 30px;
+  padding: 0 20px 20px 20px;
 }
 
 .card-img-overlay {
@@ -304,7 +310,7 @@ dropdown-menu {
 
 .accordion-flush .accordion-button:not(.collapsed) {
   box-shadow: none;
-  color: #f60000;
+  color: #4154f1;
 }
 
 .accordion-flush .accordion-body {
@@ -346,19 +352,18 @@ dropdown-menu {
 
 .nav-tabs-bordered .nav-link {
   margin-bottom: -2px;
-  
   border: none;
-  color: #5990f6;
+  color: #2c384e;
 }
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #fad12c;
+  color: #4154f1;
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #f71e06;
+  color: #4154f1;
   border-bottom: 2px solid #4154f1;
 }
 
@@ -371,17 +376,17 @@ dropdown-menu {
 
 @media (min-width: 1200px) {
   .logo {
-    width: 270px;
+    width: 280px;
   }
 }
 
 .logo img {
-  max-height: 50px;
-  margin-right: 3px;
+  max-height: 26px;
+  margin-right: 6px;
 }
 
 .logo span {
-  font-size: 46px;
+  font-size: 26px;
   font-weight: 700;
   color: #012970;
   font-family: "Nunito", sans-serif;
@@ -392,7 +397,7 @@ dropdown-menu {
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: rgba(98, 108, 255, 0.872);
+  background-color: #fff;
   padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
@@ -400,9 +405,9 @@ dropdown-menu {
 
 .header .toggle-sidebar-btn {
   font-size: 32px;
-  padding-left: 7px;
+  padding-left: 10px;
   cursor: pointer;
-  color: #4e16d1;
+  color: #012970;
 }
 
 .header .search-bar {
@@ -621,7 +626,7 @@ dropdown-menu {
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: rgba(255, 255, 255, 0.79);
+  background-color: #fff;
 }
 
 @media (max-width: 1199px) {
@@ -695,9 +700,9 @@ dropdown-menu {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #3258aa;
+  color: #4154f1;
   transition: 0.3;
-  cursor: pointer;background: #f6f9ff;
+  background: #f6f9ff;
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -705,7 +710,7 @@ dropdown-menu {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #324a8c;
+  color: #4154f1;
 }
 
 .sidebar-nav .nav-link.collapsed {
@@ -1252,143 +1257,4 @@ dropdown-menu {
   text-align: center;
   font-size: 13px;
   color: #012970;
-}
-.file-upload {
-  background-color: hsl(0, 0%, 100%);
-  width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.file-upload-btn {
-  width: 100%;
-  margin: 0;
-  color: #fff;
-  background: #1FB264;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid hsl(150, 53%, 29%);
-  transition: all .2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.file-upload-btn:hover {
-  background: #1AA059;
-  color: #ffffff;
-  transition: all .2s ease;
-  cursor: pointer;
-}
-
-.file-upload-btn:active {
-  border: 0;
-  transition: all .2s ease;
-}
-
-.file-upload-content {
-  display: none;
-  text-align: center;
-}
-
-.file-upload-input {
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.image-upload-wrap {
-  margin-top: 20px;
-  border: 4px dashed #2cea6bad;
-  position: relative;
-}
-
-.image-dropping,
-.image-upload-wrap:hover {
-  background-color: #bdb4b4;
-  border: 4px dashed #d0d2f3;
-}
-
-.image-title-wrap {
-  padding: 0 15px 15px 15px;
-  color: #222;
-}
-
-.drag-text {
-  text-align: center;
-}
-
-.drag-text h3 {
-  font-weight: 100;
-  text-transform: uppercase;
-  color: #15824B;
-  padding: 60px 0;
-}
-
-.file-upload-image {
-  max-height: 200px;
-  max-width: 200px;
-  margin: auto;
-  padding: 20px;
-}
-
-.remove-image {
-  width: 200px;
-  margin: 0;
-  color: #fff;
-  background: #cd4535;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid #b02818;
-  transition: all .2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.remove-image:hover {
-  background: #c13b2a;
-  color: #ffffff;
-  transition: all .2s ease;
-  cursor: pointer;
-}
-
-.remove-image:active {
-  border: 0;
-  transition: all .2s ease;
-}
-
-/* Floating Button */
-
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:rgba(98, 108, 255, 0.872);
-	color:rgb(255, 255, 255);
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
-}
-
-.my-float{
-	margin-top:22px;
-}
-
-
-/* Data Tables Modification */
-[data-column-id="column"].rdt_TableCol {
-  background-color: rgb(183, 190, 219);
-  color: black;
-  font-weight: bolder;
-  font-size: 14px;
 }

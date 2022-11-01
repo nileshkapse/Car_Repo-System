@@ -9,15 +9,17 @@ function UploadDetails() {
     <div>
       <main id="main" className="main">
         <div class="file-upload">
-          <button class="file-upload-btn" type="button">
-            Add Files
-          </button>
+          
           <div class="image-upload-wrap">
             <input class="file-upload-input" type="file" />
             <div class="drag-text">
               <h3>Drag and drop a file or select CSV</h3>
             </div>
           </div>
+          <br/>
+          <button class="file-upload-btn" type="button">
+            Add Files
+          </button>
         </div>
       </main>
       <Navbar />
