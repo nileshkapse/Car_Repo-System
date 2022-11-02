@@ -45,7 +45,7 @@ function Navbar() {
           ></i>
   
 
-        <div className="search-bar">
+        {/* <div className="search-bar">
           <form
             className="search-form d-flex align-items-center"
             method="post"
@@ -61,7 +61,7 @@ function Navbar() {
               <i className="bi bi-search"></i>
             </button>
           </form>
-        </div>
+        </div> */}
         {/* <!-- End Search Bar --> */}
 
         <nav className="header-nav ms-auto">
