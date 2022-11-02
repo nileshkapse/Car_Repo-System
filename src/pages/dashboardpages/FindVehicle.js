@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import FinaceDetailsTable from "../../components/DataTable/FinaceDetailsTable";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 
@@ -18,25 +19,11 @@ function FindVehicle() {
           <div class="card">
             <div class="card-body ">
              <h1 class="card-title">Find Vehicle</h1>
+             
  
               {/* <!-- Table with stripped rows --> */}
-          <form
-          
-            className=" search-form d-flex align-items-center"
-            method="post"
-            action="#"
-          >
-            <input
-              type="text"
-              name="query"
-              placeholder="Search"
-              title="Enter search keyword"
-            />
-         
-            <a className="nav-link nav-icon search-bar-toggle " href="" onClick={()=>{}}>
-                <i className="bi bi-search"></i>
-              </a>
-          </form>
+              <FinaceDetailsTable/>
+          {/* 
     <br/>
         <section class="section">
           <div class="row">
@@ -45,7 +32,7 @@ function FindVehicle() {
                 <div class="card-body">
                 <div class="row"> 
                   {/* Vechical Deatils */}
-                  <h5 class="card-title fw-bolder ">Vehicle Detail</h5>
+                  {/* <h5 class="card-title fw-bolder ">Vehicle Detail</h5>
                   <div className="d-flex align-items-center">
                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i className="bg-info"></i>
@@ -66,9 +53,9 @@ function FindVehicle() {
                       <div className="ps-4">
                         <h6 className="fw-bold">Engine No</h6>
                         <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div>
+                      </div> */}
                       {/* vehicle details end */}
-                   </div>
+                   {/* </div>
                    <br/>
                   </div>
                   
@@ -89,17 +76,17 @@ function FindVehicle() {
                       <div className="ps-4">
                         <h6 className="fw-bold">Engine No</h6>
                         <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div>
+                      </div> */}
                       {/* vehicle details end */}
                     {/* </div> *
                   {/* </div> */}
-                  </div> </div>
+                  {/* </div> </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> */}
+            {/* </div>
           </div>
-        </section>
+        </section>  */}
         </div>
         </div></div>
       </main>

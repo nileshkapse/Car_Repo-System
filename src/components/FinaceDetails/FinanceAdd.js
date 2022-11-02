@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import axios from "axios";
+import { API_URL } from "../../constants/Database";
 
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +17,27 @@ function FinanceAdd() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const datainsert=async()=>{
+    const query = `INSERT INTO Finance (UID,finance_name, address, total_branches, upload_date ) VALUES (1008,"mandy","pune",10,"2022-11-02");`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+    
+    try{
+     axios
+      .post(API_URL, data)
+      .then((res) => {
+        console.log("Inserted data: ", res.data);
+        // this.setState({ allData: res.data });
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log("Inserted data error: ", err);
+      });
+    }catch(error){
+      console.log(error);
+    }
+  }  
+
   return (
     <div>
       {/* Button Onclick */}
@@ -91,7 +114,7 @@ function FinanceAdd() {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={datainsert}>
               Save
             </Button>
           </Modal.Footer>

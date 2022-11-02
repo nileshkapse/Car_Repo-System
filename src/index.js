@@ -7,6 +7,19 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
+
+// const express =require("express");
+// const app=express();
+// const mysql =require('mysql')
+
+// const db =mysql.createPool({
+//   host: "localhost",
+//   user: "root",
+//   password: "18Nilesh@456",
+//   database: "Nilesh"
+
+// })
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
