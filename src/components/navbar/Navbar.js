@@ -5,6 +5,7 @@ import {LOGIN_PAGES_URLS, PROFILE_PAGES_URLS,LANDING_PAGE_URL} from "../../const
 function Navbar() {
     const nevigate=useNavigate()
   const select = (el, all = false) => {
+    console.log("select click");
     el = el.trim();
     if (all) {
       return [...document.querySelectorAll(el)];
@@ -13,6 +14,7 @@ function Navbar() {
     }
   };
   const on = (type, el, listener, all = false) => {
+   console.log("on click"); 
     if (all) {
       select(el, all).forEach((e) => e.addEventListener(type, listener));
     } else {
@@ -27,20 +29,24 @@ function Navbar() {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
         ></link>
-        <div className="d-flex align-items-center justify-content-between">
+        <div className="d-flex justify-content-between">
           <a href='javascript:void(0)' onClick={()=> {nevigate(LANDING_PAGE_URL)}} className="logo d-flex align-items-center">
-            <img src={process.env.PUBLIC_URL + "/static/5techg.png"} alt=""/>
+            <img src={process.env.PUBLIC_URL + "/static/5Techg2.png"} alt=""/>
             {/* <span className="d-none d-lg-block">5TechG</span> */}
           </a>
 </div>
           <i
             className="bi bi-list toggle-sidebar-btn"
             onClick={() => {
-              if (select(".toggle-sidebar-btn")) {
-                on("click", ".toggle-sidebar-btn", function (e) {
-                  select("body").classList.toggle("toggle-sidebar");
-                });
-              }
+              // if (select(".toggle-sidebar-btn")) 
+              // {
+              //   on("click", ".toggle-sidebar-btn", function (e) {
+              //     select("body").classList.toggle("toggle-sidebar");
+              //   });
+              // }
+              const sidebar = document.getElementById("body")
+
+              sidebar.classList.toggle("toggle-sidebar");
             }}
           ></i>
   
@@ -66,11 +72,11 @@ function Navbar() {
 
         <nav className="header-nav ms-auto">
           <ul className="d-flex align-items-center">
-            <li className="nav-item d-block d-lg-none">
+            {/* <li className="nav-item d-block d-lg-none">
               <a className="nav-link nav-icon search-bar-toggle " href="" onClick={()=>{}}>
                 <i className="bi bi-search"></i>
               </a>
-            </li>
+            </li> */}
             {/* <!-- End Search Icon--> */}
 
             <li className="nav-item dropdown pe-3">
@@ -108,19 +114,6 @@ function Navbar() {
                   <a className="dropdown-item d-flex align-items-center nav-link" onClick={()=>{nevigate(PROFILE_PAGES_URLS)}}>
                     <i className="bi bi-gear"></i>
                     <span>Account Settings</span>
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-
-                <li>
-                  <a
-                    className="dropdown-item d-flex align-items-center"
-                    href="pages-faq.html"
-                  >
-                    <i className="bi bi-question-circle"></i>
-                    <span>Need Help?</span>
                   </a>
                 </li>
                 <li>

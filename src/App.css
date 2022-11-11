@@ -230,8 +230,8 @@ dropdown-menu {
 .card {
   margin-bottom: 30px;
   border: none;
-  border-radius: 5px;
-  box-shadow: 0px 0 30px rgba(213, 210, 210, 0.1);
+  border-radius: 1px;
+  box-shadow: 0px 0 30px rgba(201, 198, 198, 0.234);
 }
 
 .card-header,
@@ -246,10 +246,17 @@ dropdown-menu {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #154599;
+  color: #0a53f2;
   font-family: "Poppins", sans-serif;
 }
-
+.card-closebtn{
+    line-height: 12px;
+     margin-top: 8px;
+     margin-right: 8px;
+     position:absolute;
+     top:0;
+     right:0;
+}
 .card-title span {
   color: #899bbd;
   font-size: 14px;
@@ -371,7 +378,7 @@ dropdown-menu {
 
 @media (min-width: 1200px) {
   .logo {
-    width: 270px;
+    width: 200px;
   }
 }
 
@@ -388,26 +395,25 @@ dropdown-menu {
 }
 
 .header {
-  transition: all 0.5s;
+  transition: all 1.0s;
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: rgba(98, 108, 255, 0.872);
-  padding-left: 20px;
+  background-color: rgba(255, 255, 255, 0.872);
+  padding-left: 30px;
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
 
 .header .toggle-sidebar-btn {
   font-size: 32px;
-  padding-left: 7px;
   cursor: pointer;
-  color: #4e16d1;
+  color: #fd12be;
 }
 
 .header .search-bar {
   min-width: 360px;
-  padding: 0 20px;
+  padding: 0px;
 }
 
 @media (max-width: 1199px) {
@@ -439,7 +445,7 @@ dropdown-menu {
 .header .search-form input {
   border: 0;
   font-size: 14px;
-  color: #012970;
+  color: #dbdbdb;
   border: 1px solid rgba(1, 41, 112, 0.2);
   padding: 7px 38px 7px 8px;
   border-radius: 3px;
@@ -479,17 +485,18 @@ dropdown-menu {
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #012970;
+  color: #000000;
   margin-right: 25px;
   position: relative;
 }
 
 .header-nav .nav-profile {
-  color: #012970;
+  color: #e025e0;
 }
 
 .header-nav .nav-profile img {
   max-height: 36px;
+  max-width: min-content;
 }
 
 .header-nav .nav-profile span {
@@ -505,72 +512,6 @@ dropdown-menu {
   padding: 3px 6px;
 }
 
-.header-nav .notifications {
-  inset: 8px -15px auto auto !important;
-}
-
-.header-nav .notifications .notification-item {
-  display: flex;
-  align-items: center;
-  padding: 15px 10px;
-  transition: 0.3s;
-}
-
-.header-nav .notifications .notification-item i {
-  margin: 0 20px 0 10px;
-  font-size: 24px;
-}
-
-.header-nav .notifications .notification-item h4 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.header-nav .notifications .notification-item p {
-  font-size: 13px;
-  margin-bottom: 3px;
-  color: #919191;
-}
-
-.header-nav .notifications .notification-item:hover {
-  background-color: #f6f9ff;
-}
-
-.header-nav .messages {
-  inset: 8px -15px auto auto !important;
-}
-
-.header-nav .messages .message-item {
-  padding: 15px 10px;
-  transition: 0.3s;
-}
-
-.header-nav .messages .message-item a {
-  display: flex;
-}
-
-.header-nav .messages .message-item img {
-  margin: 0 20px 0 10px;
-  max-height: 40px;
-}
-
-.header-nav .messages .message-item h4 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 5px;
-  color: #444444;
-}
-
-.header-nav .messages .message-item p {
-  font-size: 13px;
-  margin-bottom: 3px;
-  color: #919191;
-}
-
-.header-nav .messages .message-item:hover {
-  background-color: #f6f9ff;
-}
 
 .header-nav .profile {
   min-width: 240px;
@@ -613,17 +554,21 @@ dropdown-menu {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 220px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
   overflow-y: auto;
+  display: block;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
   background-color: rgba(255, 255, 255, 0.79);
 }
-
+.sidebar .closebtn {
+  position: absolute;
+  display: none;
+}
 @media (max-width: 1199px) {
   .sidebar {
     left: -300px;
@@ -644,7 +589,7 @@ dropdown-menu {
 
   #main,
   #footer {
-    margin-left: 300px;
+    margin-left: 220px;
   }
 }
 
@@ -1072,165 +1017,6 @@ dropdown-menu {
   color: #6980aa;
 }
 
-/*--------------------------------------------------------------
-# Contact
---------------------------------------------------------------*/
-.contact .info-box {
-  padding: 28px 30px;
-}
-
-.contact .info-box i {
-  font-size: 38px;
-  line-height: 0;
-  color: #4154f1;
-}
-
-.contact .info-box h3 {
-  font-size: 20px;
-  color: #012970;
-  font-weight: 700;
-  margin: 20px 0 10px 0;
-}
-
-.contact .info-box p {
-  padding: 0;
-  line-height: 24px;
-  font-size: 14px;
-  margin-bottom: 0;
-}
-
-.contact .php-email-form .error-message {
-  display: none;
-  color: #fff;
-  background: #ed3c0d;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .sent-message {
-  display: none;
-  color: #fff;
-  background: #18d26e;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
-.contact .php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
-  -webkit-animation: animate-loading 1s linear infinite;
-  animation: animate-loading 1s linear infinite;
-}
-
-.contact .php-email-form input,
-.contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-  border-radius: 0;
-}
-
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
-  border-color: #4154f1;
-}
-
-.contact .php-email-form input {
-  padding: 10px 15px;
-}
-
-.contact .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.contact .php-email-form button[type=submit] {
-  background: #4154f1;
-  border: 0;
-  padding: 10px 30px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type=submit]:hover {
-  background: #5969f3;
-}
-
-@-webkit-keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*--------------------------------------------------------------
-# Error 404
---------------------------------------------------------------*/
-.error-404 {
-  padding: 30px;
-}
-
-.error-404 h1 {
-  font-size: 180px;
-  font-weight: 700;
-  color: #4154f1;
-  margin-bottom: 0;
-  line-height: 150px;
-}
-
-.error-404 h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #012970;
-  margin-bottom: 30px;
-}
-
-.error-404 .btn {
-  background: #51678f;
-  color: #fff;
-  padding: 8px 30px;
-}
-
-.error-404 .btn:hover {
-  background: #3e4f6f;
-}
-
-@media (min-width: 992px) {
-  .error-404 img {
-    max-width: 50%;
-  }
-}
 
 /*--------------------------------------------------------------
 # Footer
@@ -1276,7 +1062,7 @@ dropdown-menu {
 }
 
 .file-upload-btn:hover {
-  background: #1AA059;
+  background: #1a2ca0;
   color: #ffffff;
   transition: all .2s ease;
   cursor: pointer;
@@ -1387,8 +1173,27 @@ dropdown-menu {
 
 /* Data Tables Modification */
 [data-column-id="column"].rdt_TableCol {
-  background-color: rgb(183, 190, 219);
+  background-color: rgb(191, 200, 210);
   color: black;
   font-weight: bolder;
   font-size: 14px;
+  
+}
+
+.btnviwe {
+  background-color: DodgerBlue; /* Blue background */
+  border: none; /* Remove borders */
+  color: rgb(255, 255, 255); /* White text */
+  padding: 6px 6px; /* Some padding */
+  font-size: 11px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+
+
+.card-title-sm {
+  padding: 20px 0 15px 0;
+  font-size: 16x;
+  font-weight: 500;
+  color: #1a4cef;
+  font-family: "Poppins", sans-serif;
 }

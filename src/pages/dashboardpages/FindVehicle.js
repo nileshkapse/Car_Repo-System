@@ -1,11 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import FinaceDetailsTable from "../../components/DataTable/FinaceDetailsTable";
+import VehicleDeatilsTable from "../../components/DataTable/VehicleDeatilsTable";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 
 function FindVehicle() {
   const nevigate = useNavigate();
+
+const [togglebox, setTogglebox] = React.useState(false);
+
+  const handledetailscardopen = () => {
+    setTogglebox(true);
+  };
+
+  const handledetailscardclose = () => {
+    setTogglebox(false);
+  };
+
+
   return (
     <div>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link>
@@ -19,74 +31,42 @@ function FindVehicle() {
           <div class="card">
             <div class="card-body ">
              <h1 class="card-title">Find Vehicle</h1>
-             
- 
-              {/* <!-- Table with stripped rows --> */}
-              <FinaceDetailsTable/>
-          {/* 
-    <br/>
-        <section class="section">
-          <div class="row">
-            <div class="col-lg-8">
+             <div className="row">
+            <div className={togglebox===true?"col-lg-6":"col-lg-12"}>
               <div class="card">
-                <div class="card-body">
-                <div class="row"> 
-                  {/* Vechical Deatils */}
-                  {/* <h5 class="card-title fw-bolder ">Vehicle Detail</h5>
-                  <div className="d-flex align-items-center">
-                    <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i className="bg-info"></i>
-                    </div>
-                    <div className="d-flex align-items-center">
-                      <div className="ps-3">
-                        <h6 className="fw-bold text-primary">Vehicle No</h6>
-                        <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div>
-                      <div className="ps-4">
-                        <h6 className="fw-bold">Chessie No</h6>
-                        <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div>
-                      <div className="ps-4">
-                        <h6 className="fw-bold">Model Name</h6>
-                        <span className="text-secondary center pt-4 fw-bold">Maruti</span>
-                      </div>
-                      <div className="ps-4">
-                        <h6 className="fw-bold">Engine No</h6>
-                        <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div> */}
-                      {/* vehicle details end */}
-                   {/* </div>
-                   <br/>
+                <div class="card-body ">
+                  {/* <h1 class="card-title">Finace Details</h1> */}
+
+                  <VehicleDeatilsTable
+                    handledetailscardopen={handledetailscardopen}
+                    handledetailscardclose={handledetailscardclose}
+                  />
+                  {/* <FinanceAdd /> */}
+                </div>
+              </div>
+            </div>
+            
+            {togglebox === true ? (
+              <div className="col-lg-6">
+                <div className="card">
+                   <button
+                      className="card-closebtn btn btn-danger bi-x-circle-fill"
+                      id="view"
+                      onClick={handledetailscardclose}
+                    ></button>
+                  <div className="card-body">
+                   
+                    <h5 className="card-title">Vehicle Details </h5>
+                    {/* <CustomTable></CustomTable> */}
                   </div>
-                  
-                 <div class="row">
-                  <div className="d-flex align-items-center ">
-                      <div className="ps-3">
-                        <h6 className="fw-bold text-primary">Vehicle No</h6>
-                        <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div>
-                      <div className="ps-4">
-                        <h6 className="fw-bold">Chessie No</h6>
-                        <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div>
-                      <div className="ps-4">
-                        <h6 className="fw-bold">Model Name</h6>
-                        <span className="text-secondary center pt-4 fw-bold">Maruti</span>
-                      </div>
-                      <div className="ps-4">
-                        <h6 className="fw-bold">Engine No</h6>
-                        <span className="text-secondary center pt-4 fw-bold">1234</span>
-                      </div> */}
-                      {/* vehicle details end */}
-                    {/* </div> *
-                  {/* </div> */}
-                  {/* </div> </div>
                   </div>
                 </div>
-              </div> */}
-            {/* </div>
+            
+            ) : null}
           </div>
-        </section>  */}
+ 
+              {/* <!-- Table with stripped rows --> */}
+            
         </div>
         </div></div>
       </main>

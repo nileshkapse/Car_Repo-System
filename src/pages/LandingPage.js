@@ -1,16 +1,73 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
-// import {APP_USER_URL} from "../constants/URLS"
 import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import PieChart from "../components/chart/PieChart";
 import LineChart from "../components/chart/LineChart";
 import DoughnutChart from "../components/chart/DoughnutChart";
+import axios from "axios";
+import { useState } from "react";
+// import DataTable from 'react-data-table-component'
+import { useEffect } from "react";
+import { API_URL } from "../constants/Database";
+import { render } from "@testing-library/react";
 
 function LandingPage() {
- 
-  const nevigate = useNavigate();
+  const [recordlen, setCount] = useState([]);
+
+  const [appuserlen, setAppcount] = useState([]);
+
+  const getfinanceuser = async () => {
+    const query = `SELECT * from Finance;`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("all data: ", res.data.length);
+          // this.setState({ rlen : res.data.length });
+          var rlength = res.data.length;
+          setCount(rlength);
+          // setCountries(res.data);
+          // setfiltercontries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getappuser = async () => {
+    const query = `SELECT * from App_User;`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("all data: ", res.data);
+          // this.setState({ rlen : res.data.length });
+          var rlength = res.data.length;
+          setAppcount(rlength);
+          // setCountries(res.data);
+          // setfiltercontries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getfinanceuser();
+    getappuser();
+  }, []);
+  
   return (
     <div className="App">
       <script
@@ -51,15 +108,15 @@ function LandingPage() {
                           <i className="bi bi-files"></i>
                         </div>
                         <div className="ps-3">
-                          <h6>1000000</h6>
+                          <h6>{recordlen}</h6>
                           <span className="text-success center pt-4 fw-bold">
-                            Record
+                            Total Record
                           </span>
                         </div>
                         <div className="ps-5">
-                          <h6>5000</h6>
+                          <h6>{recordlen}</h6>
                           <span className="text-success center pt-1 fw-bold">
-                            Finance
+                            Total Finance
                           </span>
                         </div>
                         <div className="ps-5">
@@ -84,9 +141,9 @@ function LandingPage() {
                           <i className="bi bi-people"></i>
                         </div>
                         <div className="ps-3">
-                          <h6>1000000</h6>
+                          <h6>{appuserlen}</h6>
                           <span className="text-success center pt-4 fw-bold">
-                            A
+                            App User
                           </span>
                         </div>
                         <div className="ps-5">
@@ -107,18 +164,16 @@ function LandingPage() {
                 </div>
                 {/* <!-- End App user Card --> */}
               </div>
-              <LineChart/>
-              <DoughnutChart/>
+              <LineChart />
+              <DoughnutChart />
             </div>
             <div className="col-lg-4">
-
-                {/* Pie Chart */}
-             <PieChart/> 
+              {/* Pie Chart */}
+              <PieChart />
               {/* Pie chart end */}
               <div className="card">
                 <div className="card-body">
-                    
-                 <h5 className="card-title"> Recent activity</h5>
+                  <h5 className="card-title"> Recent activity</h5>
                   <div className="activity">
                     <div className="activity-item d-flex">
                       <div className="activite-label">32 min</div>
