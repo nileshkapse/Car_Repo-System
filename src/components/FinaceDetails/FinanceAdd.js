@@ -15,32 +15,32 @@ function FinanceAdd() {
   const nevigate = useNavigate();
   const [show, setShow] = useState(false);
   const [financename, setFinancename] = useState("");
-  const [address, setAddress] = useState(""); 
+  const [address, setAddress] = useState("");
   const [totalbranch, settotalbranch] = useState("");
-  const [uploaddate , setUploaddate] = useState("");
+  const [uploaddate, setUploaddate] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const datainsert=async()=>{
-    const query = `INSERT INTO Finance (finance_name, address, upload_date, total_branches ) VALUES ('${financename}', '${address}',${uploaddate},'${totalbranch}');`;
+  const datainsert = async () => {
+    const query = `INSERT INTO Finance (finance_name, address, upload_date, total_branches ) VALUES ('${financename}', '${address}',curdate(),'${totalbranch}');`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
-    
-    console.log("Finance name",financename);
-    try{
-     axios
-      .post(API_URL, data)
-      .then((res) => {
-        console.log("Inserted data: ", res.data);
-        // this.setState({ allData: res.data });
-        // window.location.reload(false);
-      })
-      .catch((err) => {
-        console.log("Inserted data error: ", err);
-      });
-    }catch(error){
+
+    console.log("Finance name", financename);
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("Inserted data: ", res.data);
+          // this.setState({ allData: res.data });
+          // window.location.reload(false);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
       console.log(error);
     }
-  }  
+  };
 
   return (
     <div>
@@ -52,8 +52,13 @@ function FinanceAdd() {
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
       />
-      <a href="#" class="float" onClick={handleShow} style={{zIndex:1000}}>
-        <i class="fa fa-plus my-float"></i>
+      <a
+        href="#"
+        className="float rounded-5"
+        onClick={handleShow}
+        style={{ zIndex: 1000 }}
+      >
+        <i className="btn rounded-5 btn-warning bi-plus-lg"></i>
       </a>
 
       {/* Button End */}
@@ -81,8 +86,8 @@ function FinanceAdd() {
                   placeholder="Finance Name ex.Bajaj Finance"
                   autoFocus
                   value={financename}
-                  onChange={(e)=>{
-                    setFinancename(e.target.value)
+                  onChange={(e) => {
+                    setFinancename(e.target.value);
                   }}
                 />
               </Form.Group>
@@ -91,30 +96,17 @@ function FinanceAdd() {
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Label>Finance Location</Form.Label>
-                <Form.Control type="text" placeholder="Finance Location"
-                value={address}
-                  onChange={(e)=>{
-                    setAddress(e.target.value)
-                  }} />
+                <Form.Control
+                  type="text"
+                  placeholder="Finance Location"
+                  value={address}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
+                />
               </Form.Group>
 
-              
-                <Row>
-                  <Col xs={8} md={6}>
-                    <Form.Group
-                      className="mb-1"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label>Branch No</Form.Label>
-                      <Form.Control type="number" 
-                      value={totalbranch}
-                  onChange={(e)=>{
-                    settotalbranch(e.target.value)
-                  }}/>
-                    </Form.Group>
-                  </Col>
-                  <Col xs={8} md={6}>
-                    <Form.Group
+              {/* <Form.Group
                       className="mb-1"
                       controlId="exampleForm.ControlInput1"
                     >
@@ -124,10 +116,7 @@ function FinanceAdd() {
                   onChange={(e)=>{
                     setUploaddate(e.target.value)
                   }} />
-                    </Form.Group>
-                  </Col>
-                </Row>
-         
+                    </Form.Group> */}
             </Form>
           </Modal.Body>
           <Modal.Footer>

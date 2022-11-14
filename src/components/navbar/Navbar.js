@@ -1,9 +1,13 @@
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import React from "react";
-import {LOGIN_PAGES_URLS, PROFILE_PAGES_URLS,LANDING_PAGE_URL} from "../../constants/URLS"
+import {
+  LOGIN_PAGES_URLS,
+  PROFILE_PAGES_URLS,
+  LANDING_PAGE_URL,
+} from "../../constants/URLS";
 
 function Navbar() {
-    const nevigate=useNavigate()
+  const nevigate = useNavigate();
   const select = (el, all = false) => {
     console.log("select click");
     el = el.trim();
@@ -14,42 +18,50 @@ function Navbar() {
     }
   };
   const on = (type, el, listener, all = false) => {
-   console.log("on click"); 
+    console.log("on click");
     if (all) {
       select(el, all).forEach((e) => e.addEventListener(type, listener));
     } else {
       select(el, all).addEventListener(type, listener);
     }
   };
-  
+
   return (
     <div>
-      <header id="header" className="header fixed-top d-flex align-items-center">
+      <header
+        id="header"
+        className="header fixed-top d-flex align-items-center"
+      >
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
         ></link>
         <div className="d-flex justify-content-between">
-          <a href='javascript:void(0)' onClick={()=> {nevigate(LANDING_PAGE_URL)}} className="logo d-flex align-items-center">
-            <img src={process.env.PUBLIC_URL + "/static/5Techg2.png"} alt=""/>
+          <a
+            href="javascript:void(0)"
+            onClick={() => {
+              nevigate(LANDING_PAGE_URL);
+            }}
+            className="logo d-flex align-items-center"
+          >
+            <img src={process.env.PUBLIC_URL + "/static/5Techg2.png"} alt="" />
             {/* <span className="d-none d-lg-block">5TechG</span> */}
           </a>
-</div>
-          <i
-            className="bi bi-list toggle-sidebar-btn"
-            onClick={() => {
-              // if (select(".toggle-sidebar-btn")) 
-              // {
-              //   on("click", ".toggle-sidebar-btn", function (e) {
-              //     select("body").classList.toggle("toggle-sidebar");
-              //   });
-              // }
-              const sidebar = document.getElementById("body")
+        </div>
+        <i
+          className="bi bi-list toggle-sidebar-btn"
+          onClick={() => {
+            // if (select(".toggle-sidebar-btn"))
+            // {
+            //   on("click", ".toggle-sidebar-btn", function (e) {
+            //     select("body").classList.toggle("toggle-sidebar");
+            //   });
+            // }
+            const sidebar = document.getElementById("body");
 
-              sidebar.classList.toggle("toggle-sidebar");
-            }}
-          ></i>
-  
+            sidebar.classList.toggle("toggle-sidebar");
+          }}
+        ></i>
 
         {/* <div className="search-bar">
           <form
@@ -101,7 +113,12 @@ function Navbar() {
                 </li>
 
                 <li>
-                  <a className="dropdown-item d-flex align-items-center nav-link" onClick={()=>{nevigate(PROFILE_PAGES_URLS)}}>
+                  <a
+                    className="dropdown-item d-flex align-items-center nav-link"
+                    onClick={() => {
+                      nevigate(PROFILE_PAGES_URLS);
+                    }}
+                  >
                     <i className="bi bi-person"></i>
                     <span>My Profile</span>
                   </a>
@@ -111,7 +128,12 @@ function Navbar() {
                 </li>
 
                 <li>
-                  <a className="dropdown-item d-flex align-items-center nav-link" onClick={()=>{nevigate(PROFILE_PAGES_URLS)}}>
+                  <a
+                    className="dropdown-item d-flex align-items-center nav-link"
+                    onClick={() => {
+                      nevigate(PROFILE_PAGES_URLS);
+                    }}
+                  >
                     <i className="bi bi-gear"></i>
                     <span>Account Settings</span>
                   </a>
@@ -121,7 +143,12 @@ function Navbar() {
                 </li>
 
                 <li>
-                  <a className="dropdown-item d-flex align-items-center nav-link" onClick={()=>{nevigate(LOGIN_PAGES_URLS)}}>
+                  <a
+                    className="dropdown-item d-flex align-items-center nav-link"
+                    onClick={() => {
+                      nevigate(LOGIN_PAGES_URLS);
+                    }}
+                  >
                     <i className="bi bi-box-arrow-right"></i>
                     <span>Sign Out</span>
                   </a>

@@ -19,15 +19,21 @@ function Appuser() {
   const nevigate = useNavigate();
 
   const [countries, setCountries] = useState([]);
-  const [active, setActive] = useState("");
-  const [email, setEmail] = useState("");
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [togglebox, setTogglebox] = React.useState(false);
+
+  const handlereqopen = () => {
+    setTogglebox(true);
+  };
+
+  const handlereqclose = () => {
+    setTogglebox(false);
+  };
+
+  function appuserreq() {}
 
   function myFunction() {
-    document.getElementById("sidebar").classList.toggle("show");
+    document.getElementById("view").classList.toggle("show");
   }
 
   const getdatabase = async () => {
@@ -50,7 +56,6 @@ function Appuser() {
     }
   };
 
-
   // const datainsert=async()=>{
   //   const query = `UPDATE App_User SET isactive = ${active} WHERE user_email = '${email}' ;`;
   //   let data = { crossDomain: true, crossOrigin: true, query: query };
@@ -69,7 +74,7 @@ function Appuser() {
   //   }catch(error){
   //     console.log(error);
   //   }
-  // } ; 
+  // } ;
 
   const columns = [
     {
@@ -89,7 +94,13 @@ function Appuser() {
     {
       name: "Options",
       id: "column",
-      cell: (row) => <button className="btn bi-pencil-square" onClick={handleShow} style={{zIndex:1000}} ></button>,
+      cell: (row) => (
+        <button
+          className="btn bi-pencil-square"
+          // onClick={handleShow}
+          style={{ zIndex: 1000 }}
+        ></button>
+      ),
     },
   ];
   useEffect(() => {
@@ -120,6 +131,16 @@ function Appuser() {
       <main id="main" className="main">
         <section className="section dashboard">
           <div className="row">
+            <div>
+              <button
+                className="toggle-closebtn btn rounded-5 btn-info bi-list flex-xl-fill"
+                id="view"
+                onClick={handlereqopen}>
+                <span className="m-1">Menu</span>
+              </button>
+            </div>
+          </div>
+          <div className="row">
             <div className="col-lg-7">
               <div className="row">
                 <div className="col-xxl-4 col-xl-12">
@@ -132,9 +153,14 @@ function Appuser() {
                 </div>
               </div>
             </div>
-
+            {togglebox === true ? (
             <div className="col-lg-5">
               <div className="card">
+                 <button
+                    className="card-closebtn btn btn-danger rounded-5 bi-x"
+                    id="view"
+                    onClick={handlereqclose}
+                  ></button>
                 <div className="card-body">
                   <h5 className="card-title"> App User Request</h5>
                   <DataTable
@@ -143,15 +169,14 @@ function Appuser() {
                     pagination
                     highlightOnHover
                     subHeader
-                    
-
                   ></DataTable>
                 </div>
               </div>
             </div>
+            ):null}
           </div>
           <div>
-        {/* <Modal
+            {/* <Modal
           size=""
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -177,8 +202,8 @@ function Appuser() {
                     setEmail(e.target.value)
                   }}
                 />
-              </Form.Group> */}
-              {/* <Form.Group
+              </Form.Group> 
+            <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlInput1"
               >
@@ -189,10 +214,9 @@ function Appuser() {
                 //     setAddress(e.target.value)
                 //   }} 
                 />
-              </Form.Group> */}
+              </Form.Group> 
 
-              
-                {/* <Row>
+             <Row>
                   <Col xs={8} md={6}>
                     <Form.Group
                       className="mb-1"
@@ -207,8 +231,8 @@ function Appuser() {
                   }}
                   />
                     </Form.Group>
-                  </Col> */}
-                  {/* <Col xs={8} md={6}>
+                  </Col> 
+             <Col xs={8} md={6}>
                     <Form.Group
                       className="mb-1"
                       controlId="exampleForm.ControlInput1"
@@ -221,8 +245,8 @@ function Appuser() {
                   // }}
                    />
                     </Form.Group>
-                  </Col> */}
-                {/* </Row>
+                  </Col> 
+            </Row>
          
             </Form>
           </Modal.Body>
@@ -237,7 +261,7 @@ function Appuser() {
             </Button>
           </Modal.Footer>
         </Modal> */}
-      </div>
+          </div>
         </section>
       </main>
     </div>

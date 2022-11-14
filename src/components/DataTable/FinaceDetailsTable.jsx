@@ -4,12 +4,9 @@ import { useState } from 'react'
 import DataTable from 'react-data-table-component'
 import { useEffect } from 'react';
 import { API_URL } from '../../constants/Database';
-import moment from 'moment';
 
 const FinaceDetailsTable = ({
-
-
-  handledetailscardopen}) => {
+  handledetailscardopen,setUid}) => {
     
   const [countries, setCountries] = useState([]);
 
@@ -28,8 +25,8 @@ const FinaceDetailsTable = ({
           console.log("all data: ", res.data);
           // this.setState({ allData: res.data });
 
-          setCountries(res.data);
-          setfiltercontries(res.data);
+          setCountries([...res.data]);
+          setfiltercontries([...res.data]);
         })
         .catch((err) => {
           console.log("all data error: ", err);
@@ -47,38 +44,38 @@ const FinaceDetailsTable = ({
       width: "200px",
     },
     {
-      name: "Location ",
-      selector: (row) => row.address,
-      sortable: true,
-      id: "column",
-      width: "150px",
-    },
-    {
       name: "Total Branches",
       selector: (row) => row.total_branches,
       sortable: true,
       id: "column",
       width: "100px",
     },
-    // {
-    //   name: "Upload Date",
-    //   selector: (row) => moment.utc(row.upload_date).format("DD/MM/YYYY"),
-    //   sortable: true,
-    //   id: "column",
-    //   // width:'auto'
-    //   // width: "200px",
-    // },
+
     {
       name: "Options",
       id: "column",
       cell: (row) => (
-        <button
-          className="btn btn-primary bi-pencil-square"
-          id="view"
-          onClick={handledetailscardopen}
-        >
-          View All
-        </button>
+        <div>
+          <button
+            className="btn btn-primary bi-eye"
+            id="view"
+            onClick={() =>{ handledetailscardopen();
+               setUid(row.UID);
+               console.log("handleuid data", row.UID);
+              }}
+               
+          ></button>
+          <button
+            className="btn btn-secondary m-1  bi-pen"
+            id="edit"
+            onClick={handledetailscardopen}
+          ></button>
+          <button
+            className="btn btn-danger bi-trash"
+            id="delete"
+            onClick={handledetailscardopen}
+          ></button>
+        </div>
       ),
       width: "200px",
     },
@@ -86,7 +83,7 @@ const FinaceDetailsTable = ({
 
   useEffect(() => {
     getdatabase();
-  }, []);
+  });
 
   useEffect(() => {
     const result = countries.filter((country) => {
@@ -106,17 +103,22 @@ const FinaceDetailsTable = ({
         subHeaderAlign="left"
         subHeaderWrap
         subHeaderComponent={
-          <label><h6>Search :</h6>
-            <input
-              type="text"
-              placeholder="Search Here"
-              className="from-control form-control-sm"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <br></br>
-          </label>
-          
+          <div>
+            <div className="input-group mb-3">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroup-sizing-default">
+                  Serach
+                </span>
+              </div>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search Here"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+          </div>
         }
       />
     </div>

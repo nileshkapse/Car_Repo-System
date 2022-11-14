@@ -9,32 +9,93 @@ import { useEffect } from "react";
 import { API_URL } from "../../constants/Database";
 
 function UploadDetails() {
+  
   const nevigate = useNavigate();
 
-  const [countries, setCountries] = useState([]);
+  const [branch, setBranch] = useState([]);
 
-  const [branch,setBranch]=useState([]);
 
-  const getdatabase = async () => {
-    const query = `SELECT * FROM Finance ;`;
+  const [file, setFile] = useState();
+  const [array, setArray] = useState([]);
+
+  const fileReader = new FileReader();
+
+  const handleOnChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const csvFileToArray = (string) => {
+    const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
+    const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+
+    const array = csvRows.map((i) => {
+      const values = i.split(",");
+      const obj = csvHeader.reduce((object, header, index) => {
+        object[header] = values[index];
+        return object;
+      }, {});
+      return obj;
+    });
+
+    setArray(array);
+    console.log("csv data",csvRows);
+    console.log("csv header",csvHeader[0].toString().toLowerCase());
+  };
+
+
+  const datainsert = async () => {
+   
+    const query = `select * from student ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
       axios
         .post(API_URL, data)
-        .then((res) => {
-          console.log("all data: ", res.data);
-          // this.setState({ allData: res.data });
-
-          setCountries(res.data);
-        })
+        .then((res) => {})
         .catch((err) => {
-          console.log("all data error: ", err);
+          console.log("Inserted data error: ", err);
         });
     } catch (error) {
       console.log(error);
     }
   };
+
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    if (file) {
+      fileReader.onload = function (event) {
+        const text = event.target.result;
+        csvFileToArray(text);
+      };
+
+      fileReader.readAsText(file);
+    }
+  };
+
+  const headerKeys = Object.keys(Object.assign({}, ...array));
+
+  // const getdatabase = async () => {
+  //   const query = `SELECT * FROM Finance ;`;
+  //   let data = { crossDomain: true, crossOrigin: true, query: query };
+
+  //   try {
+  //     axios
+  //       .post(API_URL, data)
+  //       .then((res) => {
+  //         console.log("all data: ", res.data);
+  //         // this.setState({ allData: res.data });
+
+  //         setCountries(res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log("all data error: ", err);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const getbranch = async () => {
     const query = `SELECT * FROM Branches ;`;
@@ -57,48 +118,54 @@ function UploadDetails() {
     }
   };
 
-
   useEffect(() => {
-    getdatabase();
+    // getdatabase();
     getbranch();
+    datainsert ();
   }, []);
 
-  
   return (
     <div>
       <main id="main" className="main">
         <Navbar />
         <Sidebar />
-        <div class="input-group mb-3">
+        {/* <div className="input-group mb-3">
           <h6 className="form-label">Finance Name : </h6>
           <select
             className="form-select"
             placeholder="Choose one thing"
             id="finance"
             
-          >
-            {/* <option>Choose Finance Name </option> */}
-            {countries.map((comp) => (
+          > */}
+        {/* <option>Choose Finance Name </option> */}
+        {/* {countries.map((comp) => (
               <option>{comp.finance_name}</option>
             ))}
           </select>
          
-        </div>
-        <div class="input-group ">
-          <h6 className="form-label">Branch Name : </h6>
-          <select
-            class="form-select"
-            placeholder="Choose one thing"
-            id="branch"
-          >
-            {/* <option>Choose Finance Name </option> */}
-            {branch.map((comp) => (
-              <option>{comp.branch_name} <label className="secondary">address : </label>{comp.address}</option>
-              
-            ))}
-          </select>
-        {/* <select
-            class="form-select"
+        </div> */}
+        <div className="input-group ">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1 ">
+              Branch Name
+            </span>
+
+            <select
+              className="form-select"
+              placeholder="Choose one thing"
+              id="branch"
+            >
+              {/* <option>Choose Finance Name </option> */}
+              {branch.map((comp) => (
+                <option>
+                  {comp.branch_name} <label className="secondary"> , </label>
+                  {comp.address}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* <select
+            className="form-select"
             placeholder="Choose one thing"
             id="branch"
           >
@@ -109,18 +176,47 @@ function UploadDetails() {
           </select>  */}
         </div>
         {/* File upload */}
-        <div class="file-upload">
-          <div class="image-upload-wrap">
-            <input class="file-upload-input" type="file" />
-            <div class="drag-text">
-              <h3>Drag and drop a file or select CSV</h3>
-            </div>
-          </div>
+        <div className="file-upload">
+          <input
+            type={"file"}
+            id={"csvFileInput"}
+            accept={".csv"}
+            onChange={handleOnChange}
+          />
+          <h3>Drag and drop a file or select CSV</h3>
+
           <br />
-          <button class="btn btn-success centre" type="button">
+          <button
+            className="btn btn-success centre"
+            type="button"
+            onClick={(e) => {
+              handleOnSubmit(e);
+              console.log("DATA",e);
+            }}
+          >
             Add Files
           </button>
         </div>
+
+        <table>
+          <thead>
+            <tr key={"header"}>
+              {headerKeys.map((key) => (
+                <th>{key}</th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {array.map((item) => (
+              <tr key={item.id}>
+                {Object.values(item).map((val) => (
+                  <td>{val}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
         {/* File Uploade end */}
       </main>
     </div>
