@@ -7,14 +7,14 @@ function DetailsView() {
   return (
     <div><main id="main" className="main">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"></link> 
-        <div class="col-lg-12">
+        <div className="col-lg-12">
 
-          <div class="card">
-            <div class="card-body ">
-              <h1 class="card-title">Detail View</h1>
+          <div className="card">
+            <div className="card-body ">
+              <h1 className="card-title">Detail View</h1>
 
               {/* <!-- Table with stripped rows --> */}
-              <table class="table table-striped">
+              <table className="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">Sr.No</th>

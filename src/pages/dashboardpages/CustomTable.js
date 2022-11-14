@@ -7,24 +7,25 @@ import { useEffect } from "react";
 import { API_URL } from "../../constants/Database";
 import moment from "moment";
 
-function CustomTable() {
+function CustomTable({ uid }) {
+
   const nevigate = useNavigate();
 
   const [countries, setCountries] = useState([]);
 
   const [branch, setBranch] = useState([]);
 
+  console.log("uid data",uid );
+
   const getdatabase = async () => {
-    const query = `SELECT * FROM Finance where UID = 1001 ;`;
+    const query = `SELECT * FROM Finance where UID = ${uid};`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
       axios
         .post(API_URL, data)
         .then((res) => {
-          console.log("all data: ", res.data);
-          // this.setState({ allData: res.data });
-          setCountries(res.data);
+          setCountries([...res.data]);
         })
         .catch((err) => {
           console.log("all data error: ", err);
@@ -35,16 +36,15 @@ function CustomTable() {
   };
 
   const getbranchdatabase = async () => {
-    const query = `SELECT * FROM Branches where FUID = 1001 ;`;
+    const query = `SELECT * FROM Branches where FUID = ${uid} ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
       axios
         .post(API_URL, data)
         .then((res) => {
-          console.log("all data: ", res.data);
-          // this.setState({ allData: res.data });
-          setBranch(res.data);
+          console.log("all data Branches: ", res.data);
+          setBranch([...res.data]);
         })
         .catch((err) => {
           console.log("all data error: ", err);
@@ -54,25 +54,17 @@ function CustomTable() {
     }
   };
 
-  // const columns = [
-  //   {
-  //     name: "Finance Name",
-  //     selector: (row) => row.UID,
-  //     sortable: true,
-  //     id: "column",
-  //     width: "200px",
-  //   },
-  // ];
 
   useEffect(() => {
     getdatabase();
     getbranchdatabase();
-  }, []);
+  });
 
   return (
     <div>
       <div className="row">
         <div className="col-lg-4">Finance Name :</div>
+
         <div className="col-lg ">
           {countries.map((comp) => (
             <div key={comp.finance_name}>
@@ -93,7 +85,7 @@ function CustomTable() {
       </div>
       <div className="row">
         <div className="col-lg-4">Address :</div>
-        <div className="col-lg-2">
+        <div className="col-lg-4">
           {countries.map((comp) => (
             <div key={comp.address}>
               <label>{comp.address}</label>
@@ -124,19 +116,60 @@ function CustomTable() {
 
       {/* Ended */}
       {/* <br></br> */}
-      <div >
-      <h6 className="card-title-sm">Branches Detail</h6>
-       
-      </div>
-      <div className="row">
-        <div className="col-lg-4 ">Name</div>
-        <div className="w-width">
-          {branch.map((comp) => (
-            <div key={comp.branch_name}>
-              <label>{comp.branch_name}</label>
-            </div>
-          ))}
-        </div>
+      <div>
+        <h6 className="card-title-sm">Branches Detail</h6>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Branch Name</th>
+              <th scope="col">Upload Date</th>
+              <th scope="col">Record Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* <tr>
+              <td>
+                {" "}
+                {branch.map((comp) => (
+                  <div key={comp.branch_name}>
+                    <label>{comp.branch_name}</label>
+                  </div>
+                ))}
+              </td>
+              <td>
+                {" "}
+                {branch.map((comp) => (
+                  <div key={moment.utc(comp.Upload_Date).format("DD-MM-YYYY")}>
+                    <label>{moment.utc(comp.Upload_Date).format("DD-MM-YYYY")}</label>
+                  </div>
+                ))}
+              </td>
+            </tr> */}
+            {branch.map((comp) => (
+              <tr>
+                <td>
+                  <div key={comp.branch_name}>
+                    <label>{comp.branch_name}</label>
+                  </div>
+                </td>
+                <td>
+                  <div key={moment.utc(comp.Upload_Date).format("DD-MM-YYYY")}>
+                    <label>
+                      {moment.utc(comp.Upload_Date).format("DD-MM-YYYY")}
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <div key={comp.Total_Records}>
+                    <label>
+                      {comp.Total_Records}
+                    </label>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

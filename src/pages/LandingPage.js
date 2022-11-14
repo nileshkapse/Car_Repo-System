@@ -14,13 +14,28 @@ import { API_URL } from "../constants/Database";
 import { render } from "@testing-library/react";
 
 function LandingPage() {
+
   const [recordlen, setCount] = useState([]);
+
+  const [financelen,setFinancelen] = useState([]);
 
   const [appuserlen, setAppcount] = useState([]);
 
+  const [branchlen,setBranchlen] = useState([]);
+
+  const [isactive,setIsactive] = useState([]);
+
+  const [isadmin,setIsadmin] = useState([]);
+
   const getfinanceuser = async () => {
-    const query = `SELECT * from Finance;`;
+    const query = `SELECT * from Vehicle;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    const query1 = `SELECT * from Branches;`;
+    let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
+
+    const query2 = `SELECT * from Finance;`;
+    let data2 = { crossDomain: true, crossOrigin: true, query: query2 };
 
     try {
       axios
@@ -39,10 +54,55 @@ function LandingPage() {
     } catch (error) {
       console.log(error);
     }
+     try {
+      axios
+        .post(API_URL, data1)
+        .then((res) => {
+          console.log("all branch data: ", res.data.length);
+          // this.setState({ rlen : res.data.length });
+          var rlength = res.data.length;
+          setBranchlen(rlength);
+          // setCountries(res.data);
+          // setfiltercontries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      axios
+        .post(API_URL, data2)
+        .then((res) => {
+          console.log("all branch data: ", res.data.length);
+          // this.setState({ rlen : res.data.length });
+          var rlength = res.data.length;
+          setFinancelen(rlength);
+          // setCountries(res.data);
+          // setfiltercontries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+
+  // App user counts 
+
   const getappuser = async () => {
+
     const query = `SELECT * from App_User;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    const query1 = `select * from App_User where isactive = 1 ;` ;
+    let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
+
+    const query2 = `select * from App_User where isadmin = 1 ;` ;
+    let data2 = { crossDomain: true, crossOrigin: true, query: query2 };
 
     try {
       axios
@@ -52,6 +112,42 @@ function LandingPage() {
           // this.setState({ rlen : res.data.length });
           var rlength = res.data.length;
           setAppcount(rlength);
+          // setCountries(res.data);
+          // setfiltercontries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      axios
+        .post(API_URL, data1)
+        .then((res) => {
+          console.log("all isactive ", res.data);
+          // this.setState({ rlen : res.data.length });
+          var rlength = res.data.length;
+          setIsactive(rlength);
+          // setCountries(res.data);
+          // setfiltercontries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      axios
+        .post(API_URL, data2)
+        .then((res) => {
+          console.log("all data: ", res.data);
+          // this.setState({ rlen : res.data.length });
+          var rlength = res.data.length;
+          setIsadmin(rlength);
           // setCountries(res.data);
           // setfiltercontries(res.data);
         })
@@ -114,13 +210,13 @@ function LandingPage() {
                           </span>
                         </div>
                         <div className="ps-5">
-                          <h6>{recordlen}</h6>
+                          <h6>{financelen}</h6>
                           <span className="text-success center pt-1 fw-bold">
                             Total Finance
                           </span>
                         </div>
                         <div className="ps-5">
-                          <h6>500</h6>
+                          <h6>{branchlen}</h6>
                           <span className="text-success center pt-1 fw-bolder">
                             Branches
                           </span>
@@ -147,13 +243,13 @@ function LandingPage() {
                           </span>
                         </div>
                         <div className="ps-5">
-                          <h6>5000</h6>
+                          <h6>{isactive}</h6>
                           <span className="text-success center pt-1 fw-bold">
                             Active
                           </span>
                         </div>
                         <div className="ps-5">
-                          <h6>500</h6>
+                          <h6>{isadmin}</h6>
                           <span className="text-success center pt-1 fw-bolder">
                             Admin
                           </span>

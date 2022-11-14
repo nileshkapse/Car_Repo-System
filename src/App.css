@@ -2,7 +2,7 @@
   scroll-behavior: smooth;
 }
 /* My colors */
-.nkcolor{
+.nkcolor {
   color: #d63a3a;
 }
 
@@ -249,14 +249,37 @@ dropdown-menu {
   color: #0a53f2;
   font-family: "Poppins", sans-serif;
 }
-.card-closebtn{
-    line-height: 12px;
-     margin-top: 8px;
-     margin-right: 8px;
-     position:absolute;
-     top:0;
-     right:0;
+.card-closebtn {
+  line-height: 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
+
+.toggle-closebtn {
+  line-height: 20px;
+  margin-left: 870px;
+  margin-bottom: 20px;
+  position: relative;
+  top: 0;
+  right: 0;
+ 
+}
+
+.card-addbtn {
+  line-height: 20px;
+  font-size: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 70px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .card-title span {
   color: #899bbd;
   font-size: 14px;
@@ -353,7 +376,7 @@ dropdown-menu {
 
 .nav-tabs-bordered .nav-link {
   margin-bottom: -2px;
-  
+
   border: none;
   color: #5990f6;
 }
@@ -395,7 +418,7 @@ dropdown-menu {
 }
 
 .header {
-  transition: all 1.0s;
+  transition: all 1s;
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
@@ -478,7 +501,7 @@ dropdown-menu {
   list-style: none;
 }
 
-.header-nav>ul {
+.header-nav > ul {
   margin: 0;
   padding: 0;
 }
@@ -511,7 +534,6 @@ dropdown-menu {
   font-size: 12px;
   padding: 3px 6px;
 }
-
 
 .header-nav .profile {
   min-width: 240px;
@@ -586,7 +608,6 @@ dropdown-menu {
 }
 
 @media (min-width: 1200px) {
-
   #main,
   #footer {
     margin-left: 220px;
@@ -600,7 +621,6 @@ dropdown-menu {
 }
 
 @media (min-width: 1200px) {
-
   .toggle-sidebar #main,
   .toggle-sidebar #footer {
     margin-left: 0;
@@ -642,7 +662,8 @@ dropdown-menu {
   font-weight: 600;
   color: #3258aa;
   transition: 0.3;
-  cursor: pointer;background: #f6f9ff;
+  cursor: pointer;
+  background: #f6f9ff;
   padding: 10px 15px;
   border-radius: 4px;
 }
@@ -839,7 +860,7 @@ dropdown-menu {
 }
 
 /* News & Updates */
-.dashboard .news .post-item+.post-item {
+.dashboard .news .post-item + .post-item {
   margin-top: 15px;
 }
 
@@ -915,42 +936,6 @@ dropdown-menu {
 }
 
 /*--------------------------------------------------------------
-# Icons list page
---------------------------------------------------------------*/
-.iconslist {
-  display: grid;
-  max-width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.25rem;
-  padding-top: 15px;
-}
-
-.iconslist .icon {
-  background-color: #fff;
-  border-radius: 0.25rem;
-  text-align: center;
-  color: #012970;
-  padding: 15px 0;
-}
-
-.iconslist i {
-  margin: 0.25rem;
-  font-size: 2.5rem;
-}
-
-.iconslist .label {
-  font-family: var(--bs-font-monospace);
-  display: inline-block;
-  width: 100%;
-  overflow: hidden;
-  padding: 0.25rem;
-  font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #666;
-}
-
-/*--------------------------------------------------------------
 # Profie Page
 --------------------------------------------------------------*/
 .profile .profile-card img {
@@ -1004,41 +989,6 @@ dropdown-menu {
   max-width: 120px;
 }
 
-/*--------------------------------------------------------------
-# F.A.Q Page
---------------------------------------------------------------*/
-.faq .basic h6 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #4154f1;
-}
-
-.faq .basic p {
-  color: #6980aa;
-}
-
-
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
-.footer {
-  padding: 20px 0;
-  font-size: 14px;
-  transition: all 0.3s;
-  border-top: 1px solid #cddfff;
-}
-
-.footer .copyright {
-  text-align: center;
-  color: #012970;
-}
-
-.footer .credits {
-  padding-top: 5px;
-  text-align: center;
-  font-size: 13px;
-  color: #012970;
-}
 .file-upload {
   background-color: hsl(0, 0%, 100%);
   width: 600px;
@@ -1050,12 +1000,12 @@ dropdown-menu {
   width: 100%;
   margin: 0;
   color: #fff;
-  background: #1FB264;
+  background: #1fb264;
   border: none;
   padding: 10px;
   border-radius: 4px;
   border-bottom: 4px solid hsl(150, 53%, 29%);
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   outline: none;
   text-transform: uppercase;
   font-weight: 700;
@@ -1064,13 +1014,13 @@ dropdown-menu {
 .file-upload-btn:hover {
   background: #1a2ca0;
   color: #ffffff;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .file-upload-btn:active {
   border: 0;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 
 .file-upload-content {
@@ -1113,7 +1063,7 @@ dropdown-menu {
 .drag-text h3 {
   font-weight: 100;
   text-transform: uppercase;
-  color: #15824B;
+  color: #15824b;
   padding: 60px 0;
 }
 
@@ -1133,7 +1083,7 @@ dropdown-menu {
   padding: 10px;
   border-radius: 4px;
   border-bottom: 4px solid #b02818;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   outline: none;
   text-transform: uppercase;
   font-weight: 700;
@@ -1142,34 +1092,36 @@ dropdown-menu {
 .remove-image:hover {
   background: #c13b2a;
   color: #ffffff;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .remove-image:active {
   border: 0;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 
 /* Floating Button */
 
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:rgba(98, 108, 255, 0.872);
-	color:rgb(255, 255, 255);
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+.float {
+  position: absolute;
+  line-height: 20px;
+  font-size: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  top: 0;
+  right: 0;
+  background-color: rgba(98, 108, 255, 0.872);
+  color: rgb(255, 255, 255);
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
 }
 
-.my-float{
-	margin-top:22px;
+.my-float {
+  margin-top: 22px;
 }
-
 
 /* Data Tables Modification */
 [data-column-id="column"].rdt_TableCol {
@@ -1177,7 +1129,6 @@ dropdown-menu {
   color: black;
   font-weight: bolder;
   font-size: 14px;
-  
 }
 
 .btnviwe {
@@ -1188,7 +1139,6 @@ dropdown-menu {
   font-size: 11px; /* Set a font size */
   cursor: pointer; /* Mouse pointer on hover */
 }
-
 
 .card-title-sm {
   padding: 20px 0 15px 0;

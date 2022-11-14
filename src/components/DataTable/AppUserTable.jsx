@@ -94,24 +94,33 @@ const AppUserTable = () => {
 
 
   return (
-    <DataTable columns={columns} data={filtercountries} 
-    pagination 
-    highlightOnHover
-    subHeader
-    subHeaderAlign='right'
-    label="Search"
-    subHeaderComponent={
-      <input 
-      type="text"
-      
-      placeholder='Search Here'
-      className='w-24 from-control'
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-      />
-    }
-    /> 
-  )
+    <DataTable
+      columns={columns}
+      data={filtercountries}
+      pagination
+      highlightOnHover
+      subHeader
+      subHeaderAlign="left"
+      subHeaderComponent={
+        <div>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-default">
+                Serach
+              </span>
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search Here"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
+      }
+    />
+  );
 }
 
 export default AppUserTable
