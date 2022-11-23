@@ -7,6 +7,7 @@ import { useState } from "react";
 import DataTable from "react-data-table-component";
 import { useEffect } from "react";
 import { API_URL } from "../../constants/Database";
+import { forEach } from "jszip";
 
 function UploadDetails() {
   
@@ -17,6 +18,7 @@ function UploadDetails() {
 
   const [file, setFile] = useState();
   const [array, setArray] = useState([]);
+
 
   const fileReader = new FileReader();
 
@@ -39,15 +41,15 @@ function UploadDetails() {
 
     setArray(array);
     console.log("csv data",csvRows);
-    console.log("csv header",csvHeader[0].toString().toLowerCase());
   };
 
 
   const datainsert = async () => {
    
-    const query = `select * from student ;`;
+    console.log("Header key data ",);
+    
+    const query = `INSERT INTO student(${headerKeys[0].toString().toLowerCase()},${headerKeys[1].toString().toLowerCase()}) VALUES ('mi',40);`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
-
     try {
       axios
         .post(API_URL, data)
@@ -58,6 +60,7 @@ function UploadDetails() {
     } catch (error) {
       console.log(error);
     }
+    
   };
 
 
@@ -75,27 +78,6 @@ function UploadDetails() {
   };
 
   const headerKeys = Object.keys(Object.assign({}, ...array));
-
-  // const getdatabase = async () => {
-  //   const query = `SELECT * FROM Finance ;`;
-  //   let data = { crossDomain: true, crossOrigin: true, query: query };
-
-  //   try {
-  //     axios
-  //       .post(API_URL, data)
-  //       .then((res) => {
-  //         console.log("all data: ", res.data);
-  //         // this.setState({ allData: res.data });
-
-  //         setCountries(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log("all data error: ", err);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const getbranch = async () => {
     const query = `SELECT * FROM Branches ;`;
@@ -129,21 +111,6 @@ function UploadDetails() {
       <main id="main" className="main">
         <Navbar />
         <Sidebar />
-        {/* <div className="input-group mb-3">
-          <h6 className="form-label">Finance Name : </h6>
-          <select
-            className="form-select"
-            placeholder="Choose one thing"
-            id="finance"
-            
-          > */}
-        {/* <option>Choose Finance Name </option> */}
-        {/* {countries.map((comp) => (
-              <option>{comp.finance_name}</option>
-            ))}
-          </select>
-         
-        </div> */}
         <div className="input-group ">
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1 ">
@@ -164,17 +131,9 @@ function UploadDetails() {
               ))}
             </select>
           </div>
-          {/* <select
-            className="form-select"
-            placeholder="Choose one thing"
-            id="branch"
-          >
-            {branch.map((comp) => (
-              <option>{comp.address}</option>
-              
-            ))}
-          </select>  */}
         </div>
+
+        
         {/* File upload */}
         <div className="file-upload">
           <input
@@ -191,7 +150,7 @@ function UploadDetails() {
             type="button"
             onClick={(e) => {
               handleOnSubmit(e);
-              console.log("DATA",e);
+              datainsert();
             }}
           >
             Add Files
