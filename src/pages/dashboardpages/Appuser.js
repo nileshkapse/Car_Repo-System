@@ -46,12 +46,6 @@ const [mobno, setMobno] = useState("");
     setTogglebox1(false);
   };
 
-  function appuserreq() {}
-
-  function myFunction() {
-    document.getElementById("view").classList.toggle("show");
-  }
-
   const getdatabase = async () => {
     const query = `SELECT * FROM App_User where isactive = 0 ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
