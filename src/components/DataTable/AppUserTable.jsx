@@ -1,42 +1,37 @@
-import React from 'react'
+import React from "react";
 import axios from "axios";
-import { useState } from 'react'
-import DataTable from 'react-data-table-component'
-import { useEffect } from 'react';
-import { API_URL } from '../../constants/Database';
+import { useState } from "react";
+import DataTable from "react-data-table-component";
+import { useEffect } from "react";
+import { API_URL } from "../../constants/Database";
 
+const AppUserTable = ({ handleperopen, setEmail,setName,setMobno }) => {
+  const [countries, setCountries] = useState([]);
 
-const AppUserTable = () => {
+  const [search, setSearch] = useState([]);
 
+  const [filtercountries, setfiltercontries] = useState([]);
 
-  const [countries,setCountries] =useState([]);
-
-  const [search,setSearch] =useState([]);
-
-  const [filtercountries,setfiltercontries] =useState([]);
-
-  
-  
-  const getdatabase =async()=>{
+  const getdatabase = async () => {
     const query = `SELECT * FROM App_User where isactive = 1 ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
-    
-    try{
-     axios
-      .post(API_URL, data)
-      .then((res) => {
-        console.log("all data: ", res.data);
-        // this.setState({ allData: res.data });
-        setCountries(res.data);
-        setfiltercontries(res.data);
-      })
-      .catch((err) => {
-        console.log("all data error: ", err);
-      });
-    }catch(error){
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("all data: ", res.data);
+          // this.setState({ allData: res.data });
+          setCountries(res.data);
+          setfiltercontries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
   const columns = [
     {
       name: "Email ID (User ID)",
@@ -51,47 +46,67 @@ const AppUserTable = () => {
       selector: (row) => row.isactive,
       sortable: true,
       id: "column",
-      width:"auto"
+      width: "auto",
     },
     {
-       name:"Admin",
-       selector:(row) => row.isadmin,
-       sortable:true,
-        id: "column",
-        width:"auto",
+      name: "Admin",
+      selector: (row) => row.isadmin,
+      sortable: true,
+      id: "column",
+      width: "auto",
     },
     {
       name: "Balance",
       selector: (row) => row.balance,
       sortable: true,
       id: "column",
-      
     },
     {
       name: "Options",
       id: "column",
-      cell: (row) => <button className="btn bi-pencil-square"></button>,
+      cell: (row) => (
+        <div>
+          <button
+            className="btn btn-primary bi-eye"
+            id="view"
+            onClick={() => {
+              handleperopen();
+              setEmail(row.user_email);
+              setName(row.user_name);
+              setMobno(row.mobno);
+            }}
+          ></button>
+          <button className="btn btn-secondary m-1  bi-pen" id="edit"></button>
+          <button
+            className="btn btn-danger bi-trash"
+            id="delete"
+            onClick={() => {}}
+          ></button>
+        </div>
+      ),
+      width: "200px",
     },
   ];
 
-    
-    useEffect(()=>{
-      getdatabase();
-    },[]);
+  useEffect(() => {
+    getdatabase();
+  }, []);
 
-    useEffect(()=>{
-      const result= countries.filter(country => {
+  useEffect(() => {
+    const result = countries.filter((country) => {
+      var email = country.user_email
+        .toString()
+        .toLowerCase()
+        .match(search.toLowerCase());
+      var bal = country.balance
+        .toString()
+        .toLowerCase()
+        .match(search.toLowerCase());
 
-        var email =country.user_email.toString().toLowerCase().match(search.toLowerCase());
-        var bal =country.balance.toString().toLowerCase().match(search.toLowerCase());
-        
-        return email || bal;
-      });
-      setfiltercontries(result);
-    },[search]);
-
-    
-
+      return email || bal;
+    });
+    setfiltercontries(result);
+  }, [search]);
 
   return (
     <DataTable
@@ -121,6 +136,6 @@ const AppUserTable = () => {
       }
     />
   );
-}
+};
 
-export default AppUserTable
+export default AppUserTable;

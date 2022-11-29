@@ -1,67 +1,58 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
-import { useState } from 'react'
-import DataTable from 'react-data-table-component'
-import { useEffect } from 'react';
-import { API_URL } from '../../constants/Database';
+import { useState } from "react";
+import DataTable from "react-data-table-component";
+import { useEffect } from "react";
+import { API_URL } from "../../constants/Database";
+import Spinner from "react-bootstrap/Spinner";
+import ReactSpinnerTimer from "react-spinner-timer";
 
-const VehicleDeatilsTable = ({
-  handledetailscardopen,setRcn}) => {
-  
-    const [countries,setCountries] =useState([]);
+const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
+  const [countries, setCountries] = useState([]);
 
-  const [search,setSearch] =useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [filtercountries,setfiltercontries] =useState([]);
+  const [search, setSearch] = useState([]);
 
-  const getdatabase =async()=>{
-    const query = `SELECT * FROM Vehicle ;`;
+  const [filtercountries, setfiltercontries] = useState([]);
+
+  const getdatabase = async () => {
+    const query = `SELECT * FROM vehicle2 ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
-    
-    try{
-     axios
-      .post(API_URL, data)
-      .then((res) => {
-        console.log("all data: ", res.data);
-        // this.setState({ allData: res.data });
-        setCountries([...res.data]);
-        setfiltercontries([...res.data]);
-      })
-      .catch((err) => {
-        console.log("all data error: ", err);
-      });
-    }catch(error){
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("all data: ", res.data);
+          // this.setState({ allData: res.data });
+          setCountries([...res.data]);
+          setfiltercontries([...res.data]);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
       console.log(error);
     }
-  }
+  
+  };
   const columns = [
-    // {
-    //    name:"Contract Number",
-    //    selector:(row) =>row.contract_no,
-    //    sortable: true,
-    //   id: "column",
-    // },
     {
       name: "RC Number",
-      selector: (row) => row.rc_number,
+      selector: (row) => row.regdnum,
       sortable: true,
       id: "column",
       width: "130px",
     },
     {
       name: "Customer Name ",
-      selector: (row) => row.customer_name,
+      selector: (row) => row.customername,
       sortable: true,
       id: "column",
       width: "200px",
     },
-
-    // {
-    //    name:"Zone",
-    //    selector:(row) =>row.zone,
-    //    sortable:true,
-    //     id: "column",
-    // },
     {
       name: "Options",
       id: "column",
@@ -72,9 +63,9 @@ const VehicleDeatilsTable = ({
             id="view"
             onClick={() => {
               handledetailscardopen();
-             
+
               setRcn(row.rc_number);
-               console.log("handleuid data", setRcn);
+              console.log("handleuid data", setRcn);
             }}
           ></button>
           <button
@@ -93,28 +84,30 @@ const VehicleDeatilsTable = ({
     },
   ];
 
-    
-    useEffect(()=>{
-      getdatabase();
-    },[]);
+  useEffect(() => {
+    getdatabase();
+   
+  }, []);
 
-    useEffect(()=>{
-      const result= countries.filter(country => {
+  useEffect(() => {
+    const result = countries.filter((country) => {
+      // var contra =country.contract_no.toString().toLowerCase().match(search.toLowerCase());
+      var name = country.customername
+        .toString()
+        .toLowerCase()
+        .match(search.toLowerCase());
+      var rc = country.regdnum
+        .toString()
+        .toLowerCase()
+        .match(search.toLowerCase());
+      // var zo =country.zone.toString().toLowerCase().match(search.toLowerCase());
 
-        // var contra =country.contract_no.toString().toLowerCase().match(search.toLowerCase());
-        var name =country.customer_name.toString().toLowerCase().match(search.toLowerCase());
-        var rc =country.rc_number.toString().toLowerCase().match(search.toLowerCase());
-        // var zo =country.zone.toString().toLowerCase().match(search.toLowerCase());
-        
-        // return contra || name || rc || zo;
+      // return contra || name || rc || zo;
 
-        return  name || rc ;
-
-      });
-      setfiltercontries(result);
-    },[search]);
-
-    
+      return name || rc;
+    });
+    setfiltercontries(result);
+  }, [search]);
 
   return (
     <DataTable
@@ -123,6 +116,8 @@ const VehicleDeatilsTable = ({
       pagination
       highlightOnHover
       subHeader
+      progressPending={loading}
+      progressComponent={<Spinner animation="border" variant="success" />}
       subHeaderAlign="left"
       subHeaderComponent={
         <div>
@@ -143,7 +138,7 @@ const VehicleDeatilsTable = ({
         </div>
       }
     />
-  );  
+  );
 };
 
-export default VehicleDeatilsTable
+export default VehicleDeatilsTable;

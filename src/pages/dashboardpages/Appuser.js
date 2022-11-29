@@ -14,13 +14,21 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { useRef } from "react";
+
 
 function Appuser() {
   const nevigate = useNavigate();
 
   const [countries, setCountries] = useState([]);
 
+  const [email, setEmail] = useState("");
+
+  const [name, setName] = useState("");
+const [mobno, setMobno] = useState("");
   const [togglebox, setTogglebox] = React.useState(false);
+
+  const [togglebox1, setTogglebox1] = React.useState(false);
 
   const handlereqopen = () => {
     setTogglebox(true);
@@ -28,6 +36,14 @@ function Appuser() {
 
   const handlereqclose = () => {
     setTogglebox(false);
+  };
+
+  const handleperopen = () => {
+    setTogglebox1(true);
+  };
+
+  const handleperclose = () => {
+    setTogglebox1(false);
   };
 
   function appuserreq() {}
@@ -108,6 +124,25 @@ function Appuser() {
     // datainsert();
   }, []);
 
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    // 👇️ open file input box on click of other element
+    inputRef.current.click();
+  };
+  const handleFileChange = (event) => {
+    const fileObj = event.target.files && event.target.files[0];
+    if (!fileObj) {
+      return;
+    }
+
+    console.log("fileObj is", fileObj);
+
+    // 👇️ reset file input
+    event.target.value = null;
+  };
+
+  
   return (
     <div>
       <link
@@ -128,6 +163,7 @@ function Appuser() {
       {/* <!-- ======= Sidebar ======= --> */}
       <Sidebar />
 
+
       <main id="main" className="main">
         <section className="section dashboard">
           <div className="row">
@@ -135,11 +171,194 @@ function Appuser() {
               <button
                 className="toggle-closebtn btn rounded-5 btn-info bi-list flex-xl-fill"
                 id="view"
-                onClick={handlereqopen}>
+                onClick={handlereqopen}
+              >
                 <span className="m-1">Menu</span>
               </button>
             </div>
           </div>
+           {togglebox1 === true ? ( 
+            <div className="card p-5">
+              <button
+                className="card-closebtn btn btn-danger rounded-5 bi-x"
+                id="view"
+                onClick={handleperclose}
+              ></button>
+              <button
+                className="card-addbtn btn rounded-5 btn-warning bi-pen"
+                id="view"
+              ></button>
+              <br />
+
+              <h5 className="card-title">Personal Details</h5>
+
+              <table class="table table-bordered">
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <th>Sezur Finance </th>
+                    <th colSpan={2}>Payment Confirmation : </th>
+                  </tr>
+                  <tr>
+                    <td colSpan={1} rowSpan={6}>
+                      <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        <img
+                          src={
+                            process.env.PUBLIC_URL + "/static/profile-img.jpg"
+                          }
+                          alt="Profile"
+                          className="rounded-circle"
+                        />
+                      </div>
+                    </td>
+                    <th scope="row">Sezur Name</th>
+                    <td> {name}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Email ID</th>
+                    <td>{email}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Mobile</th>
+                    <td>{mobno}</td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">DRA CERTIFICATE</th>
+                    <td>
+                      <a
+                        href=""
+                        target="_blank"
+                        download
+                        className="btn btn-success m-2"
+                      >
+                        Download
+                      </a>
+                      <input
+                        style={{ display: "none" }}
+                        ref={inputRef}
+                        type="file"
+                        onChange={handleFileChange}
+                      />
+                      <Button className="btn btn-info" onClick={handleClick}>
+                        Upload File
+                      </Button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">KYC Upload</th>
+                    <td>
+                      <Button href="" className="btn btn-success m-2">
+                        Download
+                      </Button>
+                      <input
+                        style={{ display: "none" }}
+                        ref={inputRef}
+                        type="file"
+                        onChange={handleFileChange}
+                      />
+                      <Button className="btn btn-info" onClick={handleClick}>
+                        Upload File
+                      </Button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Current Location</th>
+                    <td>
+                      <Button href="" className="btn btn-info">
+                        View
+                      </Button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <h5 className="">Operations</h5>
+                  </tr>
+                  <tr>
+                    <th>
+                      <label>Shift</label>
+                      <br></br>
+                      <div class="form-check">
+                        <br></br>
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          id="flexRadioDefault1"
+                          disabled
+                          checked
+                        />
+                        <label
+                          class="form-check-label "
+                          for="flexRadioDefault1"
+                        >
+                          Morning Shift
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="flexRadioDefault"
+                          id="flexRadioDefault2"
+                          disabled
+                        />
+                        <label
+                          class="form-check-label "
+                          for="flexRadioDefault2"
+                        >
+                          Night Shift
+                        </label>
+                      </div>
+                    </th>
+                    <td colSpan={2} rowSpan={2}>
+                      <th>
+                        <label>Permisson</label>
+                      </th>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="btnradio"
+                        id="btnradio1"
+                        autocomplete="off"
+                        disabled
+                        checked
+                      />
+                      <label
+                        class="btn btn-outline-success m-3"
+                        for="btnradio1"
+                      >
+                        Activate
+                      </label>
+
+                      <input
+                        type="radio"
+                        class="btn-check m-3"
+                        name="btnradio"
+                        id="btnradio2"
+                        autocomplete="off"
+                        disabled
+                      />
+                      <label class="btn btn-outline-danger m-3" for="btnradio2">
+                        Deactive
+                      </label>
+
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="btnradio"
+                        id="btnradio3"
+                        autocomplete="off"
+                        disabled
+                      />
+                      <label class="btn btn-outline-danger m-3" for="btnradio3">
+                        BlackListed
+                      </label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+             ) : null}
           <div className="row">
             <div className="col-lg-7">
               <div className="row">
@@ -147,33 +366,39 @@ function Appuser() {
                   <div className="card info-card sales-card">
                     <div className="card-body">
                       <h5 className="card-title">APP Users</h5>
-                      <AppUserTable />
+                      <AppUserTable
+                        handleperopen={handleperopen}
+                        handleperclose={handleperclose}
+                        setEmail={setEmail}
+                        setMobno={setMobno}
+                        setName={setName}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {togglebox === true ? (
-            <div className="col-lg-5">
-              <div className="card">
-                 <button
+              <div className="col-lg-5">
+                <div className="card">
+                  <button
                     className="card-closebtn btn btn-danger rounded-5 bi-x"
                     id="view"
                     onClick={handlereqclose}
                   ></button>
-                <div className="card-body">
-                  <h5 className="card-title"> App User Request</h5>
-                  <DataTable
-                    columns={columns}
-                    data={countries}
-                    pagination
-                    highlightOnHover
-                    subHeader
-                  ></DataTable>
+                  <div className="card-body">
+                    <h5 className="card-title"> App User Request</h5>
+                    <DataTable
+                      columns={columns}
+                      data={countries}
+                      pagination
+                      highlightOnHover
+                      subHeader
+                    ></DataTable>
+                  </div>
                 </div>
               </div>
-            </div>
-            ):null}
+            ) : null}
           </div>
           <div>
             {/* <Modal
@@ -261,6 +486,7 @@ function Appuser() {
             </Button>
           </Modal.Footer>
         </Modal> */}
+       
           </div>
         </section>
       </main>

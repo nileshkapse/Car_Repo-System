@@ -5,6 +5,9 @@ import { Col, Row } from "react-bootstrap";
 import Sidebar from "../../components/sidebar/Sidebar";
 function ProfilePage() {
   const nevigate = useNavigate();
+
+
+
   return (
     <div>
       <link
@@ -219,11 +222,11 @@ function ProfilePage() {
                           <Row>
                             <Col>
                             <div>
-                            <a href="#" className="btn btn-primary btn-sm " title="Upload new profile image"><input classnName="" type="file" /></a>
+                            <a href="" className="btn btn-primary btn-sm " title="Upload new profile image"><input classnName="" style={{ display: "text" }} type="file" /></a>
                             </div>
                             </Col>
                             
-                        <Col> <a href="#" className="btn btn-danger btn-sm" title="Remove my profile image"><i className="bi bi-trash"></i></a></Col>
+                        <Col> <a href="" className="btn btn-danger btn-sm" title="Remove my profile image"><i className="bi bi-trash"></i></a></Col>
                                           
                           </Row>
                            
