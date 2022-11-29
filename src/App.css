@@ -25,8 +25,14 @@ a:hover {
 h1,
 h2,
 h3,
-h4,
-h5,
+th4{
+   text-transform: capitalize;
+   padding-right: 30px;
+   color: #3940cc	;
+}
+h5{
+  color: #39CCCC	;
+}
 h6 {
   font-family: "Nunito", sans-serif;
 }
@@ -1147,3 +1153,104 @@ dropdown-menu {
   color: #1a4cef;
   font-family: "Poppins", sans-serif;
 }
+
+
+/* Glow Button */
+
+
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgb(87, 158, 78);
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+
+
+/* Submit Button */
+
+.subbutton {
+  width: 300px;
+  height: 80px;
+  background: dodgerblue;
+  border-radius: 6px;
+  transition: all .3s cubic-bezier(0.67, 0.17, 0.40, 0.83);
+}
+
+.subbutton svg {
+  transform: rotate(180deg);
+  transition: all .5s;
+}
+
+.subbutton__circle {
+  width: 120px;
+  height: 120px;
+  background: mediumseagreen;
+  border-radius: 50%;
+  transform: rotate(-180deg);
+}
+
+.subbutton:hover {
+  cursor: pointer;
+}
+
+.subtick {
+  color: white;
+  font-size: 2em;
+  transition: all .9s;
+}
+
+

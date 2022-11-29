@@ -64,7 +64,14 @@ function Finacedetails() {
     } catch (error) {
       console.log(error);
     }
+
+    // 👇️ clear all input values in the form
+    setFinancename('');
+    setAddress('');
+    settotalbranch('');
   };
+
+
 
   return (
     <div>
@@ -137,7 +144,7 @@ function Finacedetails() {
                       <Modal.Title>Add Branch </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      <Form>
+                      <Form >
                         <Form.Group
                           className="mb-3"
                           controlId="exampleForm.ControlInput1"

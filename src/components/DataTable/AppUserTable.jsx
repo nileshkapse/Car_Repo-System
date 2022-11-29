@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import { useEffect } from "react";
 import { API_URL } from "../../constants/Database";
 
-const AppUserTable = () => {
+const AppUserTable = ({ handleperopen, setEmail,setName,setMobno }) => {
   const [countries, setCountries] = useState([]);
 
   const [search, setSearch] = useState([]);
@@ -69,7 +69,12 @@ const AppUserTable = () => {
           <button
             className="btn btn-primary bi-eye"
             id="view"
-            onClick={() => {}}
+            onClick={() => {
+              handleperopen();
+              setEmail(row.user_email);
+              setName(row.user_name);
+              setMobno(row.mobno);
+            }}
           ></button>
           <button className="btn btn-secondary m-1  bi-pen" id="edit"></button>
           <button
