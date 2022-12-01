@@ -15,6 +15,8 @@ function CustomTable({ uid }) {
 
   const [branch, setBranch] = useState([]);
 
+  // const [del,setDel]= useState("");
+
   console.log("uid data",uid );
 
   const getdatabase = async () => {
@@ -54,6 +56,25 @@ function CustomTable({ uid }) {
     }
   };
 
+
+  const datadelete = async () => {
+   
+    const query1 = `delete FROM Branches where FUID=${uid};`;
+    let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
+
+   
+
+    try {
+      axios
+        .post(API_URL, data1)
+        .then((res) => {})
+        .catch((err) => {
+          console.log("delete error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getdatabase();
@@ -164,6 +185,18 @@ function CustomTable({ uid }) {
                     <label>
                       {comp.Total_Records}
                     </label>
+                  </div>
+                </td>
+                 <td>
+                  <div>
+                     <button
+            className="btn btn-danger bi-trash"
+            id="delete"
+            onClick={() => {
+              datadelete();
+              // setDel(FUID);
+            }}
+          ></button>
                   </div>
                 </td>
               </tr>

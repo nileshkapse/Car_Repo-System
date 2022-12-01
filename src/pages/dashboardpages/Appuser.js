@@ -29,6 +29,7 @@ const [mobno, setMobno] = useState("");
   const [togglebox, setTogglebox] = React.useState(false);
 
   const [togglebox1, setTogglebox1] = React.useState(false);
+  const [togglebox2, setTogglebox2] = React.useState(false);
 
   const handlereqopen = () => {
     setTogglebox(true);
@@ -44,6 +45,12 @@ const [mobno, setMobno] = useState("");
 
   const handleperclose = () => {
     setTogglebox1(false);
+  };
+const handleShowopen=()=> {
+    setTogglebox2(true);
+  };
+   const handleShowclose=()=> {
+    setTogglebox2(false);
   };
 
   const getdatabase = async () => {
@@ -106,8 +113,8 @@ const [mobno, setMobno] = useState("");
       id: "column",
       cell: (row) => (
         <button
-          className="btn bi-pencil-square"
-          // onClick={handleShow}
+          className="btn bi-pencil-square btn-primary"
+          onClick={handleShowopen}
           style={{ zIndex: 1000 }}
         ></button>
       ),
@@ -395,12 +402,12 @@ const [mobno, setMobno] = useState("");
             ) : null}
           </div>
           <div>
-            {/* <Modal
+            <Modal
           size=""
           aria-labelledby="contained-modal-title-vcenter"
           centered
-          show={show}
-          onHide={handleClose}
+          show={togglebox2}
+          onHide={handleShowclose}
         >
           <Modal.Header closeButton>
             <Modal.Title>Update Activation </Modal.Title>
@@ -422,18 +429,6 @@ const [mobno, setMobno] = useState("");
                   }}
                 />
               </Form.Group> 
-            <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Finance Location</Form.Label>
-                <Form.Control type="text" placeholder="Finance Location"
-                // value={address}
-                //   onChange={(e)=>{
-                //     setAddress(e.target.value)
-                //   }} 
-                />
-              </Form.Group> 
 
              <Row>
                   <Col xs={8} md={6}>
@@ -442,27 +437,13 @@ const [mobno, setMobno] = useState("");
                       controlId="exampleForm.ControlInput1"
                     >
                       <Form.Label>Activate or deactivate</Form.Label>
-                      <Form.Control type="number" 
+                      <Form.Control type="radiobutton" 
                       min="0" max="1"  maxlength="1"
-                      value={active}
-                  onChange={(e)=>{
-                    setActive(e.target.value)
-                  }}
-                  />
-                    </Form.Group>
-                  </Col> 
-             <Col xs={8} md={6}>
-                    <Form.Group
-                      className="mb-1"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label>Upload Date</Form.Label>
-                      <Form.Control type="date"
-                  //     value={uploaddate}
+                  //     value={active}
                   // onChange={(e)=>{
-                  //   setUploaddate(e.target.value)
+                  //   setActive(e.target.value)
                   // }}
-                   />
+                  />
                     </Form.Group>
                   </Col> 
             </Row>
@@ -470,16 +451,16 @@ const [mobno, setMobno] = useState("");
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={handleShowclose}>
               Close
             </Button>
             <Button variant="primary"
-             onClick={datainsert}
+            //  onClick={dataUpdate}
              >
               Save
             </Button>
           </Modal.Footer>
-        </Modal> */}
+        </Modal>
        
           </div>
         </section>
