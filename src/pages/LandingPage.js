@@ -108,7 +108,7 @@ function LandingPage() {
       axios
         .post(API_URL, data)
         .then((res) => {
-          console.log("all data: ", res.data);
+         
           // this.setState({ rlen : res.data.length });
           var rlength = res.data.length;
           setAppcount(rlength);
@@ -126,7 +126,7 @@ function LandingPage() {
       axios
         .post(API_URL, data1)
         .then((res) => {
-          console.log("all isactive ", res.data);
+         
           // this.setState({ rlen : res.data.length });
           var rlength = res.data.length;
           setIsactive(rlength);

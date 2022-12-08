@@ -69,6 +69,7 @@ function Finacedetails() {
     setFinancename('');
     setAddress('');
     settotalbranch('');
+    handleClose();
   };
 
 

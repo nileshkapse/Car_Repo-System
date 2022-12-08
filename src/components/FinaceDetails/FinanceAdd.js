@@ -40,6 +40,9 @@ function FinanceAdd() {
     } catch (error) {
       console.log(error);
     }
+    setFinancename('');
+    setAddress('');
+    handleClose();
   };
 
   return (

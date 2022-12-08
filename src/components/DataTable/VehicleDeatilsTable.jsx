@@ -17,7 +17,7 @@ const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
   const [filtercountries, setfiltercontries] = useState([]);
 
   const getdatabase = async () => {
-    const query = `SELECT * FROM vehicle2 ;`;
+    const query = `SELECT * FROM Vehicle ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
@@ -41,14 +41,14 @@ const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
   const columns = [
     {
       name: "RC Number",
-      selector: (row) => row.regdnum,
+      selector: (row) => row.rc_number,
       sortable: true,
       id: "column",
       width: "130px",
     },
     {
       name: "Customer Name ",
-      selector: (row) => row.customername,
+      selector: (row) => row.customer_name,
       sortable: true,
       id: "column",
       width: "200px",
@@ -63,9 +63,7 @@ const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
             id="view"
             onClick={() => {
               handledetailscardopen();
-
               setRcn(row.rc_number);
-              console.log("handleuid data", setRcn);
             }}
           ></button>
           <button
@@ -92,11 +90,11 @@ const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
   useEffect(() => {
     const result = countries.filter((country) => {
       // var contra =country.contract_no.toString().toLowerCase().match(search.toLowerCase());
-      var name = country.customername
+      var name = country.customer_name
         .toString()
         .toLowerCase()
         .match(search.toLowerCase());
-      var rc = country.regdnum
+      var rc = country.rc_number
         .toString()
         .toLowerCase()
         .match(search.toLowerCase());

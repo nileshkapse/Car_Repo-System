@@ -16,16 +16,21 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useRef } from "react";
 
-
 function Appuser() {
   const nevigate = useNavigate();
 
   const [countries, setCountries] = useState([]);
 
+  const [finance, setfinance] = useState([]);
+
   const [email, setEmail] = useState("");
 
+  const [status, setstatus] = useState("");
+
+  const [deactiveemail, setDeactiveemail] = useState("");
+
   const [name, setName] = useState("");
-const [mobno, setMobno] = useState("");
+  const [mobno, setMobno] = useState("");
   const [togglebox, setTogglebox] = React.useState(false);
 
   const [togglebox1, setTogglebox1] = React.useState(false);
@@ -41,17 +46,20 @@ const [mobno, setMobno] = useState("");
 
   const handleperopen = () => {
     setTogglebox1(true);
+    getFinance();
   };
 
   const handleperclose = () => {
     setTogglebox1(false);
   };
-const handleShowopen=()=> {
+  const handleShowopen = () => {
     setTogglebox2(true);
   };
-   const handleShowclose=()=> {
+  const handleShowclose = () => {
     setTogglebox2(false);
   };
+
+  const buttonRef = useRef();
 
   const getdatabase = async () => {
     const query = `SELECT * FROM App_User where isactive = 0 ;`;
@@ -73,25 +81,45 @@ const handleShowopen=()=> {
     }
   };
 
-  // const datainsert=async()=>{
-  //   const query = `UPDATE App_User SET isactive = ${active} WHERE user_email = '${email}' ;`;
-  //   let data = { crossDomain: true, crossOrigin: true, query: query };
+  const getFinance = async () => {
+    const query = `SELECT * from Branches where Branches.FUID in (select FUID from assign where assign.mail='${email}')`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
 
-  //   try{
-  //    axios
-  //     .post(API_URL, data)
-  //     .then((res) => {
-  //       console.log("Inserted data: ", res.data);
-  //       // this.setState({ allData: res.data });
-  //       // window.location.reload(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log("Inserted data error: ", err);
-  //     });
-  //   }catch(error){
-  //     console.log(error);
-  //   }
-  // } ;
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("Finance data: ", res.data);
+          // this.setState({ allData: res.data });
+          setfinance(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const dataUpdate = async () => {
+    const query = `UPDATE App_User SET isactive = ${status} WHERE user_email = '${deactiveemail}' ;`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("Updated Data", res.data);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    handleShowclose();
+    window.location.reload(true);
+  };
 
   const columns = [
     {
@@ -114,15 +142,48 @@ const handleShowopen=()=> {
       cell: (row) => (
         <button
           className="btn bi-pencil-square btn-primary"
-          onClick={handleShowopen}
+          onClick={() => {
+            handleShowopen();
+            setDeactiveemail(row.user_email);
+          }}
           style={{ zIndex: 1000 }}
         ></button>
       ),
     },
   ];
+
+  const financecol = [
+    {
+      name: "Finance Name",
+      selector: (row) => row.branch_name,
+      sortable: true,
+      id: "column",
+    },
+    {
+      name: "Address",
+      selector: (row) => row.address,
+      sortable: true,
+      id: "column",
+    },
+    {
+      name: "Contact No",
+      selector: (row) => row.contact_no,
+      sortable: true,
+      id: "column",
+    },
+    {
+      name: "Total Records",
+      selector: (row) => row.Total_Records,
+      sortable: true,
+      id: "column",
+    },
+  ];
+
+
+
   useEffect(() => {
     getdatabase();
-    // datainsert();
+    // dataUpdate();
   }, []);
 
   const inputRef = useRef(null);
@@ -143,7 +204,12 @@ const handleShowopen=()=> {
     event.target.value = null;
   };
 
-  
+  console.log(status);
+  console.log(email);
+  const enableButton = () => {
+    buttonRef.current.disabled = false; // this disables the button
+  };
+
   return (
     <div>
       <link
@@ -164,7 +230,6 @@ const handleShowopen=()=> {
       {/* <!-- ======= Sidebar ======= --> */}
       <Sidebar />
 
-
       <main id="main" className="main">
         <section className="section dashboard">
           <div className="row">
@@ -172,13 +237,13 @@ const handleShowopen=()=> {
               <button
                 className="toggle-closebtn btn rounded-5 btn-info bi-list flex-xl-fill"
                 id="view"
-                onClick={handlereqopen}
+                // onClick={handlereqopen}
               >
                 <span className="m-1">Menu</span>
               </button>
             </div>
           </div>
-           {togglebox1 === true ? ( 
+          {togglebox1 === true ? (
             <div className="card p-5">
               <button
                 className="card-closebtn btn btn-danger rounded-5 bi-x"
@@ -188,6 +253,7 @@ const handleShowopen=()=> {
               <button
                 className="card-addbtn btn rounded-5 btn-warning bi-pen"
                 id="view"
+                onClick={enableButton}
               ></button>
               <br />
 
@@ -278,40 +344,55 @@ const handleShowopen=()=> {
                     <th>
                       <label>Shift</label>
                       <br></br>
-                      <div class="form-check">
-                        <br></br>
+                      <br></br>
+
+                      <div class="form-check form-check-inline">
                         <input
                           class="form-check-input"
                           type="radio"
-                          name="flexRadioDefault"
-                          id="flexRadioDefault1"
-                          disabled
-                          checked
+                          name="inlineRadioOptions"
+                          id="inlineRadio1"
+                          value="0"
+                          onChange={(e) => {
+                            setstatus(e.target.value);
+                          }}
                         />
-                        <label
-                          class="form-check-label "
-                          for="flexRadioDefault1"
-                        >
-                          Morning Shift
+                        <label class="form-check-label" for="inlineRadio1">
+                          Morning
                         </label>
                       </div>
-                      <div class="form-check">
+                      <div class="form-check form-check-inline">
                         <input
                           class="form-check-input"
                           type="radio"
-                          name="flexRadioDefault"
-                          id="flexRadioDefault2"
-                          disabled
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          value="1"
+                          onChange={(e) => {
+                            setstatus(e.target.value);
+                          }}
                         />
-                        <label
-                          class="form-check-label "
-                          for="flexRadioDefault2"
-                        >
-                          Night Shift
+                        <label class="form-check-label" for="inlineRadio2">
+                          Night
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          value="2"
+                          onChange={(e) => {
+                            setstatus(e.target.value);
+                          }}
+                        />
+                        <label class="form-check-label" for="inlineRadio2">
+                          Both Shift
                         </label>
                       </div>
                     </th>
-                    <td colSpan={2} rowSpan={2}>
+                    <td colSpan={2} rowSpan={1}>
                       <th>
                         <label>Permisson</label>
                       </th>
@@ -356,10 +437,22 @@ const handleShowopen=()=> {
                       </label>
                     </td>
                   </tr>
+                  <tr>
+                    {/* <h5>Finance Link</h5> */}
+                    <td colSpan={5} rowSpan={1}>
+                      <DataTable
+                        columns={financecol}
+                        data={finance}
+                        pagination
+                        highlightOnHover
+                        subHeader
+                      ></DataTable>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
-             ) : null}
+          ) : null}
           <div className="row">
             <div className="col-lg-7">
               <div className="row">
@@ -379,89 +472,109 @@ const handleShowopen=()=> {
                 </div>
               </div>
             </div>
-            {togglebox === true ? (
-              <div className="col-lg-5">
-                <div className="card">
-                  <button
-                    className="card-closebtn btn btn-danger rounded-5 bi-x"
-                    id="view"
-                    onClick={handlereqclose}
-                  ></button>
-                  <div className="card-body">
-                    <h5 className="card-title"> App User Request</h5>
-                    <DataTable
-                      columns={columns}
-                      data={countries}
-                      pagination
-                      highlightOnHover
-                      subHeader
-                    ></DataTable>
-                  </div>
+            {/* {togglebox === true ? ( */}
+            <div className="col-lg-5">
+              <div className="card">
+                {/* <button
+                  className="card-closebtn btn btn-danger rounded-5 bi-x"
+                  id="view"
+                  // onClick={handlereqclose}
+                ></button> */}
+                <div className="card-body">
+                  <h5 className="card-title"> App User Request</h5>
+                  <DataTable
+                    columns={columns}
+                    data={countries}
+                    pagination
+                    highlightOnHover
+                    subHeader
+                  ></DataTable>
                 </div>
               </div>
-            ) : null}
+            </div>
+            {/* ) : null} */}
           </div>
           <div>
             <Modal
-          size=""
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          show={togglebox2}
-          onHide={handleShowclose}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Update Activation </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Email ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Email ID"
-                  autoFocus
-                  value={email}
-                  onChange={(e)=>{
-                    setEmail(e.target.value)
-                  }}
-                />
-              </Form.Group> 
+              size=""
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={togglebox2}
+              onHide={handleShowclose}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Update Activation </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Email ID</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Email ID"
+                      autoFocus
+                      value={deactiveemail}
+                      onChange={(e) => {
+                        setDeactiveemail(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
 
-             <Row>
-                  <Col xs={8} md={6}>
-                    <Form.Group
-                      className="mb-1"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label>Activate or deactivate</Form.Label>
-                      <Form.Control type="radiobutton" 
-                      min="0" max="1"  maxlength="1"
-                  //     value={active}
-                  // onChange={(e)=>{
-                  //   setActive(e.target.value)
-                  // }}
-                  />
-                    </Form.Group>
-                  </Col> 
-            </Row>
-         
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleShowclose}>
-              Close
-            </Button>
-            <Button variant="primary"
-            //  onClick={dataUpdate}
-             >
-              Save
-            </Button>
-          </Modal.Footer>
-        </Modal>
-       
+                  <Row>
+                    <Col xs={8} md={6}>
+                      <Form.Group
+                        className="mb-1"
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <Form.Label>Activate or deactivate</Form.Label>
+
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio1"
+                            value="1"
+                            onChange={(e) => {
+                              setstatus(e.target.value);
+                            }}
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            Activate
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio2"
+                            value="0"
+                            onChange={(e) => {
+                              setstatus(e.target.value);
+                            }}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            deactivate
+                          </label>
+                        </div>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleShowclose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={dataUpdate}>
+                  Save
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </div>
         </section>
       </main>
