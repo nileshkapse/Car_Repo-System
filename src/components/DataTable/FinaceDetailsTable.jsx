@@ -117,8 +117,6 @@ const FinaceDetailsTable = ({ handledetailscardopen, setUid }) => {
     },
   ];
 
-  console.log("Delete Uid", uid);
-
   useEffect(() => {
     getdatabase();
   });

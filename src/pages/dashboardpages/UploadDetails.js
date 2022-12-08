@@ -220,7 +220,7 @@ function UploadDetails() {
           fields_str += `,`;
         }
 
-        fields_str += `'${item}'`;
+        fields_str += `"${item}"`;
       });
 
       local_db_query += fields_str + `)`;

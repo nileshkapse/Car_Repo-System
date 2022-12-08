@@ -13,7 +13,6 @@ function Vehicledetail({rcn}) {
 
   const[vehicle,setVehicle] = useState([]);
 
-  console.log("handleuid data",rcn );
 
   const getdatabase = async () => {
     const query = `SELECT * FROM Vehicle where rc_number = '${rcn}';`;
@@ -45,7 +44,7 @@ function Vehicledetail({rcn}) {
 
         <div className="col-lg ">
           {vehicle.map((comp) => (
-            <div key={comp.customer_name}>
+            <div>
               <label>{comp.customer_name}</label>
             </div>
           ))}
@@ -55,7 +54,7 @@ function Vehicledetail({rcn}) {
         <div className="col-lg-4">RC No. :</div>
         <div className="col-lg-2">
           {vehicle.map((comp) => (
-            <div key={comp.rc_number}>
+            <div >
               <label>{comp.rc_number}</label>
             </div>
           ))}
@@ -65,4 +64,4 @@ function Vehicledetail({rcn}) {
   )
 }
 
-export default Vehicledetail
+export default Vehicledetail;
