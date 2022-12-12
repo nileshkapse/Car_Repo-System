@@ -26,6 +26,9 @@ function Appuser() {
   const [email, setEmail] = useState("");
 
   const [status, setstatus] = useState("");
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleopen = () => setShow(true);
 
   const [deactiveemail, setDeactiveemail] = useState("");
 
@@ -35,6 +38,8 @@ function Appuser() {
 
   const [togglebox1, setTogglebox1] = React.useState(false);
   const [togglebox2, setTogglebox2] = React.useState(false);
+
+  const [togglebox3, setTogglebox3] = React.useState(false);
 
   const handlereqopen = () => {
     setTogglebox(true);
@@ -57,6 +62,14 @@ function Appuser() {
   };
   const handleShowclose = () => {
     setTogglebox2(false);
+  };
+
+  const creatshow = () => {
+    setTogglebox3(true);
+  };
+
+  const creatclose = () => {
+    setTogglebox3(false);
   };
 
   const buttonRef = useRef();
@@ -121,6 +134,28 @@ function Appuser() {
     window.location.reload(true);
   };
 
+
+  const deleteuser = async () => {
+    const query = `delete from App_User WHERE user_email = '${deactiveemail}' ;`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("Updated Data", res.data);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    handleShowclose();
+    window.location.reload(true);
+    };
+
+
   const columns = [
     {
       name: "Email ID (User ID)",
@@ -179,8 +214,6 @@ function Appuser() {
     },
   ];
 
-
-
   useEffect(() => {
     getdatabase();
     // dataUpdate();
@@ -235,14 +268,15 @@ function Appuser() {
           <div className="row">
             <div>
               <button
-                className="toggle-closebtn btn rounded-5 btn-info bi-list flex-xl-fill"
+                className="btn rounded-5 btn-info bi-plus flex-xl-fill"
                 id="view"
-                // onClick={handlereqopen}
+                onClick={creatshow}
               >
-                <span className="m-1">Menu</span>
+                <span className="m-2">Create User</span>
               </button>
             </div>
           </div>
+          <br></br>
           {togglebox1 === true ? (
             <div className="card p-5">
               <button
@@ -562,6 +596,15 @@ function Appuser() {
                           </label>
                         </div>
                       </Form.Group>
+                      <br></br>
+                      <div class="form-check form-check-inline">
+                        <Button
+                          className="center btn btn-danger center"
+                          onClick={handleopen}
+                        >
+                          Delete Request
+                        </Button>
+                      </div>
                     </Col>
                   </Row>
                 </Form>
@@ -572,6 +615,218 @@ function Appuser() {
                 </Button>
                 <Button variant="primary" onClick={dataUpdate}>
                   Save
+                </Button>
+              </Modal.Footer>
+            </Modal>
+
+            {/* Delete user sure */}
+            <Modal
+              size=""
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={show}
+              onHide={handleClose}
+            >
+              <Modal.Header closeButton>
+                <h5 className="alert alert-danger" role="alert">
+                  Are You Sure to Delete ?
+                </h5>
+              </Modal.Header>
+              <Modal.Footer>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-mdb-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={deleteuser}
+                >
+                  Delete
+                </button>
+              </Modal.Footer>
+            </Modal>
+
+            {/* Create User */}
+
+            <Modal
+              size=""
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={togglebox3}
+              onHide={creatclose}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Create User </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Sezur Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Name"
+                      autoFocus
+                      // value={deactiveemail}
+                      onChange={(e) => {
+                        setDeactiveemail(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Email ID</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Email ID"
+                      autoFocus
+                      // value={deactiveemail}
+                      onChange={(e) => {
+                        setDeactiveemail(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>Mobile No</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Mobile no"
+                      autoFocus
+                      // value={deactiveemail}
+                      onChange={(e) => {
+                        setDeactiveemail(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+
+                  <Row>
+                    <Col xs={8} md={6}>
+                      <Form.Group
+                        className="mb-1"
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <Form.Label>Activate or deactivate</Form.Label>
+
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio1"
+                            value="1"
+                            onChange={(e) => {
+                              setstatus(e.target.value);
+                            }}
+                          />
+                          <label class="form-check-label" for="inlineRadio1">
+                            Activate
+                          </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="inlineRadioOptions"
+                            id="inlineRadio2"
+                            value="0"
+                            onChange={(e) => {
+                              setstatus(e.target.value);
+                            }}
+                          />
+                          <label class="form-check-label" for="inlineRadio2">
+                            deactivate
+                          </label>
+                        </div>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <br></br>
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label>$ Account Balance $</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Balance"
+                      autoFocus
+                      // value={deactiveemail}
+                      onChange={(e) => {
+                        setDeactiveemail(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+                  <Row>
+                    <Form.Group className="mb-1">
+                      <Form.Label>SubScription :</Form.Label>
+                      <Col xs={4} md={2}>
+                        <div class="">
+                          <label class="form-check-label ">From </label>
+                          <input
+                            type="date"
+                            // name="inlineRadioOptions"
+                            // id="inlineRadio2"
+                            // value="0"
+                            // onChange={(e) => {
+                            //   setstatus(e.target.value);
+                            // }}
+                          />
+                        </div>
+
+                        <div class="">
+                          <label class="form-check-label">To </label>
+                          <input
+                            type="date"
+                            // name="inlineRadioOptions"
+                            // id="inlineRadio2"
+                            // value="0"
+                            // onChange={(e) => {
+                            //   setstatus(e.target.value);
+                            // }}
+                          />
+                        </div>
+                      </Col>
+                    </Form.Group>
+                  </Row>
+                  <br></br>
+                  <Row>
+                    <br></br>
+                    <Form.Group
+                      className="mb-1"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Upload Details : </Form.Label>
+                      <br></br>
+                      <input
+                        style={{ display: "none" }}
+                        ref={inputRef}
+                        type="file"
+                        onChange={handleFileChange}
+                      />
+                      <Button className="btn btn-info" onClick={handleClick}>
+                        Upload KYC
+                      </Button>
+                    </Form.Group>
+                  </Row>
+                </Form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleShowclose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={createuser}>
+                  Create User
                 </Button>
               </Modal.Footer>
             </Modal>

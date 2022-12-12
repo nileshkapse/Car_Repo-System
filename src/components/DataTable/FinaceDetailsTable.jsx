@@ -152,7 +152,7 @@ const FinaceDetailsTable = ({ handledetailscardopen, setUid }) => {
           </button>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-danger"
             onClick={datadelete}
           >
             Delete

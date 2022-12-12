@@ -15,7 +15,7 @@ function LineChart() {
     datasets:[
       {
         label:"First Dataset",
-        data:[10, 20, 30, 42, 51, 82, 31, 59, 61, 73, 91, 58],
+        data:[2022-10-25],
         backgroundColor:'#34ebc9',
         borderColor:'green',
         tension:0.4,
