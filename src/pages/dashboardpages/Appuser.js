@@ -27,19 +27,34 @@ function Appuser() {
 
   const [status, setstatus] = useState("");
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleopen = () => setShow(true);
+  
 
   const [deactiveemail, setDeactiveemail] = useState("");
 
   const [name, setName] = useState("");
   const [mobno, setMobno] = useState("");
+
   const [togglebox, setTogglebox] = React.useState(false);
 
   const [togglebox1, setTogglebox1] = React.useState(false);
   const [togglebox2, setTogglebox2] = React.useState(false);
 
   const [togglebox3, setTogglebox3] = React.useState(false);
+
+
+  // User function 
+
+  const [sezurname, setSezur] = useState("");
+  const [emailid, setEmailid] = useState("");
+  const [mobileno , setMobileno] =useState("");
+  const [userstatus, setUserstatus] = useState("");
+  const [accountbal, setAccountbal] = useState("");
+  const [fromdate , setFromdate] =useState("");
+  const [todate , setTodate] =useState("");
+
+
+  const handleClose = () => setShow(false);
+  const handleopen = () => setShow(true);
 
   const handlereqopen = () => {
     setTogglebox(true);
@@ -94,6 +109,29 @@ function Appuser() {
     }
   };
 
+  // Database Query for Creating New User
+
+  const createuser = async () => {
+    const query = `insert into App_User (user_email,isactive,balance,user_name,mobno) values ('${emailid}',${userstatus},${accountbal},'${sezurname}',${mobileno});`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("all data: ", res.data);
+          // this.setState({ allData: res.data });
+          setCountries(res.data);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload(true);
+  };
+
   const getFinance = async () => {
     const query = `SELECT * from Branches where Branches.FUID in (select FUID from assign where assign.mail='${email}')`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
@@ -134,7 +172,6 @@ function Appuser() {
     window.location.reload(true);
   };
 
-
   const deleteuser = async () => {
     const query = `delete from App_User WHERE user_email = '${deactiveemail}' ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
@@ -153,8 +190,7 @@ function Appuser() {
     }
     handleShowclose();
     window.location.reload(true);
-    };
-
+  };
 
   const columns = [
     {
@@ -637,6 +673,7 @@ function Appuser() {
                   type="button"
                   className="btn btn-secondary"
                   data-mdb-dismiss="modal"
+                  onClick={handleClose}
                 >
                   Close
                 </button>
@@ -673,9 +710,9 @@ function Appuser() {
                       type="text"
                       placeholder="Name"
                       autoFocus
-                      // value={deactiveemail}
+                      value={sezurname}
                       onChange={(e) => {
-                        setDeactiveemail(e.target.value);
+                        setSezur(e.target.value);
                       }}
                     />
                   </Form.Group>
@@ -688,9 +725,9 @@ function Appuser() {
                       type="text"
                       placeholder="Email ID"
                       autoFocus
-                      // value={deactiveemail}
+                      value={emailid}
                       onChange={(e) => {
-                        setDeactiveemail(e.target.value);
+                        setEmailid(e.target.value);
                       }}
                     />
                   </Form.Group>
@@ -703,9 +740,9 @@ function Appuser() {
                       type="text"
                       placeholder="Mobile no"
                       autoFocus
-                      // value={deactiveemail}
+                      value={mobileno}
                       onChange={(e) => {
-                        setDeactiveemail(e.target.value);
+                        setMobileno(e.target.value);
                       }}
                     />
                   </Form.Group>
@@ -726,7 +763,7 @@ function Appuser() {
                             id="inlineRadio1"
                             value="1"
                             onChange={(e) => {
-                              setstatus(e.target.value);
+                              setUserstatus(e.target.value);
                             }}
                           />
                           <label class="form-check-label" for="inlineRadio1">
@@ -741,7 +778,7 @@ function Appuser() {
                             id="inlineRadio2"
                             value="0"
                             onChange={(e) => {
-                              setstatus(e.target.value);
+                              setUserstatus(e.target.value);
                             }}
                           />
                           <label class="form-check-label" for="inlineRadio2">
@@ -761,9 +798,9 @@ function Appuser() {
                       type="number"
                       placeholder="Balance"
                       autoFocus
-                      // value={deactiveemail}
+                      value={accountbal}
                       onChange={(e) => {
-                        setDeactiveemail(e.target.value);
+                        setAccountbal(e.target.value);
                       }}
                     />
                   </Form.Group>
@@ -777,10 +814,10 @@ function Appuser() {
                             type="date"
                             // name="inlineRadioOptions"
                             // id="inlineRadio2"
-                            // value="0"
-                            // onChange={(e) => {
-                            //   setstatus(e.target.value);
-                            // }}
+                            value={fromdate}
+                            onChange={(e) => {
+                              setFromdate(e.target.value);
+                            }}
                           />
                         </div>
 
@@ -790,10 +827,10 @@ function Appuser() {
                             type="date"
                             // name="inlineRadioOptions"
                             // id="inlineRadio2"
-                            // value="0"
-                            // onChange={(e) => {
-                            //   setstatus(e.target.value);
-                            // }}
+                            value={todate}
+                            onChange={(e) => {
+                              setTodate(e.target.value);
+                            }}
                           />
                         </div>
                       </Col>

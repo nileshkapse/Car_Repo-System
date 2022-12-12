@@ -28,7 +28,7 @@ function LandingPage() {
   const [isadmin,setIsadmin] = useState([]);
 
   const getfinanceuser = async () => {
-    const query = `SELECT * from Vehicle;`;
+    const query = `SELECT * from Vehicle2;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     const query1 = `SELECT * from Branches;`;

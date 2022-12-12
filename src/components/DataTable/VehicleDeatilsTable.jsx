@@ -17,14 +17,14 @@ const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
   const [filtercountries, setfiltercontries] = useState([]);
 
   const getdatabase = async () => {
-    const query = `SELECT * FROM Vehicle ;`;
+    const query = `SELECT * FROM Vehicle2 ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
       axios
         .post(API_URL, data)
         .then((res) => {
-          console.log("all data: ", res.data);
+          // console.log("all data: ", res.data);
           // this.setState({ allData: res.data });
           setCountries([...res.data]);
           setfiltercontries([...res.data]);
@@ -84,7 +84,6 @@ const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
 
   useEffect(() => {
     getdatabase();
-   
   }, []);
 
   useEffect(() => {
