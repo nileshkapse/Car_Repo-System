@@ -8,6 +8,7 @@ import {
   DETAILS_VIEW_URLS,
   UPLOAD_DETAILS_URLS,
   PROFILE_PAGES_URLS,
+  RECENT_VEHICLE,
 } from "../../constants/URLS";
 
 import { Link, useLocation } from "react-router-dom";

@@ -69,6 +69,7 @@ const FinaceDetailsTable = ({ handledetailscardopen, setUid }) => {
     } catch (error) {
       console.log(error);
     }
+    window.location.reload(true);
   };
 
   const columns = [
@@ -84,7 +85,7 @@ const FinaceDetailsTable = ({ handledetailscardopen, setUid }) => {
       selector: (row) => row.total_branches,
       sortable: true,
       id: "column",
-      width: "100px",
+      width: "110px",
     },
 
     {
@@ -147,6 +148,7 @@ const FinaceDetailsTable = ({ handledetailscardopen, setUid }) => {
             type="button"
             className="btn btn-secondary"
             data-mdb-dismiss="modal"
+            onClick={handleClose}
           >
             Close
           </button>

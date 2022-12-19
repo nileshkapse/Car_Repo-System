@@ -28,22 +28,21 @@ function LandingPage() {
   const [isadmin,setIsadmin] = useState([]);
 
   const getfinanceuser = async () => {
-    const query = `SELECT * from Vehicle2;`;
+    const query = `SELECT COUNT(*) as rl FROM Vehicle;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
-    const query1 = `SELECT * from Branches;`;
+    const query1 = `SELECT COUNT(*) as brl From Branches;`;
     let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
 
-    const query2 = `SELECT * from Finance;`;
+    const query2 = `SELECT COUNT(*) as frl from Finance;`;
     let data2 = { crossDomain: true, crossOrigin: true, query: query2 };
 
     try {
       axios
         .post(API_URL, data)
         .then((res) => {
-          console.log("all data: ", res.data.length);
           // this.setState({ rlen : res.data.length });
-          var rlength = res.data.length;
+          var rlength = res.data[0].rl;
           setCount(rlength);
           // setCountries(res.data);
           // setfiltercontries(res.data);
@@ -58,9 +57,9 @@ function LandingPage() {
       axios
         .post(API_URL, data1)
         .then((res) => {
-          console.log("all branch data: ", res.data.length);
+        
           // this.setState({ rlen : res.data.length });
-          var rlength = res.data.length;
+          var rlength = res.data[0].brl;
           setBranchlen(rlength);
           // setCountries(res.data);
           // setfiltercontries(res.data);
@@ -75,9 +74,8 @@ function LandingPage() {
       axios
         .post(API_URL, data2)
         .then((res) => {
-          console.log("all branch data: ", res.data.length);
           // this.setState({ rlen : res.data.length });
-          var rlength = res.data.length;
+          var rlength = res.data[0].frl;
           setFinancelen(rlength);
           // setCountries(res.data);
           // setfiltercontries(res.data);
@@ -95,13 +93,13 @@ function LandingPage() {
 
   const getappuser = async () => {
 
-    const query = `SELECT * from App_User;`;
+    const query = `SELECT COUNT(*) as arl from App_User;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
-    const query1 = `select * from App_User where isactive = 1 ;` ;
+    const query1 = `select COUNT(*) as aarl from App_User where isactive = 1 ;` ;
     let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
 
-    const query2 = `select * from App_User where isadmin = 1 ;` ;
+    const query2 = `select COUNT(*) as acarl from App_User where isadmin = 1 ;` ;
     let data2 = { crossDomain: true, crossOrigin: true, query: query2 };
 
     try {
@@ -110,7 +108,7 @@ function LandingPage() {
         .then((res) => {
          
           // this.setState({ rlen : res.data.length });
-          var rlength = res.data.length;
+          var rlength = res.data[0].arl;
           setAppcount(rlength);
           // setCountries(res.data);
           // setfiltercontries(res.data);
@@ -128,7 +126,7 @@ function LandingPage() {
         .then((res) => {
          
           // this.setState({ rlen : res.data.length });
-          var rlength = res.data.length;
+          var rlength = res.data[0].aarl;
           setIsactive(rlength);
           // setCountries(res.data);
           // setfiltercontries(res.data);
@@ -144,9 +142,8 @@ function LandingPage() {
       axios
         .post(API_URL, data2)
         .then((res) => {
-          console.log("all data: ", res.data);
           // this.setState({ rlen : res.data.length });
-          var rlength = res.data.length;
+          var rlength = res.data[0].acarl;
           setIsadmin(rlength);
           // setCountries(res.data);
           // setfiltercontries(res.data);

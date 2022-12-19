@@ -27,7 +27,6 @@ function Appuser() {
 
   const [status, setstatus] = useState("");
   const [show, setShow] = useState(false);
-  
 
   const [deactiveemail, setDeactiveemail] = useState("");
 
@@ -41,16 +40,7 @@ function Appuser() {
 
   const [togglebox3, setTogglebox3] = React.useState(false);
 
-
-  // User function 
-
-  const [sezurname, setSezur] = useState("");
-  const [emailid, setEmailid] = useState("");
-  const [mobileno , setMobileno] =useState("");
-  const [userstatus, setUserstatus] = useState("");
-  const [accountbal, setAccountbal] = useState("");
-  const [fromdate , setFromdate] =useState("");
-  const [todate , setTodate] =useState("");
+  // User function
 
 
   const handleClose = () => setShow(false);
@@ -111,27 +101,7 @@ function Appuser() {
 
   // Database Query for Creating New User
 
-  const createuser = async () => {
-    const query = `insert into App_User (user_email,isactive,balance,user_name,mobno) values ('${emailid}',${userstatus},${accountbal},'${sezurname}',${mobileno});`;
-    let data = { crossDomain: true, crossOrigin: true, query: query };
-
-    try {
-      axios
-        .post(API_URL, data)
-        .then((res) => {
-          console.log("all data: ", res.data);
-          // this.setState({ allData: res.data });
-          setCountries(res.data);
-        })
-        .catch((err) => {
-          console.log("all data error: ", err);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-    window.location.reload(true);
-  };
-
+  
   const getFinance = async () => {
     const query = `SELECT * from Branches where Branches.FUID in (select FUID from assign where assign.mail='${email}')`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
@@ -268,16 +238,60 @@ function Appuser() {
     }
 
     console.log("fileObj is", fileObj);
-
     // 👇️ reset file input
     event.target.value = null;
   };
 
   console.log(status);
   console.log(email);
+
   const enableButton = () => {
     buttonRef.current.disabled = false; // this disables the button
   };
+  
+  function convertArrayOfObjectsToCSV(array) {
+    let result;
+    const columnDelimiter = ",";
+    const lineDelimiter = "\n";
+    const keys = Object.keys(finance[0]);
+    result = "";
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+    array.forEach((item) => {
+      let ctr = 0;
+      keys.forEach((key) => {
+        if (ctr > 0) result += columnDelimiter;
+        result += item[key];
+        ctr++;
+      });
+      result += lineDelimiter;
+    });
+    return result;
+  }
+  // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
+  function downloadCSV(array) {
+    const link = document.createElement("a");
+    let csv = convertArrayOfObjectsToCSV(array);
+    if (csv == null) return;
+    const filename = "export.csv";
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`;
+    }
+
+    link.setAttribute("href", encodeURI(csv));
+    link.setAttribute("download", filename);
+    link.click();
+  }
+
+  const Export = ({ onExport }) => (
+    <Button onClick={(e) => onExport(e.target.value)}>Export</Button>
+  );
+
+  const actionsMemo = React.useMemo(
+    () => <Export onExport={() => downloadCSV(finance)} />,
+    [finance]
+  );
 
   return (
     <div>
@@ -301,18 +315,6 @@ function Appuser() {
 
       <main id="main" className="main">
         <section className="section dashboard">
-          <div className="row">
-            <div>
-              <button
-                className="btn rounded-5 btn-info bi-plus flex-xl-fill"
-                id="view"
-                onClick={creatshow}
-              >
-                <span className="m-2">Create User</span>
-              </button>
-            </div>
-          </div>
-          <br></br>
           {togglebox1 === true ? (
             <div className="card p-5">
               <button
@@ -334,7 +336,7 @@ function Appuser() {
                 <tbody>
                   <tr>
                     <th>Sezur Finance </th>
-                    <th colSpan={2}>Payment Confirmation : </th>
+                    <th colSpan={3}>Payment Confirmation : </th>
                   </tr>
                   <tr>
                     <td colSpan={1} rowSpan={6}>
@@ -349,7 +351,9 @@ function Appuser() {
                       </div>
                     </td>
                     <th scope="row">Sezur Name</th>
-                    <td> {name}</td>
+                    <td>{name}
+                    <input type="hidden" id="sname"/>
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">Email ID</th>
@@ -366,7 +370,7 @@ function Appuser() {
                       <a
                         href=""
                         target="_blank"
-                        download
+
                         className="btn btn-success m-2"
                       >
                         Download
@@ -377,9 +381,6 @@ function Appuser() {
                         type="file"
                         onChange={handleFileChange}
                       />
-                      <Button className="btn btn-info" onClick={handleClick}>
-                        Upload File
-                      </Button>
                     </td>
                   </tr>
                   <tr>
@@ -394,9 +395,6 @@ function Appuser() {
                         type="file"
                         onChange={handleFileChange}
                       />
-                      <Button className="btn btn-info" onClick={handleClick}>
-                        Upload File
-                      </Button>
                     </td>
                   </tr>
                   <tr>
@@ -411,6 +409,7 @@ function Appuser() {
                     <h5 className="">Operations</h5>
                   </tr>
                   <tr>
+                    {/* <tr>
                     <th>
                       <label>Shift</label>
                       <br></br>
@@ -461,8 +460,8 @@ function Appuser() {
                           Both Shift
                         </label>
                       </div>
-                    </th>
-                    <td colSpan={2} rowSpan={1}>
+                    </th> */}
+                    <td colSpan={3} rowSpan={1}>
                       <th>
                         <label>Permisson</label>
                       </th>
@@ -514,8 +513,10 @@ function Appuser() {
                         columns={financecol}
                         data={finance}
                         pagination
+                        selectableRows
                         highlightOnHover
                         subHeader
+                        actions={actionsMemo}
                       ></DataTable>
                     </td>
                   </tr>
@@ -684,187 +685,6 @@ function Appuser() {
                 >
                   Delete
                 </button>
-              </Modal.Footer>
-            </Modal>
-
-            {/* Create User */}
-
-            <Modal
-              size=""
-              aria-labelledby="contained-modal-title-vcenter"
-              centered
-              show={togglebox3}
-              onHide={creatclose}
-            >
-              <Modal.Header closeButton>
-                <Modal.Title>Create User </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Sezur Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Name"
-                      autoFocus
-                      value={sezurname}
-                      onChange={(e) => {
-                        setSezur(e.target.value);
-                      }}
-                    />
-                  </Form.Group>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Email ID</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Email ID"
-                      autoFocus
-                      value={emailid}
-                      onChange={(e) => {
-                        setEmailid(e.target.value);
-                      }}
-                    />
-                  </Form.Group>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>Mobile No</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Mobile no"
-                      autoFocus
-                      value={mobileno}
-                      onChange={(e) => {
-                        setMobileno(e.target.value);
-                      }}
-                    />
-                  </Form.Group>
-
-                  <Row>
-                    <Col xs={8} md={6}>
-                      <Form.Group
-                        className="mb-1"
-                        controlId="exampleForm.ControlInput1"
-                      >
-                        <Form.Label>Activate or deactivate</Form.Label>
-
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio1"
-                            value="1"
-                            onChange={(e) => {
-                              setUserstatus(e.target.value);
-                            }}
-                          />
-                          <label class="form-check-label" for="inlineRadio1">
-                            Activate
-                          </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <input
-                            class="form-check-input"
-                            type="radio"
-                            name="inlineRadioOptions"
-                            id="inlineRadio2"
-                            value="0"
-                            onChange={(e) => {
-                              setUserstatus(e.target.value);
-                            }}
-                          />
-                          <label class="form-check-label" for="inlineRadio2">
-                            deactivate
-                          </label>
-                        </div>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <br></br>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label>$ Account Balance $</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Balance"
-                      autoFocus
-                      value={accountbal}
-                      onChange={(e) => {
-                        setAccountbal(e.target.value);
-                      }}
-                    />
-                  </Form.Group>
-                  <Row>
-                    <Form.Group className="mb-1">
-                      <Form.Label>SubScription :</Form.Label>
-                      <Col xs={4} md={2}>
-                        <div class="">
-                          <label class="form-check-label ">From </label>
-                          <input
-                            type="date"
-                            // name="inlineRadioOptions"
-                            // id="inlineRadio2"
-                            value={fromdate}
-                            onChange={(e) => {
-                              setFromdate(e.target.value);
-                            }}
-                          />
-                        </div>
-
-                        <div class="">
-                          <label class="form-check-label">To </label>
-                          <input
-                            type="date"
-                            // name="inlineRadioOptions"
-                            // id="inlineRadio2"
-                            value={todate}
-                            onChange={(e) => {
-                              setTodate(e.target.value);
-                            }}
-                          />
-                        </div>
-                      </Col>
-                    </Form.Group>
-                  </Row>
-                  <br></br>
-                  <Row>
-                    <br></br>
-                    <Form.Group
-                      className="mb-1"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label>Upload Details : </Form.Label>
-                      <br></br>
-                      <input
-                        style={{ display: "none" }}
-                        ref={inputRef}
-                        type="file"
-                        onChange={handleFileChange}
-                      />
-                      <Button className="btn btn-info" onClick={handleClick}>
-                        Upload KYC
-                      </Button>
-                    </Form.Group>
-                  </Row>
-                </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleShowclose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={createuser}>
-                  Create User
-                </Button>
               </Modal.Footer>
             </Modal>
           </div>

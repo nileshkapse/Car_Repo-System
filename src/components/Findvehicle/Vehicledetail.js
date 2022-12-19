@@ -15,7 +15,7 @@ function Vehicledetail({rcn}) {
 
 
   const getdatabase = async () => {
-    const query = `SELECT * FROM Vehicle2 where rc_number = '${rcn}';`;
+    const query = `SELECT * FROM Vehicle where rc_number = '${rcn}';`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
@@ -39,10 +39,11 @@ function Vehicledetail({rcn}) {
 
   return (
     <div>
+       <h5 className="card-title text-danger">  &#x25C9;  Financer </h5>
       <div className="row">
-        <div className="col-lg-4">Customer Name :</div>
+        <div className="col-lg-4 border border-primary border-bottom-0">Customer Name :</div>
 
-        <div className="col-lg ">
+        <div className="col-lg border border-primary border-bottom-0 border-left-0 ">
           {vehicle.map((comp) => (
             <div>
               <label className='text-info'>{comp.customer_name}</label>
@@ -50,9 +51,9 @@ function Vehicledetail({rcn}) {
           ))}
         </div>
       </div>
-      <div className="row">
-        <div className="col-lg-4">RC No. :</div>
-        <div className="col-lg-2">
+      <div className="row ">
+        <div className="col-lg-4 border border-primary border-bottom-0">Vehicle Rc No :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               <label className='text-info'>{comp.rc_number}</label>
@@ -61,8 +62,8 @@ function Vehicledetail({rcn}) {
         </div>
       </div>
        <div className="row">
-        <div className="col-lg-4">Contract No. :</div>
-        <div className="col-lg-2">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Contract No. :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               <label className='text-info'>{comp.contract_no}</label>
@@ -70,8 +71,8 @@ function Vehicledetail({rcn}) {
           ))}
         </div>
       </div> <div className="row">
-        <div className="col-lg-4">Chassis No. :</div>
-        <div className="col-lg-2">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0 ">Chassis No. :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               <label>{comp.Chassis_no}</label>
@@ -79,8 +80,8 @@ function Vehicledetail({rcn}) {
           ))}
         </div>
       </div> <div className="row">
-        <div className="col-lg-4">Vechical Model :</div>
-        <div className="col-lg-2">
+        <div className="col-lg-4  border border-primary border-bottom-0 border-left-0">Vechical Model :</div>
+        <div className="col-lg  border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               <label className='text-info'>{comp.vehicle_model}</label>
@@ -88,8 +89,8 @@ function Vehicledetail({rcn}) {
           ))}
         </div>
       </div> <div className="row">
-        <div className="col-lg-4">Engine No. :</div>
-        <div className="col-lg-2">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Engine No. :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               {/* <label>{comp.Engine_No}</label> */}
@@ -97,8 +98,8 @@ function Vehicledetail({rcn}) {
           ))}
         </div>
       </div> <div className="row">
-        <div className="col-lg-4">OD Amount :</div>
-        <div className="col-lg-2">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">OD Amount :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               <label>{comp.OD_Amount}</label>
@@ -107,53 +108,262 @@ function Vehicledetail({rcn}) {
         </div>
       </div>
        <div className="row">
-        <div className="col-lg-4">Zone :</div>
-        <div className="col-lg-2">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Zone :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               <label>{comp.zone}</label>
             </div>
           ))}
         </div>
-      </div> <div className="row">
-        <div className="col-lg-4">Financier</div>
-        <div className="col-lg-2">
-          {vehicle.map((comp) => (
-            <div >
-              <label className='text-info'>{comp.financier}</label>
-            </div>
-          ))}
-        </div>
-      </div> <div className="row">
-        <div className="col-lg-4">Finance :</div>
-        <div className="col-lg-2">
-          {vehicle.map((comp) => (
-            <div >
-              <label>{comp.FUID}</label>
-            </div>
-          ))}
-        </div>
-      </div> <div className="row">
-        <div className="col-lg-4">Branch Code :</div>
-        <div className="col-lg-2">
+      </div> 
+      
+ <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Region:</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
               <label>{comp.Branch_code}</label>
             </div>
           ))}
         </div>
-      {/* </div> <div className="row">
-        <div className="col-lg-4"></div>
-        <div className="col-lg-2">
+    
+      </div> <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Area :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
           {vehicle.map((comp) => (
             <div >
-              <label>{comp.rc_number}</label>
+              <label>{comp.Branch_code}</label>
             </div>
           ))}
-        </div> */}
+        </div>
+    
+      </div> <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Cos Address :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+    
+      </div> <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Cos Mobile No:</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+    
+      </div> <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">BKT :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+    
+      </div> <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">DPD :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+    
+      </div> <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">POS :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
       </div>
+     <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">GV :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
       </div>
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Sec9 :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Sec 17 :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+<div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">TBR :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div><div className="row">
+        <div className="col-lg-4 border border-primary ">SEASONING:</div>
+        <div className="col-lg border border-primary ">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+      <h5 className="card-title text-danger"> &#x25C9; Branch </h5>
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Branch </div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label className='text-info'>{comp.financier}</label>
+            </div>
+          ))}
+        </div>
+      </div> 
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Branch Code:</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+    </div>
+    <div>
+      </div>
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">LEVEL 1 CONTACT:</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div><div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">LEVEL 2 CONTACT :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">LEVEL 3 CONTACT :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-4 border border-primary ">LEVEL 4 CONTACT :</div>
+        <div className="col-lg border border-primary ">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+      <h5 className="card-title text-danger"> &#x25C9; Finance Head Office</h5>
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Finance Name :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Finance Address :</div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0 ">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+       <div className="row">
+        <div className="col-lg-4 border border-primary border-bottom-0 border-left-0">Finance Contact 1 </div>
+        <div className="col-lg border border-primary border-bottom-0 border-left-0 ">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+       <div className="row">
+        <div className="col-lg-4 border border-primary">Finance Contact 2 </div>
+        <div className="col-lg border border-primary ">
+          {vehicle.map((comp) => (
+            <div >
+              <label>{comp.Branch_code}</label>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
 
 export default Vehicledetail;
+
+// Financer..
+
+// SEASONING 
+// LEVEL1
+// LEVEL1 CONTACT
+// LEVEL2
+// LEVEL2 CONTACT
+// LEVEL3
+// LEVEL3 CONTACT
+// LEVEL 4
+// LEVEL 4CONTACT 
+
+// CREAT FINNACE
+
+// FINANCE HED OFFICE
+
+// FINANCE NAME
+// FINANCE ADDRESS 
+// CONTACT 1
+// CONTACT 2
+// CONTACT 3
