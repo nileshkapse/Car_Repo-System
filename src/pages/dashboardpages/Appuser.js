@@ -26,15 +26,25 @@ function Appuser() {
   const [email, setEmail] = useState("");
 
   const [status, setstatus] = useState("");
+  const [show, setShow] = useState(false);
 
   const [deactiveemail, setDeactiveemail] = useState("");
 
   const [name, setName] = useState("");
   const [mobno, setMobno] = useState("");
+
   const [togglebox, setTogglebox] = React.useState(false);
 
   const [togglebox1, setTogglebox1] = React.useState(false);
   const [togglebox2, setTogglebox2] = React.useState(false);
+
+  const [togglebox3, setTogglebox3] = React.useState(false);
+
+  // User function
+
+
+  const handleClose = () => setShow(false);
+  const handleopen = () => setShow(true);
 
   const handlereqopen = () => {
     setTogglebox(true);
@@ -59,6 +69,14 @@ function Appuser() {
     setTogglebox2(false);
   };
 
+  const creatshow = () => {
+    setTogglebox3(true);
+  };
+
+  const creatclose = () => {
+    setTogglebox3(false);
+  };
+
   const buttonRef = useRef();
 
   const getdatabase = async () => {
@@ -81,6 +99,9 @@ function Appuser() {
     }
   };
 
+  // Database Query for Creating New User
+
+  
   const getFinance = async () => {
     const query = `SELECT * from Branches where Branches.FUID in (select FUID from assign where assign.mail='${email}')`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
@@ -103,6 +124,26 @@ function Appuser() {
 
   const dataUpdate = async () => {
     const query = `UPDATE App_User SET isactive = ${status} WHERE user_email = '${deactiveemail}' ;`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("Updated Data", res.data);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    handleShowclose();
+    window.location.reload(true);
+  };
+
+  const deleteuser = async () => {
+    const query = `delete from App_User WHERE user_email = '${deactiveemail}' ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
@@ -179,8 +220,6 @@ function Appuser() {
     },
   ];
 
-
-
   useEffect(() => {
     getdatabase();
     // dataUpdate();
@@ -199,16 +238,60 @@ function Appuser() {
     }
 
     console.log("fileObj is", fileObj);
-
     // 👇️ reset file input
     event.target.value = null;
   };
 
   console.log(status);
   console.log(email);
+
   const enableButton = () => {
     buttonRef.current.disabled = false; // this disables the button
   };
+  
+  function convertArrayOfObjectsToCSV(array) {
+    let result;
+    const columnDelimiter = ",";
+    const lineDelimiter = "\n";
+    const keys = Object.keys(finance[0]);
+    result = "";
+    result += keys.join(columnDelimiter);
+    result += lineDelimiter;
+    array.forEach((item) => {
+      let ctr = 0;
+      keys.forEach((key) => {
+        if (ctr > 0) result += columnDelimiter;
+        result += item[key];
+        ctr++;
+      });
+      result += lineDelimiter;
+    });
+    return result;
+  }
+  // Blatant "inspiration" from https://codepen.io/Jacqueline34/pen/pyVoWr
+  function downloadCSV(array) {
+    const link = document.createElement("a");
+    let csv = convertArrayOfObjectsToCSV(array);
+    if (csv == null) return;
+    const filename = "export.csv";
+
+    if (!csv.match(/^data:text\/csv/i)) {
+      csv = `data:text/csv;charset=utf-8,${csv}`;
+    }
+
+    link.setAttribute("href", encodeURI(csv));
+    link.setAttribute("download", filename);
+    link.click();
+  }
+
+  const Export = ({ onExport }) => (
+    <Button onClick={(e) => onExport(e.target.value)}>Export</Button>
+  );
+
+  const actionsMemo = React.useMemo(
+    () => <Export onExport={() => downloadCSV(finance)} />,
+    [finance]
+  );
 
   return (
     <div>
@@ -232,17 +315,6 @@ function Appuser() {
 
       <main id="main" className="main">
         <section className="section dashboard">
-          <div className="row">
-            <div>
-              <button
-                className="toggle-closebtn btn rounded-5 btn-info bi-list flex-xl-fill"
-                id="view"
-                // onClick={handlereqopen}
-              >
-                <span className="m-1">Menu</span>
-              </button>
-            </div>
-          </div>
           {togglebox1 === true ? (
             <div className="card p-5">
               <button
@@ -264,7 +336,7 @@ function Appuser() {
                 <tbody>
                   <tr>
                     <th>Sezur Finance </th>
-                    <th colSpan={2}>Payment Confirmation : </th>
+                    <th colSpan={3}>Payment Confirmation : </th>
                   </tr>
                   <tr>
                     <td colSpan={1} rowSpan={6}>
@@ -279,7 +351,9 @@ function Appuser() {
                       </div>
                     </td>
                     <th scope="row">Sezur Name</th>
-                    <td> {name}</td>
+                    <td>{name}
+                    <input type="hidden" id="sname"/>
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">Email ID</th>
@@ -296,7 +370,7 @@ function Appuser() {
                       <a
                         href=""
                         target="_blank"
-                        download
+
                         className="btn btn-success m-2"
                       >
                         Download
@@ -307,9 +381,6 @@ function Appuser() {
                         type="file"
                         onChange={handleFileChange}
                       />
-                      <Button className="btn btn-info" onClick={handleClick}>
-                        Upload File
-                      </Button>
                     </td>
                   </tr>
                   <tr>
@@ -324,9 +395,6 @@ function Appuser() {
                         type="file"
                         onChange={handleFileChange}
                       />
-                      <Button className="btn btn-info" onClick={handleClick}>
-                        Upload File
-                      </Button>
                     </td>
                   </tr>
                   <tr>
@@ -341,6 +409,7 @@ function Appuser() {
                     <h5 className="">Operations</h5>
                   </tr>
                   <tr>
+                    {/* <tr>
                     <th>
                       <label>Shift</label>
                       <br></br>
@@ -391,8 +460,8 @@ function Appuser() {
                           Both Shift
                         </label>
                       </div>
-                    </th>
-                    <td colSpan={2} rowSpan={1}>
+                    </th> */}
+                    <td colSpan={3} rowSpan={1}>
                       <th>
                         <label>Permisson</label>
                       </th>
@@ -444,8 +513,10 @@ function Appuser() {
                         columns={financecol}
                         data={finance}
                         pagination
+                        selectableRows
                         highlightOnHover
                         subHeader
+                        actions={actionsMemo}
                       ></DataTable>
                     </td>
                   </tr>
@@ -562,6 +633,15 @@ function Appuser() {
                           </label>
                         </div>
                       </Form.Group>
+                      <br></br>
+                      <div class="form-check form-check-inline">
+                        <Button
+                          className="center btn btn-danger center"
+                          onClick={handleopen}
+                        >
+                          Delete Request
+                        </Button>
+                      </div>
                     </Col>
                   </Row>
                 </Form>
@@ -573,6 +653,38 @@ function Appuser() {
                 <Button variant="primary" onClick={dataUpdate}>
                   Save
                 </Button>
+              </Modal.Footer>
+            </Modal>
+
+            {/* Delete user sure */}
+            <Modal
+              size=""
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              show={show}
+              onHide={handleClose}
+            >
+              <Modal.Header closeButton>
+                <h5 className="alert alert-danger" role="alert">
+                  Are You Sure to Delete ?
+                </h5>
+              </Modal.Header>
+              <Modal.Footer>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-mdb-dismiss="modal"
+                  onClick={handleClose}
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={deleteuser}
+                >
+                  Delete
+                </button>
               </Modal.Footer>
             </Modal>
           </div>

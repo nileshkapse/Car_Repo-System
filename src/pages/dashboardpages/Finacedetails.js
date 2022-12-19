@@ -63,6 +63,7 @@ function Finacedetails() {
         });
     } catch (error) {
       console.log(error);
+      
     }
 
     // 👇️ clear all input values in the form
@@ -179,7 +180,33 @@ function Finacedetails() {
                           className="mb-1"
                           controlId="exampleForm.ControlInput1"
                         >
-                          <Form.Label>Contact Number</Form.Label>
+                          <Form.Label>Level 1 Contact Number</Form.Label>
+                          <Form.Control
+                            type="number"
+                            value={contact}
+                            onChange={(e) => {
+                              settotalbranch(e.target.value);
+                            }}
+                          />
+                        </Form.Group>
+                         <Form.Group
+                          className="mb-1"
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label>Level 2 Contact Number</Form.Label>
+                          <Form.Control
+                            type="number"
+                            value={contact}
+                            onChange={(e) => {
+                              settotalbranch(e.target.value);
+                            }}
+                          />
+                        </Form.Group>
+                         <Form.Group
+                          className="mb-1"
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label>Level 3 Contact Number</Form.Label>
                           <Form.Control
                             type="number"
                             value={contact}

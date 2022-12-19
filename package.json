@@ -5,8 +5,12 @@
   "dependencies": {
     "@coreui/coreui": "^4.2.2",
     "@coreui/react-chartjs": "^2.1.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@material-ui/core": "^4.12.4",
     "@material-ui/lab": "^4.0.0-alpha.61",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.0",
     "@syncfusion/ej2-react-spreadsheet": "^20.3.58",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -47,6 +51,7 @@
     "react-chartjs-2": "^4.3.1",
     "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.40.0",
     "react-minimal-pie-chart": "^8.3.0",
     "react-papaparse": "^4.1.0",
     "react-router-dom": "^6.4.2",
@@ -80,5 +85,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "envify": "^4.1.0",
+    "terser": "^5.16.1",
+    "terser-brunch": "^4.1.0",
+    "uglifyify": "^5.0.2"
   }
 }

@@ -43,6 +43,7 @@ function FinanceAdd() {
     setFinancename('');
     setAddress('');
     handleClose();
+    
   };
 
   return (

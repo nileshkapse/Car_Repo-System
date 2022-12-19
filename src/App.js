@@ -1,5 +1,5 @@
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import { LANDING_PAGE_URL,APP_USER_URL, FINACE_DETAILS_URLS, FIND_VEHICLE_URLS, DETAILS_VIEW_URLS, UPLOAD_DETAILS_URLS,PROFILE_PAGES_URLS, LOGIN_PAGES_URLS, CUSTOM_TABLE} from "./constants/URLS"
+import { LANDING_PAGE_URL,APP_USER_URL, FINACE_DETAILS_URLS, FIND_VEHICLE_URLS, DETAILS_VIEW_URLS, UPLOAD_DETAILS_URLS,PROFILE_PAGES_URLS, LOGIN_PAGES_URLS, CUSTOM_TABLE, RECENT_VEHICLE} from "./constants/URLS"
 import './App.css';
 import LandingPage from "./pages/LandingPage";
 import Appuser from "./pages/dashboardpages/Appuser";
@@ -11,6 +11,7 @@ import ProfilePage from "./pages/dashboardpages/ProfilePage";
 import LoginPage from "./pages/dashboardpages/LoginPage";
 import { logRoles } from "@testing-library/react";
 import CustomTable from "./pages/dashboardpages/CustomTable";
+
 
 function App() {
   return (
