@@ -1,14 +1,15 @@
+/**
+* Template Name: NiceAdmin - v2.4.0
+* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
 :root {
   scroll-behavior: smooth;
-}
-/* My colors */
-.nkcolor {
-  color: #d63a3a;
-}
-
-.loginpage{
-  background-image: url("https://img.freepik.com/free-vector/gradient-mountain-landscape_23-2149162007.jpg?w=1060&t=st=1671972735~exp=1671973335~hmac=0a0edbc3f89729e3ae796518e53434cc9ea013b93a4adb2c9ebac2a3fd87320f");
-  background-size: cover;
 }
 
 body {
@@ -30,14 +31,8 @@ a:hover {
 h1,
 h2,
 h3,
-th4{
-   text-transform: capitalize;
-   padding-right: 30px;
-   color: #3940cc	;
-}
-h5{
-  color: #39CCCC	;
-}
+h4,
+h5,
 h6 {
   font-family: "Nunito", sans-serif;
 }
@@ -108,7 +103,7 @@ h6 {
 # Override some default Bootstrap stylings
 --------------------------------------------------------------*/
 /* Dropdown menus */
-dropdown-menu {
+.dropdown-menu {
   border-radius: 4px;
   padding: 10px 0;
   -webkit-animation-name: dropdown-animate;
@@ -229,7 +224,7 @@ dropdown-menu {
 
 .bg-info-light {
   background-color: #cff4fc;
-  border-color: #fbfbfb;
+  border-color: #cff4fc;
 }
 
 .bg-dark-light {
@@ -241,15 +236,15 @@ dropdown-menu {
 .card {
   margin-bottom: 30px;
   border: none;
-  border-radius: 1px;
-  box-shadow: 0px 0 30px rgba(201, 198, 198, 0.234);
+  border-radius: 5px;
+  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
 }
 
 .card-header,
 .card-footer {
-  border-color: #004adf;
-  background-color: rgb(89, 216, 220);
-  color: #84a7e5;
+  border-color: #ebeef4;
+  background-color: #fff;
+  color: #798eb3;
   padding: 15px;
 }
 
@@ -257,38 +252,8 @@ dropdown-menu {
   padding: 20px 0 15px 0;
   font-size: 18px;
   font-weight: 500;
-  color: #0a53f2;
+  color: #012970;
   font-family: "Poppins", sans-serif;
-}
-.card-closebtn {
-  line-height: 20px;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.toggle-closebtn {
-  line-height: 20px;
-  margin-left: 870px;
-  margin-bottom: 20px;
-  position: relative;
-  top: 0;
-  right: 0;
- 
-}
-
-.card-addbtn {
-  line-height: 20px;
-  font-size: 6px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 70px;
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 
 .card-title span {
@@ -298,7 +263,7 @@ dropdown-menu {
 }
 
 .card-body {
-  padding: 0 30px 20px 30px;
+  padding: 0 20px 20px 20px;
 }
 
 .card-img-overlay {
@@ -345,7 +310,7 @@ dropdown-menu {
 
 .accordion-flush .accordion-button:not(.collapsed) {
   box-shadow: none;
-  color: #f60000;
+  color: #4154f1;
 }
 
 .accordion-flush .accordion-body {
@@ -387,19 +352,18 @@ dropdown-menu {
 
 .nav-tabs-bordered .nav-link {
   margin-bottom: -2px;
-
   border: none;
-  color: #5990f6;
+  color: #2c384e;
 }
 
 .nav-tabs-bordered .nav-link:hover,
 .nav-tabs-bordered .nav-link:focus {
-  color: #fad12c;
+  color: #4154f1;
 }
 
 .nav-tabs-bordered .nav-link.active {
   background-color: #fff;
-  color: #f71e06;
+  color: #4154f1;
   border-bottom: 2px solid #4154f1;
 }
 
@@ -412,42 +376,43 @@ dropdown-menu {
 
 @media (min-width: 1200px) {
   .logo {
-    width: 200px;
+    width: 280px;
   }
 }
 
 .logo img {
-  max-height: 50px;
-  margin-right: 3px;
+  max-height: 26px;
+  margin-right: 6px;
 }
 
 .logo span {
-  font-size: 46px;
+  font-size: 26px;
   font-weight: 700;
   color: #012970;
   font-family: "Nunito", sans-serif;
 }
 
 .header {
-  transition: all 1s;
+  transition: all 0.5s;
   z-index: 997;
   height: 60px;
   box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
-  background-color: rgba(255, 255, 255, 0.872);
-  padding-left: 30px;
+  background-color: #fff;
+  padding-left: 20px;
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
 
 .header .toggle-sidebar-btn {
   font-size: 32px;
+  padding-left: 10px;
   cursor: pointer;
-  color: #fd12be;
+  color: #012970;
 }
 
 .header .search-bar {
   min-width: 360px;
-  padding: 0px;
+  padding: 0 20px;
 }
 
 @media (max-width: 1199px) {
@@ -479,7 +444,7 @@ dropdown-menu {
 .header .search-form input {
   border: 0;
   font-size: 14px;
-  color: #dbdbdb;
+  color: #012970;
   border: 1px solid rgba(1, 41, 112, 0.2);
   padding: 7px 38px 7px 8px;
   border-radius: 3px;
@@ -512,25 +477,24 @@ dropdown-menu {
   list-style: none;
 }
 
-.header-nav > ul {
+.header-nav>ul {
   margin: 0;
   padding: 0;
 }
 
 .header-nav .nav-icon {
   font-size: 22px;
-  color: #000000;
+  color: #012970;
   margin-right: 25px;
   position: relative;
 }
 
 .header-nav .nav-profile {
-  color: #e025e0;
+  color: #012970;
 }
 
 .header-nav .nav-profile img {
   max-height: 36px;
-  max-width: min-content;
 }
 
 .header-nav .nav-profile span {
@@ -544,6 +508,73 @@ dropdown-menu {
   font-weight: normal;
   font-size: 12px;
   padding: 3px 6px;
+}
+
+.header-nav .notifications {
+  inset: 8px -15px auto auto !important;
+}
+
+.header-nav .notifications .notification-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 10px;
+  transition: 0.3s;
+}
+
+.header-nav .notifications .notification-item i {
+  margin: 0 20px 0 10px;
+  font-size: 24px;
+}
+
+.header-nav .notifications .notification-item h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.header-nav .notifications .notification-item p {
+  font-size: 13px;
+  margin-bottom: 3px;
+  color: #919191;
+}
+
+.header-nav .notifications .notification-item:hover {
+  background-color: #f6f9ff;
+}
+
+.header-nav .messages {
+  inset: 8px -15px auto auto !important;
+}
+
+.header-nav .messages .message-item {
+  padding: 15px 10px;
+  transition: 0.3s;
+}
+
+.header-nav .messages .message-item a {
+  display: flex;
+}
+
+.header-nav .messages .message-item img {
+  margin: 0 20px 0 10px;
+  max-height: 40px;
+}
+
+.header-nav .messages .message-item h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #444444;
+}
+
+.header-nav .messages .message-item p {
+  font-size: 13px;
+  margin-bottom: 3px;
+  color: #919191;
+}
+
+.header-nav .messages .message-item:hover {
+  background-color: #f6f9ff;
 }
 
 .header-nav .profile {
@@ -587,21 +618,17 @@ dropdown-menu {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 220px;
+  width: 300px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
   overflow-y: auto;
-  display: block;
   scrollbar-width: thin;
   scrollbar-color: #aab7cf transparent;
   box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
-  background-color: rgba(255, 255, 255, 0.79);
+  background-color: #fff;
 }
-.sidebar .closebtn {
-  position: absolute;
-  display: none;
-}
+
 @media (max-width: 1199px) {
   .sidebar {
     left: -300px;
@@ -619,9 +646,10 @@ dropdown-menu {
 }
 
 @media (min-width: 1200px) {
+
   #main,
   #footer {
-    margin-left: 220px;
+    margin-left: 300px;
   }
 }
 
@@ -632,6 +660,7 @@ dropdown-menu {
 }
 
 @media (min-width: 1200px) {
+
   .toggle-sidebar #main,
   .toggle-sidebar #footer {
     margin-left: 0;
@@ -671,9 +700,8 @@ dropdown-menu {
   align-items: center;
   font-size: 15px;
   font-weight: 600;
-  color: #3258aa;
+  color: #4154f1;
   transition: 0.3;
-  cursor: pointer;
   background: #f6f9ff;
   padding: 10px 15px;
   border-radius: 4px;
@@ -682,7 +710,7 @@ dropdown-menu {
 .sidebar-nav .nav-link i {
   font-size: 16px;
   margin-right: 10px;
-  color: #324a8c;
+  color: #4154f1;
 }
 
 .sidebar-nav .nav-link.collapsed {
@@ -871,7 +899,7 @@ dropdown-menu {
 }
 
 /* News & Updates */
-.dashboard .news .post-item + .post-item {
+.dashboard .news .post-item+.post-item {
   margin-top: 15px;
 }
 
@@ -947,6 +975,42 @@ dropdown-menu {
 }
 
 /*--------------------------------------------------------------
+# Icons list page
+--------------------------------------------------------------*/
+.iconslist {
+  display: grid;
+  max-width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  padding-top: 15px;
+}
+
+.iconslist .icon {
+  background-color: #fff;
+  border-radius: 0.25rem;
+  text-align: center;
+  color: #012970;
+  padding: 15px 0;
+}
+
+.iconslist i {
+  margin: 0.25rem;
+  font-size: 2.5rem;
+}
+
+.iconslist .label {
+  font-family: var(--bs-font-monospace);
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  padding: 0.25rem;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #666;
+}
+
+/*--------------------------------------------------------------
 # Profie Page
 --------------------------------------------------------------*/
 .profile .profile-card img {
@@ -1000,262 +1064,197 @@ dropdown-menu {
   max-width: 120px;
 }
 
-.file-upload {
-  background-color: hsl(0, 0%, 100%);
-  width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+/*--------------------------------------------------------------
+# F.A.Q Page
+--------------------------------------------------------------*/
+.faq .basic h6 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4154f1;
 }
 
-.file-upload-btn {
-  width: 100%;
-  margin: 0;
-  color: #fff;
-  background: #1fb264;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid hsl(150, 53%, 29%);
-  transition: all 0.2s ease;
-  outline: none;
-  text-transform: uppercase;
+.faq .basic p {
+  color: #6980aa;
+}
+
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+.contact .info-box {
+  padding: 28px 30px;
+}
+
+.contact .info-box i {
+  font-size: 38px;
+  line-height: 0;
+  color: #4154f1;
+}
+
+.contact .info-box h3 {
+  font-size: 20px;
+  color: #012970;
   font-weight: 700;
+  margin: 20px 0 10px 0;
 }
 
-.file-upload-btn:hover {
-  background: #1a2ca0;
-  color: #ffffff;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.file-upload-btn:active {
-  border: 0;
-  transition: all 0.2s ease;
-}
-
-.file-upload-content {
-  display: none;
-  text-align: center;
-}
-
-.file-upload-input {
-  position: absolute;
-  margin: 0;
+.contact .info-box p {
   padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.image-upload-wrap {
-  margin-top: 20px;
-  border: 4px dashed #2cea6bad;
-  position: relative;
-}
-
-.image-dropping,
-.image-upload-wrap:hover {
-  background-color: #bdb4b4;
-  border: 4px dashed #d0d2f3;
-}
-
-.image-title-wrap {
-  padding: 0 15px 15px 15px;
-  color: #222;
-}
-
-.drag-text {
-  text-align: center;
-}
-
-.drag-text h3 {
-  font-weight: 100;
-  text-transform: uppercase;
-  color: #15824b;
-  padding: 60px 0;
-}
-
-.file-upload-image {
-  max-height: 200px;
-  max-width: 200px;
-  margin: auto;
-  padding: 20px;
-}
-
-.remove-image {
-  width: 200px;
-  margin: 0;
-  color: #fff;
-  background: #cd4535;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  border-bottom: 4px solid #b02818;
-  transition: all 0.2s ease;
-  outline: none;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.remove-image:hover {
-  background: #c13b2a;
-  color: #ffffff;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.remove-image:active {
-  border: 0;
-  transition: all 0.2s ease;
-}
-
-/* Floating Button */
-
-.float {
-  position: absolute;
-  line-height: 20px;
-  font-size: 6px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 20px;
-  top: 0;
-  right: 0;
-  background-color: rgba(98, 108, 255, 0.872);
-  color: rgb(255, 255, 255);
-  border-radius: 50px;
-  text-align: center;
-  box-shadow: 2px 2px 3px #999;
-}
-
-.my-float {
-  margin-top: 22px;
-}
-
-/* Data Tables Modification */
-[data-column-id="column"].rdt_TableCol {
-  background-color: rgb(191, 200, 210);
-  color: black;
-  font-weight: bolder;
+  line-height: 24px;
   font-size: 14px;
+  margin-bottom: 0;
 }
 
-.btnviwe {
-  background-color: DodgerBlue; /* Blue background */
-  border: none; /* Remove borders */
-  color: rgb(255, 255, 255); /* White text */
-  padding: 6px 6px; /* Some padding */
-  font-size: 11px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
+.contact .php-email-form .error-message {
+  display: none;
+  color: #fff;
+  background: #ed3c0d;
+  text-align: left;
+  padding: 15px;
+  margin-bottom: 24px;
+  font-weight: 600;
 }
 
-.card-title-sm {
-  padding: 20px 0 15px 0;
-  font-size: 16x;
-  font-weight: 500;
-  color: #1a4cef;
-  font-family: "Poppins", sans-serif;
+.contact .php-email-form .sent-message {
+  display: none;
+  color: #fff;
+  background: #18d26e;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 24px;
+  font-weight: 600;
 }
 
-
-/* Glow Button */
-
-
-.glow-on-hover {
-    width: 220px;
-    height: 50px;
-    border: none;
-    outline: none;
-    color: rgb(0, 0, 0);
-    background: rgb(255, 255, 255);
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
-    border-radius: 10px;
+.contact .php-email-form .loading {
+  display: none;
+  background: #fff;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 24px;
 }
 
-.glow-on-hover:before {
-    content: '';
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-    position: absolute;
-    top: -2px;
-    left:-2px;
-    background-size: 400%;
-    z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    animation: glowing 20s linear infinite;
-    opacity: 0;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
-}
-
-.glow-on-hover:active {
-    color: #000
-}
-
-.glow-on-hover:active:after {
-    background: transparent;
-}
-
-.glow-on-hover:hover:before {
-    opacity: 1;
-}
-
-.glow-on-hover:after {
-    z-index: -1;
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgb(87, 158, 78);
-    left: 0;
-    top: 0;
-    border-radius: 10px;
-}
-
-@keyframes glowing {
-    0% { background-position: 0 0; }
-    50% { background-position: 400% 0; }
-    100% { background-position: 0 0; }
-}
-
-
-
-/* Submit Button */
-
-.subbutton {
-  width: 300px;
-  height: 80px;
-  background: dodgerblue;
-  border-radius: 6px;
-  transition: all .3s cubic-bezier(0.67, 0.17, 0.40, 0.83);
-}
-
-.subbutton svg {
-  transform: rotate(180deg);
-  transition: all .5s;
-}
-
-.subbutton__circle {
-  width: 120px;
-  height: 120px;
-  background: mediumseagreen;
+.contact .php-email-form .loading:before {
+  content: "";
+  display: inline-block;
   border-radius: 50%;
-  transform: rotate(-180deg);
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid #18d26e;
+  border-top-color: #eee;
+  -webkit-animation: animate-loading 1s linear infinite;
+  animation: animate-loading 1s linear infinite;
 }
 
-.subbutton:hover {
-  cursor: pointer;
+.contact .php-email-form input,
+.contact .php-email-form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 14px;
+  border-radius: 0;
 }
 
-.subtick {
-  color: white;
-  font-size: 2em;
-  transition: all .9s;
+.contact .php-email-form input:focus,
+.contact .php-email-form textarea:focus {
+  border-color: #4154f1;
 }
 
+.contact .php-email-form input {
+  padding: 10px 15px;
+}
 
+.contact .php-email-form textarea {
+  padding: 12px 15px;
+}
+
+.contact .php-email-form button[type=submit] {
+  background: #4154f1;
+  border: 0;
+  padding: 10px 30px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+
+.contact .php-email-form button[type=submit]:hover {
+  background: #5969f3;
+}
+
+@-webkit-keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*--------------------------------------------------------------
+# Error 404
+--------------------------------------------------------------*/
+.error-404 {
+  padding: 30px;
+}
+
+.error-404 h1 {
+  font-size: 180px;
+  font-weight: 700;
+  color: #4154f1;
+  margin-bottom: 0;
+  line-height: 150px;
+}
+
+.error-404 h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #012970;
+  margin-bottom: 30px;
+}
+
+.error-404 .btn {
+  background: #51678f;
+  color: #fff;
+  padding: 8px 30px;
+}
+
+.error-404 .btn:hover {
+  background: #3e4f6f;
+}
+
+@media (min-width: 992px) {
+  .error-404 img {
+    max-width: 50%;
+  }
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.footer {
+  padding: 20px 0;
+  font-size: 14px;
+  transition: all 0.3s;
+  border-top: 1px solid #cddfff;
+}
+
+.footer .copyright {
+  text-align: center;
+  color: #012970;
+}
+
+.footer .credits {
+  padding-top: 5px;
+  text-align: center;
+  font-size: 13px;
+  color: #012970;
+}

@@ -146,7 +146,9 @@ function Navbar() {
                   <a
                     className="dropdown-item d-flex align-items-center nav-link"
                     onClick={() => {
+                      localStorage.clear("isLoggedIn");
                       nevigate(LOGIN_PAGES_URLS);
+
                     }}
                   >
                     <i className="bi bi-box-arrow-right"></i>

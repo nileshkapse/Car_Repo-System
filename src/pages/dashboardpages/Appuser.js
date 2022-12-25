@@ -126,6 +126,25 @@ function Appuser() {
     const query = `UPDATE App_User SET isactive = ${status} WHERE user_email = '${deactiveemail}' ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
+
+     const query10 = `INSERT INTO log (	logmessage,logdate ) VALUES ('${deactiveemail} Is set To ${status}',curdate());`;
+    let data10 = { crossDomain: true, crossOrigin: true, query: query10 };
+
+     try {
+      axios
+        .post(API_URL, data10)
+        .then((res) => {
+          // console.log("Inserted data: ", res.data);
+          // this.setState({ allData: res.data });
+          // window.location.reload(false);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
     try {
       axios
         .post(API_URL, data)
@@ -145,6 +164,24 @@ function Appuser() {
   const deleteuser = async () => {
     const query = `delete from App_User WHERE user_email = '${deactiveemail}' ;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
+
+     const query10 = `INSERT INTO log (	logmessage,logdate ) VALUES ('User ${deactiveemail} Is Deleted',curdate());`;
+    let data10 = { crossDomain: true, crossOrigin: true, query: query10 };
+
+     try {
+      axios
+        .post(API_URL, data10)
+        .then((res) => {
+          // console.log("Inserted data: ", res.data);
+          // this.setState({ allData: res.data });
+          // window.location.reload(false);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
 
     try {
       axios
@@ -224,6 +261,10 @@ function Appuser() {
     getdatabase();
     // dataUpdate();
   }, []);
+
+  useEffect(()=>{
+    getFinance();
+  })
 
   const inputRef = useRef(null);
 

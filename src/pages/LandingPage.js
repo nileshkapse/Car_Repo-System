@@ -12,20 +12,22 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { API_URL } from "../constants/Database";
 import { render } from "@testing-library/react";
+import moment from "moment";
 
 function LandingPage() {
-
   const [recordlen, setCount] = useState([]);
 
-  const [financelen,setFinancelen] = useState([]);
+  const [financelen, setFinancelen] = useState([]);
 
   const [appuserlen, setAppcount] = useState([]);
 
-  const [branchlen,setBranchlen] = useState([]);
+  const [branchlen, setBranchlen] = useState([]);
 
-  const [isactive,setIsactive] = useState([]);
+  const [isactive, setIsactive] = useState([]);
 
-  const [isadmin,setIsadmin] = useState([]);
+  const [isadmin, setIsadmin] = useState([]);
+
+  const [log, setLog] = useState([]);
 
   const getfinanceuser = async () => {
     const query = `SELECT COUNT(*) as rl FROM Vehicle;`;
@@ -53,11 +55,10 @@ function LandingPage() {
     } catch (error) {
       console.log(error);
     }
-     try {
+    try {
       axios
         .post(API_URL, data1)
         .then((res) => {
-        
           // this.setState({ rlen : res.data.length });
           var rlength = res.data[0].brl;
           setBranchlen(rlength);
@@ -88,25 +89,22 @@ function LandingPage() {
     }
   };
 
-
-  // App user counts 
+  // App user counts
 
   const getappuser = async () => {
-
     const query = `SELECT COUNT(*) as arl from App_User;`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
-    const query1 = `select COUNT(*) as aarl from App_User where isactive = 1 ;` ;
+    const query1 = `select COUNT(*) as aarl from App_User where isactive = 1 ;`;
     let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
 
-    const query2 = `select COUNT(*) as acarl from App_User where isadmin = 1 ;` ;
+    const query2 = `select COUNT(*) as acarl from App_User where isadmin = 1 ;`;
     let data2 = { crossDomain: true, crossOrigin: true, query: query2 };
 
     try {
       axios
         .post(API_URL, data)
         .then((res) => {
-         
           // this.setState({ rlen : res.data.length });
           var rlength = res.data[0].arl;
           setAppcount(rlength);
@@ -124,7 +122,6 @@ function LandingPage() {
       axios
         .post(API_URL, data1)
         .then((res) => {
-         
           // this.setState({ rlen : res.data.length });
           var rlength = res.data[0].aarl;
           setIsactive(rlength);
@@ -156,11 +153,31 @@ function LandingPage() {
     }
   };
 
+  const getbranchdatabase = async () => {
+    const query = `SELECT * FROM log order by logdate desc LIMIT 5;`;
+    let data = { crossDomain: true, crossOrigin: true, query: query };
+
+    try {
+      axios
+        .post(API_URL, data)
+        .then((res) => {
+          console.log("all data Branches: ", res.data);
+          setLog([...res.data]);
+        })
+        .catch((err) => {
+          console.log("all data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getfinanceuser();
     getappuser();
+    getbranchdatabase();
   }, []);
-  
+
   return (
     <div className="App">
       <script
@@ -257,52 +274,51 @@ function LandingPage() {
                 </div>
                 {/* <!-- End App user Card --> */}
               </div>
-              <LineChart />
-              <DoughnutChart />
+              {/* <LineChart />
+              <DoughnutChart /> */}
             </div>
             <div className="col-lg-4">
               {/* Pie Chart */}
-              <PieChart />
+              {/* <PieChart /> */}
               {/* Pie chart end */}
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title"> Recent activity</h5>
                   <div className="activity">
                     <div className="activity-item d-flex">
-                      <div className="activite-label">32 min</div>
-                      <i className="bi bi-circle-fill activity-badge text-success align-self-start"></i>
-                      <div className="activity-content">
-                        Finance Brance Added
+                      <div className="activite-label">
+                        <div className=" mb-0 col-lg-10 ">
+                          {log.map((comp) => (
+                            <div className="activity-item d-flex" key={comp.logdate}>
+                              <div className="activite-label">
+                              <label className="m-1">{moment.utc(comp.logdate).format("DD/MM/YYYY")}</label>
+                              
+                              </div>
+                              
+                                
+                              <i className="bi bi-circle-fill activity-badge text-info align-self-start"></i>
+                              {/* </div> */}
+                                <div className="activity-content">
+                              <div key={comp.logmessage}>
+                               <label>{comp.logmessage}</label>
+                              
+                              </div>
+                              <br></br>
+                              </div>
+                              <br></br>
+                            </div>
+                            
+                          ))}
+                        </div>
                       </div>
+                      
                     </div>
-                    {/* <!-- End activity item--> */}
+                  
 
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">56 min</div>
-                      <i className="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
-                      <div className="activity-content">
-                        Website dashboard done
-                      </div>
-                    </div>
-
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">20 min</div>
-                      <i className="bi bi-circle-fill activity-badge text-success align-self-start"></i>
-                      <div className="activity-content">ALl Pages done</div>
-                    </div>
+                   
                     {/* <!-- End activity item--> */}
                   </div>
-                  <br />
-                  Mobile App Development
-                  <br />
-                  <br />
-                  Startign from Android to latest React, we can develop all
-                  single platform appliation for Android or iOS as well as all
-                  hybrid application with React or Flutter, also recently we
-                  have get armed with Kotlin as well to keep ourself flexible
-                  and dynamic with development tools to fulfill all your need
-                  exactly as you wanted
-                </div>
+                  </div>
               </div>
             </div>
           </div>

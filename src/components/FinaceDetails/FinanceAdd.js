@@ -25,6 +25,24 @@ function FinanceAdd() {
     const query = `INSERT INTO Finance (finance_name, address, upload_date, total_branches ) VALUES ('${financename}', '${address}',curdate(),'${totalbranch}');`;
     let data = { crossDomain: true, crossOrigin: true, query: query };
 
+    const query10 = `INSERT INTO log (	logmessage,logdate ) VALUES ('${financename} Finance Is Added',curdate());`;
+    let data10 = { crossDomain: true, crossOrigin: true, query: query10 };
+
+     try {
+      axios
+        .post(API_URL, data10)
+        .then((res) => {
+          // console.log("Inserted data: ", res.data);
+          // this.setState({ allData: res.data });
+          // window.location.reload(false);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
     console.log("Finance name", financename);
     try {
       axios
@@ -40,6 +58,7 @@ function FinanceAdd() {
     } catch (error) {
       console.log(error);
     }
+    
     setFinancename('');
     setAddress('');
     handleClose();

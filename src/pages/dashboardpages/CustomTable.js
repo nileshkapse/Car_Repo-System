@@ -70,6 +70,24 @@ function CustomTable({ uid }) {
     const query1 = `delete FROM Branches where branchcode=${del};`;
     let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
 
+     const query10 = `INSERT INTO log (	logmessage,logdate ) VALUES ('${del} Branch Is Deleted',curdate());`;
+    let data10 = { crossDomain: true, crossOrigin: true, query: query10 };
+
+     try {
+      axios
+        .post(API_URL, data10)
+        .then((res) => {
+          // console.log("Inserted data: ", res.data);
+          // this.setState({ allData: res.data });
+          // window.location.reload(false);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
 
     try {
       axios
@@ -89,6 +107,9 @@ function CustomTable({ uid }) {
 
     const query2 = `Update Finance set total_branches= total_branches-1 where UID=${updatet};`;
     let data2 = { crossDomain: true, crossOrigin: true, query: query2 };
+
+
+    
 
 
     try {

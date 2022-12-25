@@ -43,6 +43,24 @@ function Finacedetails() {
     const query1 = `UPDATE Finance set total_branches=(SELECT COUNT(*) FROM Branches where FUID=${uid}) where UID=${uid};`;
     let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
 
+     const query10 = `INSERT INTO log (	logmessage,logdate ) VALUES ('${financename} Branch Is Added',curdate());`;
+    let data10 = { crossDomain: true, crossOrigin: true, query: query10 };
+
+     try {
+      axios
+        .post(API_URL, data10)
+        .then((res) => {
+          // console.log("Inserted data: ", res.data);
+          // this.setState({ allData: res.data });
+          // window.location.reload(false);
+        })
+        .catch((err) => {
+          console.log("Inserted data error: ", err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+
     try {
       axios
         .post(API_URL, data)
@@ -196,10 +214,10 @@ function Finacedetails() {
                           <Form.Label>Level 2 Contact Number</Form.Label>
                           <Form.Control
                             type="number"
-                            value={contact}
-                            onChange={(e) => {
-                              settotalbranch(e.target.value);
-                            }}
+                            // value={contact}
+                            // onChange={(e) => {
+                            //   settotalbranch(e.target.value);
+                            // }}
                           />
                         </Form.Group>
                          <Form.Group
@@ -209,10 +227,10 @@ function Finacedetails() {
                           <Form.Label>Level 3 Contact Number</Form.Label>
                           <Form.Control
                             type="number"
-                            value={contact}
-                            onChange={(e) => {
-                              settotalbranch(e.target.value);
-                            }}
+                            // value={contact}
+                            // onChange={(e) => {
+                            //   settotalbranch(e.target.value);
+                            // }}
                           />
                         </Form.Group>
                       </Form>

@@ -2,13 +2,30 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { LANDING_PAGE_URL } from "../../constants/URLS";
 import Box from "@mui/material/Box";
-import { green,pink,red } from "@mui/material/colors";
+import { green, pink, red } from "@mui/material/colors";
 import Icon from "@mui/material/Icon";
+import { useState } from "react";
 
 function LoginPage() {
   const nevigate = useNavigate();
+
+  const [userName, setUserName] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  let user = { userType: 0, isLoggedIn: false };
+  console.log(user);
+  const setLogin = () => {
+    if (userName === "admin" && password === "admin@123") {
+      user = { userType: 1, isLoggedIn: true };
+    }
+    localStorage.setItem("isLoggedIn", user.isLoggedIn);
+    localStorage.setItem("userType", user.userType);
+
+    window.location.reload(false);
+  };
+
   return (
-    <div>
+    <div className="loginpage">
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -68,16 +85,18 @@ function LoginPage() {
                           </span>
                           <input
                             type="text"
-                            name="username"
-                            className="form-control"
-                            id="yourUsername"
-                            required
+                            class="form-control my_css"
+                            id="userName"
+                            placeholder="User name"
+                            onChange={(e) => {
+                              setUserName(e.target.value);
+                            }}
                           />
                           <div className="invalid-feedback">
                             Please enter your username.
                           </div>
-                          <Icon sx={{ color: green[500],m:1}}>done</Icon>
-                          <Icon sx={{ color: red[500],m:1}}>clear</Icon>
+                          {/* <Icon sx={{ color: green[500],m:1}}>done</Icon>
+                          <Icon sx={{ color: red[500],m:1}}>clear</Icon> */}
                         </div>
                         {/* <Bo
                           sx={{
@@ -86,7 +105,7 @@ function LoginPage() {
                             },
                           }}
                         > */}
-                          
+
                         {/* </Box> */}
                       </div>
 
@@ -96,10 +115,12 @@ function LoginPage() {
                         </label>
                         <input
                           type="password"
-                          name="password"
-                          className="form-control"
-                          id="yourPassword"
-                          required
+                          class="form-control"
+                          id="inputPassword4"
+                          placeholder="Password"
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                          }}
                         />
                         <div className="invalid-feedback">
                           Please enter your password!
@@ -124,9 +145,7 @@ function LoginPage() {
                         <button
                           className="btn btn-primary w-100 nav-link"
                           type="submit"
-                          onClick={() => {
-                            nevigate(LANDING_PAGE_URL);
-                          }}
+                          onClick={setLogin}
                         >
                           Login
                         </button>

@@ -48,6 +48,24 @@ const FinaceDetailsTable = ({ handledetailscardopen, setUid }) => {
     const query1 = `delete FROM Branches where FUID=${uid};`;
     let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
 
+     const query10 = `INSERT INTO log (	logmessage,logdate ) VALUES ('${uid} Finance Is deleted',curdate());`;
+     let data10 = { crossDomain: true, crossOrigin: true, query: query10 };
+
+     try {
+       axios
+         .post(API_URL, data10)
+         .then((res) => {
+           // console.log("Inserted data: ", res.data);
+           // this.setState({ allData: res.data });
+           // window.location.reload(false);
+         })
+         .catch((err) => {
+           console.log("Inserted data error: ", err);
+         });
+     } catch (error) {
+       console.log(error);
+     }
+
     try {
       axios
         .post(API_URL, data)

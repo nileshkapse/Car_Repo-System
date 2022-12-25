@@ -11,6 +11,7 @@ import { forEach } from "jszip";
 // import csvtojson from "csvtojson"
 // import mysql from "mysql2"
 import { useCSVReader } from "react-papaparse";
+import Modal from "react-bootstrap/Modal";
 
 function UploadDetails() {
   const nevigate = useNavigate();
@@ -74,8 +75,6 @@ function UploadDetails() {
 
     console.log("csv array", array);
   };
-
-  
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -239,14 +238,26 @@ function UploadDetails() {
           .then((res) => {
             console.log("Data Inserted", res);
           })
+
           .catch((err) => {
             console.log("Inserted data error: ", err);
+            <div class="alert alert-success" role="alert">
+              Data is Not uploaded
+            </div>;
           });
       } catch (error) {
         console.log(error);
       }
     }
+    handleShow();
+    console.log("Data Done sucessfully");
   };
+
+
+   const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -283,6 +294,21 @@ function UploadDetails() {
 
   return (
     <div>
+      <Modal
+        size=""
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        className="alert alert-success"
+        show={show}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          <h5 className="alert alert-success" role="alert">
+           Data Uploaded !!!
+          </h5>
+        </Modal.Header>
+        <Modal.Footer></Modal.Footer>
+        </Modal>
       <main id="main" className="main">
         <Navbar />
         <Sidebar />
@@ -422,7 +448,6 @@ function UploadDetails() {
               ))}
             </tr>
           </thead>
-
           <tbody>
             {array.map((item) => (
               <tr key={item.id}>
