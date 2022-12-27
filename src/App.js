@@ -38,7 +38,7 @@ const App = () => {
 
   // const location=useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(
-        localStorage.getItem("isLoggedIn") == "true" ? true : false
+        localStorage.getItem("isLoggedIn") === "true" ? true : false
     );
 
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,7 +81,7 @@ const App = () => {
         <Route path={DETAILS_VIEW_URLS} element={<DetailsView />} />
         <Route path={UPLOAD_DETAILS_URLS} element={<UploadDetails />} />
         <Route path={PROFILE_PAGES_URLS} element={<ProfilePage />} />
-        <Route path={LOGIN_PAGES_URLS} element={<LoginPage />} />
+        {/* <Route path={LOGIN_PAGES_URLS} element={<LoginPage />} /> */}
         <Route path={CUSTOM_TABLE} element={<CustomTable />} />
         <Route path="*" element={<Navigate to={LANDING_PAGE_URL} />} />
       

@@ -17,10 +17,11 @@ function LoginPage() {
   const setLogin = () => {
     if (userName === "admin" && password === "admin@123") {
       user = { userType: 1, isLoggedIn: true };
-    }
-    localStorage.setItem("isLoggedIn", user.isLoggedIn);
+      localStorage.setItem("isLoggedIn", user.isLoggedIn);
     localStorage.setItem("userType", user.userType);
 
+    }
+    
     window.location.reload(false);
   };
 

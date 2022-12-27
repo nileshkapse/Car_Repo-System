@@ -1,0 +1,104 @@
+.transationItem {
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    // background: var(--background-hover);
+    // background-color: rgb(255, 255, 255);
+
+    .bottom {
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            color: rgb(40, 40, 40);
+            position: relative;
+
+            th {
+                border-bottom: 2px solid #ddd;
+                padding: 20px 8px;
+                text-align: left;
+                background-color: #303030;
+                position: sticky;
+                top: 60px;
+                color: rgb(239, 239, 239);
+            }
+
+            td {
+                padding: 8px;
+                text-align: start;
+
+                .editSection {
+                    display: flex;
+                    align-items: left;
+                    justify-content: space-between;
+
+                    .eye {
+                        color: blue;
+                    }
+
+                    .pencil {
+                        color: yellow;
+                    }
+
+                    .delete {
+                        color: red;
+                    }
+                }
+
+                .status {
+                    background-color: red;
+                    padding: 1px 12px;
+                    font-size: 13px;
+                    border-radius: 30px;
+                    text-transform: capitalize;
+
+
+                    &.paid {
+                        color: rgb(2, 76, 2);
+                        background-color: rgb(140, 236, 140);
+                    }
+
+                    &.failed {
+                        color: rgb(76, 2, 2);
+                        background-color: rgb(230, 195, 195);
+                    }
+
+                    &.pending {
+                        color: rgb(73, 55, 0);
+                        background-color: rgb(230, 225, 195);
+                    }
+                }
+            }
+
+            tr {
+                border-bottom: 1px solid var(--gray-100);
+                transition: all 0.4s ease;
+                cursor: pointer;
+                font-size: 15px;
+                font-weight: 500;
+
+                &:hover {
+                    background-color: #06c16020;
+                }
+
+                .image {
+                    margin-right: 12px;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            tr:nth-child(even) {
+                background-color: rgba(150, 212, 212, 0.4);
+              }
+              
+             td:nth-child(even) {
+                background-color: rgba(150, 212, 212, 0.4);
+              }
+        }
+
+    }
+}

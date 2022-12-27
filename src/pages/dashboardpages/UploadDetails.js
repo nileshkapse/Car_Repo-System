@@ -1,96 +1,39 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-import axios from "axios";
 import { useState } from "react";
-import DataTable from "react-data-table-component";
-import { useEffect } from "react";
+import { useCSVReader } from 'react-papaparse';
+import axios from "axios";
+import '../tables.scss'
 import { API_URL } from "../../constants/Database";
-import { forEach } from "jszip";
-// import csvtojson from "csvtojson"
-// import mysql from "mysql2"
-import { useCSVReader } from "react-papaparse";
-import Modal from "react-bootstrap/Modal";
+import { useEffect } from "react";
+
+
+
 
 function UploadDetails() {
-  const nevigate = useNavigate();
+  // csv reader function
+  const { CSVReader } = useCSVReader();
+  // create all states here
+  const [csvArray, setCsvArray] = useState([]);
+  const [csvHeaders, setCsvHeaders] = useState([])
+  const [csvrow, setCsvRow] = useState([])
+  const [branch, setBranch] = useState([])
+  const [allCsvRow, setAllCsvRow] = useState([])
+  const [formData, setFormData] = useState({})
 
-  const [branch, setBranch] = useState([]);
 
-  const [file, setFile] = useState();
-  const [array, setArray] = useState([]);
+  // tatal header types in database
+  const header = ["Contract No", "Rc Number", "Mek and Model", "Regon", "Area", "Region", "Branch", "Customer Name", "Engine Number", "Chassis Number", "Ex Name", "Level1", "Level2", "Level3", "Level4", "Level1Con", "Level2Con", "Level3Con", "Level4Con", "Bkt", "Od", "Gv", "Ses9", "Ses17", "Tbr", "Poss"]
 
-  const fileReader = new FileReader();
 
-  const handleOnChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const csvFileToArray = (string) => {
-    const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
-    const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
-
-    const headerstring = "";
-    csvHeader.map((item, index) => {
-      if (index !== 0) {
-        headerstring += ",";
-      }
-
-      headerstring += item;
-    });
-    console.log("header string ", headerstring);
-    csvRows.map((item) => {
-      const query = `INSERT INTO student(`;
-    });
-
-    const array = csvRows.map((i) => {
-      const values = i.split(",");
-      const obj = csvHeader.reduce((object, header, index) => {
-        object[header] = values[index];
-        return object;
-      }, {});
-      return obj;
-    });
-
-    setArray(array);
-    //     array.map((item) => {
-    //       // for (const key in item) {
-    //       //   console.log("key array data", `${key}: ${item[key]}`);
-    //       // }
-    //        const query = `INSERT INTO student(name,age) VALUES('${item['Name']}',${item['"Age "']}) `;
-    // let data = { crossDomain: true, crossOrigin: true, query: query };
-    //     try {
-    //       axios
-    //         .post(API_URL, data)
-    //         .then((res) => {})
-    //         .catch((err) => {
-    //           console.log("Inserted data error: ", err);
-    //         });
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-
-    // });
-
-    console.log("csv array", array);
-  };
-
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-
-    if (file) {
-      fileReader.onload = function (event) {
-        const text = event.target.result;
-        csvFileToArray(text);
-      };
-
-      fileReader.readAsText(file);
-      console.log("file con", file);
+  // set header function ofter click on map function
+  const handleSetHeader = (value, index) => {
+    return csvHeaders[index] = {
+      value: value,
+      color: true
     }
-  };
-
-  const headerKeys = Object.keys(Object.assign({}, ...array));
+  }
 
   const getbranch = async () => {
     const query = `SELECT * FROM Branches ;`;
@@ -113,202 +56,210 @@ function UploadDetails() {
     }
   };
 
-  useEffect(() => {
-    // getdatabase();
-    getbranch();
-  }, []);
 
-  // Upload
+  // check a object value with header types
+  function checkvalue() {
+    const newItem = csvrow.map((item, index) => {
 
-  const styles = {
-    csvReader: {
-      display: "flex",
-      flexDirection: "row",
-      flexGrow: 2,
-      marginBottom: 10,
-    },
-    browseFile: {
-      width: "20%",
-    },
-    acceptedFile: {
-      border: "1px solid #ccc",
-      height: 45,
-      lineHeight: 2.5,
-      paddingLeft: 10,
-      width: "80%",
-    },
-    remove: {
-      borderRadius: 0,
-      padding: "0 20px",
-    },
-    progressBarBackgroundColor: {
-      backgroundColor: "red",
-    },
-  };
+      // all regex code started
+      var regex = new RegExp(/^(([A-Za-z]){2,3}(|-)(?:[0-9]){1,2}(|-)(?:[A-Za-z]){2}(|-)([0-9]){1,4})|(([A-Za-z]){2,3}(|-)([0-9]){1,4})$/g);
+      let vehicleregex = new RegExp(/[A-HJ-NPR-Z0-9]{17}/i);
+      let nameregex = new RegExp(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/g);
+      let mobileregex = new RegExp(/^[6-9]\d{9}$/gi);
+      let contractregex = new RegExp(/^[1-5]\d{9}$/gi);
+      let Engineregex = new RegExp(/^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$/);
+      // all regex code end
 
-  const { CSVReader } = useCSVReader();
-
-  // States
-  const [selected, setSelected] = React.useState("");
-
-  // Main States
-  const [data, setData] = React.useState(undefined);
-  const [remainingHeaders, setRemainingHeaders] = React.useState([]);
-  const [headersMapping, setHeadersMapping] = React.useState({});
-  const [csvHeaders, setCsvHeaders] = React.useState([]);
-  const [dbHeaders, setDbHeaders] = React.useState([]);
-  // useEffect
-  React.useEffect(() => {
-    console.log("Mappings Modified: ", headersMapping);
-    const headers = [];
-    Object.entries(headersMapping).forEach((entry) => {
-      const [key, value] = entry;
-      console.log(`${key}: ${value}`);
-      headers.push(value);
-    });
-
-    const remHeaders = dbHeaders.filter(function (item) {
-      return headers.indexOf(item) === -1;
-    });
-    setRemainingHeaders(remHeaders);
-  }, [headersMapping]);
-
-  React.useEffect(() => {
-    console.log("Used Headers: ", remainingHeaders);
-  }, [remainingHeaders]);
-  const uploadData = (e) => {
-    e.preventDefault();
-
-    var db_query = `INSERT INTO Vehicle(`;
-    var header_str = ``;
-
-    // Getting headers string
-
-    for (let i = 0; i < csvHeaders.length; i++) {
-      if (i != 0) {
-        header_str += `,`;
+      // Rc number checking...
+      if (regex.test(item) === true && !csvHeaders.includes("Rc Number")) {
+        return handleSetHeader("Rc Number", index);
+      } else if (regex.test(item) === true) {
+        return handleSetHeader(csvHeaders[index].value, index);
       }
-      console.log(csvHeaders[i]);
 
-      const val = headersMapping[csvHeaders[i]];
-      if (val === "select") {
-        console.log("Invalid Mapping!!!");
-        return;
+      // Contract number checking...
+      if (contractregex.test(item) === true && !csvHeaders.includes("Contract No")) {
+        return handleSetHeader("Contract No", index);
+      } else if (contractregex.test(item) === true) {
+        return handleSetHeader(csvHeaders[index].value, index);
       }
-      header_str += val;
-    }
 
-    db_query += header_str + `) values(`;
-    console.log(db_query);
-
-    const user_data = data.data;
-
-    // Loop through users_data except header row
-    for (let i = 1; i < user_data.length; i++) {
-      var local_db_query = db_query;
-
-      if (user_data[i].length !== csvHeaders.length) {
-        continue;
+      // Chassis number checking...
+      if (vehicleregex.test(item) === true && !csvHeaders.includes("Chassis Number")) {
+        return handleSetHeader("Chassis Number", index)
+      } else if (vehicleregex.test(item) === true) {
+        return handleSetHeader(csvHeaders[index].value, index);
       }
-      console.log(user_data[i]);
 
-      // Creating users_data fields string
-      var fields_str = ``;
-      user_data[i].map((item, index) => {
-        if (index !== 0) {
-          fields_str += `,`;
+      // Engine number checking...
+      if (Engineregex.test(item) && (item.length >= 17 && item.length >= 10) && !csvHeaders.includes("Engine Number")) {
+        return handleSetHeader("Engine Number", index)
+      } else if (Engineregex.test(item)) {
+        return handleSetHeader(csvHeaders[index].value, index);
+      }
+
+
+      // All name type checking...
+      if (nameregex.test(item) && item.indexOf(' ') >= 0) {
+        if (!csvHeaders.includes("Customer Name")) {
+          return handleSetHeader("Customer Name", index)
+        } else if (!csvHeaders.includes("Level1")) {
+          return handleSetHeader("Level1", index)
+        } else if (!csvHeaders.includes("Level2")) {
+          return handleSetHeader("Level2", index)
+        } else if (!csvHeaders.includes("Level3")) {
+          return handleSetHeader("Level3", index)
+        } else {
+          return handleSetHeader("Level4", index)
         }
-
-        fields_str += `"${item}"`;
-      });
-
-      local_db_query += fields_str + `)`;
-
-      console.log("Query: ", local_db_query);
-
-      let data2 = {
-        crossDomain: true,
-        crossOrigin: true,
-        query: local_db_query,
-      };
-
-      try {
-        axios
-          .post(API_URL, data2)
-          .then((res) => {
-            console.log("Data Inserted", res);
-          })
-
-          .catch((err) => {
-            console.log("Inserted data error: ", err);
-            <div class="alert alert-success" role="alert">
-              Data is Not uploaded
-            </div>;
-          });
-      } catch (error) {
-        console.log(error);
       }
-    }
-    handleShow();
-    console.log("Data Done sucessfully");
+      // Branch checking...
+      if (item.indexOf(' ') <= 0 && (!csvHeaders.includes("Branch") && nameregex.test(item))) {
+        return handleSetHeader("Branch", index)
+      }
+      // Mobile number checking...
+      if (mobileregex.test(item)) {
+        if (!csvHeaders.includes("Level1con")) {
+          return handleSetHeader("Level1con", index)
+        } else if (!csvHeaders.includes("Level2con")) {
+          return handleSetHeader("Level2con", index)
+        } else if (!csvHeaders.includes("Level3con")) {
+          return handleSetHeader("Level3con", index)
+        } else {
+          return handleSetHeader("Level4con", index)
+        }
+      } else {
+        return (csvHeaders[index])
+      }
+    })
+    setCsvHeaders(newItem)
+  }
+
+
+
+  const mapSubmit = (e) => {
+    e.preventDefault()
+    checkvalue()
+    setHead()
+  }
+
+
+  // console.log(csvArray);
+
+  // input field set using state
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevProps) => ({
+      ...prevProps,
+      [name]: value.trim()
+    }));
   };
 
 
-   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // Manual correction map function
+  const nextMap = () => {
+    let formDataKeys = (Object.keys(formData));
+    if (formDataKeys.length == 0) {
+      return alert("Input field are empty")
+    }
+    let formDataValue = Object.values(formData)
+    const newCsvHeaders = csvHeaders.map((val, index1) => {
+      let newData = {}
+      for (let i = 0; i < formDataValue.length; i++) {
+        if (formDataValue[i] == val.value) {
+          newData = csvHeaders[index1] = {
+            value: formDataKeys[i],
+            color: true
+          }
+          break
+        } else {
+          newData = csvHeaders[index1] = val
+        }
+      }
+      // console.log(newData);
+      return newData
+    })
+    setCsvHeaders(newCsvHeaders)
+    setHead()
+    setFormData({})
+  }
 
 
-  const handleFormSubmit = (e) => {
+
+  // header function
+  function setHead() {
+    const newhead = csvHeaders.map((val) => {
+      return val.value.toLowerCase().split(" ").join("_")
+    })
+
+    // console.log(newhead);
+    const newArray = allCsvRow.map(row => {
+      const eachObject = newhead.reduce((obj, header, i) => {
+        obj[header] = row[i];
+        return obj;
+      }, {})
+      return eachObject;
+    })
+    return setCsvArray(newArray)
+  }
+
+
+
+
+  // upload data to database function
+  const uploadDb = async (e) => {
     e.preventDefault();
 
-    // Insertion
+    // find column name in data
+    let database_Column = Object.keys(csvArray[0])
+    let oldArray = []; // create an empty array of length n
+    for (var i = 0; i < csvArray.length - 1; i++) {
+      let newArr = Object.values(csvArray[i])
+      oldArray[i] = new Array(newArr); // make each element an array
+    }
 
-    const query1 = `SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'Vehicle';`;
-    let data1 = { crossDomain: true, crossOrigin: true, query: query1 };
+    // set query values in bracket and convert into string
+    let updateArray = oldArray.flatMap((values) => {
+      return `(${(values.map((value) => {
+        return (value.map((val, index, arr) => {
+          return arr[index] = `'${val}'`
+        }))
+      }))})`
+    })
+
+    // set database query with column names and values
+    const query = `INSERT INTO vehicle (${database_Column}) VALUES ${updateArray}`
+    let data = { crossDomain: true, crossOrigin: true, query: query };
 
     try {
       axios
-        .post(API_URL, data1)
+        .post(API_URL, data)
         .then((res) => {
-          console.log("get columnn", res);
-          const local_db_headers = [];
-          res.data.map((item, index) => {
-            local_db_headers.push(item.COLUMN_NAME);
-          });
-          setDbHeaders([...local_db_headers]);
-          setRemainingHeaders([...local_db_headers]);
+          if (res.status == 200) {
+            alert("Successfull \nTotal " + res.data.affectedRows + " data inserted in database")
+            setCsvArray([])
+            setFormData()
+          } else {
+            alert("Unsuccessfull insert\nTrying inserted large file")
+          }
         })
         .catch((err) => {
-          console.log("Inserted data error: ", err);
+          alert("Unsuccessfull insert\nTrying inserted large file or server down");
         });
     } catch (error) {
       console.log(error);
     }
 
-    const user_data = data.data;
-    const headers = user_data[0];
+  }
 
-    setCsvHeaders(headers);
-  };
+
+  useEffect(() => {
+    getbranch();
+  });
+
 
   return (
-    <div>
-      <Modal
-        size=""
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        className="alert alert-success"
-        show={show}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <h5 className="alert alert-success" role="alert">
-           Data Uploaded !!!
-          </h5>
-        </Modal.Header>
-        <Modal.Footer></Modal.Footer>
-        </Modal>
+    <>
       <main id="main" className="main">
         <Navbar />
         <Sidebar />
@@ -324,10 +275,10 @@ function UploadDetails() {
                 id="branch"
               >
                 {/* <option>Choose Finance Name </option> */}
-                {branch.map((comp) => (
+                {branch.map((data) => (
                   <option>
-                    {comp.branch_name} <label className="secondary"> , </label>
-                    {comp.address}
+                    {data.branchName} <label className="secondary"> </label>
+                    {data.address}
                   </option>
                 ))}
               </select>
@@ -335,133 +286,163 @@ function UploadDetails() {
           </div>
         </div>
 
-        {/* File upload */}
+        <div style={{ textAlign: "center" }}>
+          <CSVReader
+            onUploadAccepted={(results) => {
+              // console.log('---------------------------');
+              const header = results.data[0].filter((val) => {
+                return val.trim()
+              })
 
-        <CSVReader
-          onUploadAccepted={(results) => {
-            console.log("---------------------------");
-            console.log(results);
-            setData(results);
-            console.log("---------------------------");
-          }}
-        >
-          {({ getRootProps, acceptedFile }) => (
-            <>
-              <div className="text-center ">
-                <button
-                  className="btn btn-success centre glow-on-hover"
-                  type="button"
-                  {...getRootProps()}
-                  style={styles.browseFile}
-                >
-                  Browse file
-                </button>
-              </div>
-              <br></br>
-              <div className="text-center ">
-                <h5>Selected File : {acceptedFile && acceptedFile.name}</h5>
-              </div>
-              <br></br>
-            </>
-          )}
-        </CSVReader>
+              const val = header.map((val, index, arr) => {
+                return arr[index] = {
+                  value: val.trim(),
+                  color: false
+                }
+              })
 
-        {data !== undefined ? (
-          <form onSubmit={handleFormSubmit}>
-            <div className="text-center">
-              <button className="btn btn-success centre" type="submit">
-                Mapping
-              </button>
-            </div>
-            <br></br>
-          </form>
-        ) : null}
+              // console.log(val);
+              setCsvHeaders(val)
+              const rows = results.data
+              rows.shift()
+              setAllCsvRow(rows)
+              setCsvRow(rows[0])
 
-        {csvHeaders.length > 0 ? (
-          <div>
-            {csvHeaders.map((item, index) => (
-              <div style={{ display: "flex" }}>
-                <table>
-                  <td>
-                    <tr>
-                      <th4 style={{ flexGrow: 3, flex: 3 }} key={index}>
-                        {item}
-                      </th4>
-                    </tr>
-                  </td>
+              // console.log(csvrow, csvHeaders);
 
-                  <td>
-                    <select
-                      className="form-select h4"
-                      aria-label="Default select example"
-                      value={headersMapping[item]}
-                      onChange={(e) => {
-                        console.log(e.target.value);
-                        const global_mapping = headersMapping;
-                        global_mapping[item] = e.target.value;
-                        setHeadersMapping({ ...global_mapping });
+              if (rows[0].length != header.length) {
+                return alert("Empty header area or row area")
+              }
+              const newArray = rows.map(row => {
+                const values = row;
+                const eachObject = val.reduce((obj, header, i) => {
+                  // console.log(header);
+                  // console.log(obj);
+                  obj[header.value] = values[i];
+                  return obj;
+                }, {})
+                return eachObject;
+              })
+              setCsvArray(newArray)
+              // console.log('---------------------------');
+            }}
+          >
+
+            {({
+              getRootProps,
+              acceptedFile,
+              ProgressBar,
+              getRemoveFileProps,
+            }) => (
+              <>
+                <div className="d-flex">
+                  <button type='button' className="btn btn-danger me-3" {...getRootProps()}>
+                    Browse file
+                  </button>
+                  <div>
+                    {acceptedFile && acceptedFile.name}
+                  </div>
+                  <button className="btn btn-primary me-3" {...getRemoveFileProps()}>
+                    Remove
+                  </button>
+                  {
+                    csvArray.length > 0 &&
+                    <button
+                      className="btn btn-success me-3"
+                      onClick={mapSubmit}
+                    >
+                      Mapping
+                    </button>
+                  }
+                  {
+                    csvArray.length > 0 &&
+                    <button
+                      className="btn btn-secondary me"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        nextMap()
                       }}
                     >
-                      {headersMapping.hasOwnProperty(item) ? (
-                        <option value={headersMapping[item]} key="-1">
-                          {headersMapping[item]}
-                        </option>
-                      ) : (
-                        <option value="select" key="-1">
-                          select
-                        </option>
-                      )}
-                      {remainingHeaders.map(
-                        (db_header_item, db_header_index) => (
-                          <option value={db_header_item} key={db_header_index}>
-                            {db_header_item}
-                          </option>
-                        )
-                      )}
-                    </select>
-                  </td>
-                </table>
+                      Next Mapping
+                    </button>
+                  }
+                  {
+                    csvArray.length > 0 && <button className="btn btn-info ms-3" onClick={uploadDb}>Upload</button>
+                  }
+                </div>
+                <ProgressBar />
+              </>
+            )}
+          </CSVReader>
+
+          {csvArray.length > 0 ?
+            <>
+              <div className="transationItem">
+                <div className="bottom">
+                  <table id="customers">
+                    <thead>
+                      <tr>
+                        {
+                          csvHeaders.map((val, index) => (
+                            <th key={index} style={val.color ? { background: "green" } : {}}>{val.value}</th>
+                          ))
+                        }
+                      </tr>
+
+                    </thead>
+                    <tbody>
+
+                      {
+                        csvArray.map((item, index) => (
+                          <tr key={index}>
+                            {Object.values(item).map((val, index) => (
+                              <td key={index}>{val}</td>
+                            ))}
+                          </tr>
+                        ))
+                      }
+                    </tbody>
+                  </table>
+                  <div style={{
+                    display: "flex",
+                    width: "100%",
+                    position: "sticky",
+                    bottom: "0",
+                    background: "white",
+                    overflowX: "scroll"
+                  }}>
+                    {
+                      header.map((val, index) => (
+                        <>
+                          <form>
+                            <div key={index} className="m-2" style={{
+                              minWidth: "200px"
+                            }}>
+                              <span style={{
+                                color: "red"
+                              }}>{val}</span>
+                              <input type="text" className="form-control" autoComplete="off" placeholder={val} name={val} onChange={handleInputChange} value={formData.val}></input>
+                              {/* <select className="form-select m-2" aria-label="Default select example" value={formData.val} name={val} onChange={handleInputChange}>
+                              <option value="" selected defaultValue="">Select</option>
+                              {
+                                csvHeaders.map((val) => (
+                                  <option value={val}>{val}</option>
+                                ))
+                              }
+                            </select> */}
+                            </div>
+                          </form>
+                        </>
+                      ))
+                    }
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
-        ) : null}
-
-        {data !== undefined ? (
-          <form onSubmit={uploadData}>
-            <br></br>
-            <div className="text-center ">
-              <button
-                className="btn btn-success centre glow-on-hover"
-                type="submit"
-              >
-                Upload To DB
-              </button>
-            </div>
-          </form>
-        ) : null}
-
-        {/* <table>
-          <thead>
-            <tr key={"header"}>
-              {headerKeys.map((key) => (
-                <th>{key}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {array.map((item) => (
-              <tr key={item.id}>
-                {Object.values(item).map((val) => (
-                  <td>{val}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
-        {/* File Uploade end */}
+            </> : null
+          }
+        </div>
       </main>
-    </div>
+    </>
   );
 }
-
 export default UploadDetails;
