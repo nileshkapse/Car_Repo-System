@@ -191,7 +191,7 @@ const VehicleDeatilsTable = ({ handledetailscardopen, setRcn }) => {
           >
             Close
           </button>
-          <button type="button" className="btn btn-danger" onClick={deleteuser}>
+             <button type="button" className="btn btn-danger" onClick={deleteuser}>
             Delete
           </button>
         </Modal.Footer>
